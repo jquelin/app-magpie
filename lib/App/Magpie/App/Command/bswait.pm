@@ -40,7 +40,7 @@ sub execute {
     my $response = $ua->head('http://pkgsubmit.mageia.org/');
     die $response->status_line unless $response->is_success;
 
-    my $sleep = $response->header( "x-bs-throttle" )+10;
+    my $sleep = $response->header( "x-bs-throttle" );
 
     say $sleep    if $opts->{display};
     sleep($sleep) if $opts->{sleep};
