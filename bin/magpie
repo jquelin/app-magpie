@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+use 5.012;
+use strict;
+use warnings;
+
+package main;
+# ABSTRACT: Mageia Perl Integration Easy
+
+use FindBin               qw{ $Bin };
+use Path::Class;
+
+use lib dir($Bin)->parent->subdir('lib')->stringify; # for dev purposes
+
+use App::Magpie::App;
+
+$|++; # disabling buffered output
+App::Magpie::App->run;
+
+exit;
+
+__END__
+
+=head1 SYNOPSIS
+
+    # for help purposes
+    magpie commands
+    magpie help
+    magpie help subcommand
+
+    # to really do stuff
+    magpie <subcommand>
+
+
+=head1 DESCRIPTION
+
+This script is the main entry point to the Perl module L<App::Magpie>.
+It is providing various subcommands - which list is available with
+C<magpie commands>. Each of the commands provides some help when running
+C<magpie help subcommand>.
+
