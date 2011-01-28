@@ -2,5 +2,8 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110280  2011-01-28 12:05:48 Europe/Paris
+ - better set of options for bswait command
+
 1.110241  2011-01-24 15:37:22 Europe/Paris
   - first command: bswait
