@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - new command: checkout
 
 1.110280  2011-01-28 12:05:48 Europe/Paris
  - better set of options for bswait command
