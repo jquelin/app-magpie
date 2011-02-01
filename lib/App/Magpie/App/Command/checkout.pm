@@ -72,7 +72,14 @@ __END__
 =head1 DESCRIPTION
 
 This command will check out a package from Mageia repository, or update
-a local check-out if it already exists.
+a local check-out if it already exists. It uses the C<mgarepo> command
+underneath, so you might want to look at this command for more
+information.
 
-It uses the C<mgarepo> command underneath, so you might want to look at
-this command for more information.
+The "shell" option (C<--shell> / C<-s>) is especially useful if you
+C<eval> the result of this command, to go directly in the fresh
+check-out directory. In that case, you may want to add the following to
+your F<~/.bashrc>:
+
+    function cco() { eval $(magpie co -q -s $*); }
+
