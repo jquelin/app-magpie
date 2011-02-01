@@ -24,6 +24,7 @@ sub opt_spec {
     return (
         [],
         [ 'directory|d=s' => "directory where to check out", { default => "." } ],
+        [ 'quiet|q'       => "be quiet on checkout operations",                 ],
     );
 }
 
@@ -35,16 +36,19 @@ sub execute {
     $self->usage_error( "A package should be specified." )
         unless defined $pkg;
 
+    # set up redirect depending on quiet mode
+    my $redirect = $opts->{quiet} ? "/dev/null" : "&2";
+
     my $dir    = dir( $opts->{directory} );
     my $pkgdir = $dir->subdir( $pkg );
     $dir->mkpath unless -d $dir;
 
     if ( -d $pkgdir ) {
         chdir $pkgdir;
-        system "mgarepo up >&2";
+        system "mgarepo up >$redirect";
     } else {
         chdir $dir;
-        system "mgarepo co $pkg >&2";
+        system "mgarepo co $pkg >$redirect";
         chdir $pkgdir;
     }
 
@@ -57,7 +61,7 @@ __END__
 =head1 SYNOPSIS
 
     $ magpie checkout perl-Foo-Bar
-    $ magpie checkout -d ~/rpm/cauldron perl-Foo-Bar
+    $ magpie co -d ~/rpm/cauldron -q perl-Foo-Bar
 
     # to get list of available options
     $ magpie help checkout
