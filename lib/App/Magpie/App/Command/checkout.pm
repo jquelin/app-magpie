@@ -12,6 +12,8 @@ use App::Magpie::App -command;
 
 # -- public methods
 
+sub command_names { qw{ checkout co }; }
+
 sub description {
 "Check out a package from Mageia repository, or update the local
 check-out if it already exists."
