@@ -25,6 +25,7 @@ sub opt_spec {
         [],
         [ 'directory|d=s' => "directory where to check out", { default => "." } ],
         [ 'quiet|q'       => "be quiet on checkout operations",                 ],
+        [ 'shell|s'       => "display Bourne shell commands to execute to change directory" ],
     );
 }
 
@@ -39,19 +40,20 @@ sub execute {
     # set up redirect depending on quiet mode
     my $redirect = $opts->{quiet} ? "/dev/null" : "&2";
 
+    # check out the package, or update the local checkout
     my $dir    = dir( $opts->{directory} );
     my $pkgdir = $dir->subdir( $pkg );
     $dir->mkpath unless -d $dir;
-
     if ( -d $pkgdir ) {
         chdir $pkgdir;
         system "mgarepo up >$redirect";
     } else {
         chdir $dir;
         system "mgarepo co $pkg >$redirect";
-        chdir $pkgdir;
     }
 
+    # display command to execute if shell mode
+    say "cd $pkgdir" if $opts->{shell};
 }
 
 1;
@@ -62,6 +64,7 @@ __END__
 
     $ magpie checkout perl-Foo-Bar
     $ magpie co -d ~/rpm/cauldron -q perl-Foo-Bar
+    $ eval $( magpie co -s perl-Foo-Bar )
 
     # to get list of available options
     $ magpie help checkout
