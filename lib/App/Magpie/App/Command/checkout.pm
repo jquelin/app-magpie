@@ -81,5 +81,5 @@ C<eval> the result of this command, to go directly in the fresh
 check-out directory. In that case, you may want to add the following to
 your F<~/.bashrc>:
 
-    function cco() { eval $(magpie co -q -s $*); }
+    function cco() { eval $(magpie co -d ~/rpm/cauldron -q -s $*); }
 
