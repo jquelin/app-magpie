@@ -161,6 +161,9 @@ sub fixspec {
         $self->log_debug( "no documentation found" );
     }
 
+    # removing extra newlines
+    $spec =~ s{\n{3,}}{\n\n}g;
+
     # writing down new spec file
     $self->log_debug( "writing updated spec file" );
     my $fh = $specfile->openw;
