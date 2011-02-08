@@ -117,6 +117,9 @@ sub fixspec {
     $self->log_debug( "removing mandriva macros" );
     $spec =~ s/^%if %{mdkversion}.*?^%endif$//msi;
 
+    $self->log_debug( "removing buildroot, not needed anymore" );
+    $spec =~ s/^buildroot:.*\n//mi;
+
     $self->log_debug( "trimming empty end lines" );
     $spec =~ s/\n+\z//;
 
