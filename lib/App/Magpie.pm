@@ -80,6 +80,35 @@ sub checkout {
     return $pkgdir;
 }
 
+
+=method fixspec
+
+    $magpie->fixspec;
+
+Fix the spec file to match a set of rules. Make sure buildrequires are
+correct.
+
+=cut
+
+sub fixspec {
+    my ($self) = @_;
+
+    # check if there's a spec file to update...
+    my $specdir = dir("SPECS");
+    -e $specdir or $self->log_fatal("cannot find a SPECS directory, aborting");
+    my @specfiles =
+        grep { /\.spec$/ }
+        $specdir->children;
+    scalar(@specfiles) > 0
+        or $self->log_fatal("could not find a spec file, aborting");
+    scalar(@specfiles) < 2
+        or $self->log_fatal("more than one spec file found, aborting");
+
+    #
+    #system "bm -lp >$redirect";
+
+}
+
 # -- private methods
 
 #

@@ -19,22 +19,16 @@ a list of various policies. Also update the list of build prereqs."
 
 sub opt_spec {
     my $self = shift;
-    return;
+    return (
+        [],
+        $self->verbose_options,
+    );
 }
 
 sub execute {
     my ($self, $opts, $args) = @_;
-
-    my $specdir = dir("SPECS");
-    -e $specdir or die "cannot find a SPECS directory, aborting\n";
-    my @specfiles =
-        grep { /\.spec$/ }
-        $specdir->children;
-    scalar(@specfiles) > 0 or
-        die "could not find a spec file, aborting\n";
-    scalar(@specfiles) < 2 or
-        die "more than one spec file found, aborting\n";
-
+    $self->log_init($opts);
+    $self->magpie->fixspec;
 }
 
 1;
