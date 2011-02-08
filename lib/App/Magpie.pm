@@ -90,10 +90,10 @@ sub checkout {
 #
 sub _run_command {
     my ($self, $cmd) = @_;
-    my $logger   = $self->logger;
+    my $logger = $self->logger;
+    $logger->log_debug( "running: $cmd" );
 
     my $redirect = ($logger->get_debug && !$logger->get_muted) ? "&2" : "/dev/null";
-    $self->log_debug( "running: $cmd" );
 
     # run the command
     system("$cmd >$redirect") == 0
