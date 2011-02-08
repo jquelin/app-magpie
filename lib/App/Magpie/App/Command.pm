@@ -56,6 +56,7 @@ method. Those options can then be used by C<log_init()>.
 
 sub verbose_options {
     return (
+        [ "Logging options" ],
         [ 'verbose|v' => "display extra information" ],
         [ 'quiet|q'   => "be quiet unless error"     ],
     );
