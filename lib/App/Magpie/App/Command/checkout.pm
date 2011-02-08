@@ -23,34 +23,24 @@ sub opt_spec {
     my $self = shift;
     return (
         [],
-        [ 'directory|d=s' => "directory where to check out", { default => "." } ],
-        [ 'quiet|q'       => "be quiet on checkout operations",                 ],
+        [ 'directory|d=s' => "directory where to check out"    ],
         [ 'shell|s'       => "display Bourne shell commands to execute to change directory" ],
+        [],
+        $self->verbose_options,
     );
 }
 
 sub execute {
     my ($self, $opts, $args) = @_;
 
-    # fetch package to be checked out
+    # sanity check
     my $pkg = shift @$args;
     $self->usage_error( "A package should be specified." )
         unless defined $pkg;
 
-    # set up redirect depending on quiet mode
-    my $redirect = $opts->{quiet} ? "/dev/null" : "&2";
-
-    # check out the package, or update the local checkout
-    my $dir    = dir( $opts->{directory} );
-    my $pkgdir = $dir->subdir( $pkg );
-    $dir->mkpath unless -d $dir;
-    if ( -d $pkgdir ) {
-        chdir $pkgdir;
-        system "mgarepo up >$redirect";
-    } else {
-        chdir $dir;
-        system "mgarepo co $pkg >$redirect";
-    }
+    # do the checkout
+    $self->log_init($opts);
+    my $pkgdir = $self->magpie->checkout($pkg, $opts->{directory});
 
     # display command to execute if shell mode
     say "cd $pkgdir" if $opts->{shell};
