@@ -139,6 +139,7 @@ sub fixspec {
     $spec =~
         s{^(Name|Version|Release|Epoch|Summary|License|Group|Url|Source\d*|Requires|Obsoletes|Provides):\s*}
          { $pad->left( ucfirst(lc($1)) . ":", 12 ) }mgie;
+    $spec =~ s{^(buildrequires):\s*}{BuildRequires: }mgi;
 
     # updating %doc
     $self->log_debug( "fetching documentation files" );
