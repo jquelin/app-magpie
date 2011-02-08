@@ -2,6 +2,11 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110390  2011-02-08 15:16:05 Europe/Paris
+ - new command: fixspec
+ - using a common logging scheme
+ - deporting action logic in app::magpie
+
 1.110320  2011-02-01 11:22:20 Europe/Paris
  - new command: checkout
 
