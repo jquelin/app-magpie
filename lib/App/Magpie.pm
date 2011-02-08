@@ -10,6 +10,28 @@ use Moose;
 use MooseX::Has::Sugar;
 use Path::Class;
 
+
+# -- public attributes
+
+=attr logger
+
+The L<Log::Dispatchouli> object used for logging.
+
+=method log
+
+=method log_debug
+
+=method log_fatal
+
+    $magpie->log( ... );
+    $magpie->log_debug( ... );
+    $magpie->log_fatal( ... );
+
+Log stuff at various verbose levels. Uses L<Log::Dispatchouli>
+underneath - refer to this module for more information.
+
+=cut
+
 has logger => (
     ro, lazy,
     isa     => "Log::Dispatchouli",
@@ -22,6 +44,20 @@ has logger => (
         });
     },
 );
+
+
+# -- public methods
+
+=method checkout
+
+    my $pkgdir = $magpie->checkout( $pkg [, $directory] );
+
+Check out C<$pkg> under C<$directory> (or current directory if no
+directory specified). Refresh the checkout if it already exists.
+
+Return the directory in which the checkout is located.
+
+=cut
 
 sub checkout {
     my ($self, $pkg, $directory) = @_;
