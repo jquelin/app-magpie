@@ -5,6 +5,35 @@ use warnings;
 package App::Magpie;
 # ABSTRACT: Mageia Perl Integration Easy
 
+use Log::Dispatchouli;
+use Moose;
+use MooseX::Has::Sugar;
+use Path::Class;
+
+has logger => (
+    ro, lazy,
+    isa     => "Log::Dispatchouli",
+    handles => [ qw{ log log_debug log_fatal } ],
+    default => sub {
+        Log::Dispatchouli->new({
+            ident     => "magpie",
+            to_stderr => 1,
+            log_pid   => 0,
+        });
+    },
+);
+
+
+# -- private methods
+
+sub _run_command {
+    my ($self, $cmd) = @_;
+    my $logger   = $self->logger;
+    my $redirect = ($logger->get_debug && !$logger->get_muted) ? "&2" : "/dev/null";
+    $self->log_debug( "running: $cmd" );
+    system "$cmd >$redirect";
+}
+
 1;
 __END__
 
