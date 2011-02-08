@@ -9,6 +9,7 @@ use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
 use Path::Class 0.22; # dir->basename
+use Text::Padding;
 
 
 # -- public attributes
@@ -119,6 +120,13 @@ sub fixspec {
 
     $self->log_debug( "removing buildroot, not needed anymore" );
     $spec =~ s/^buildroot:.*\n//mi;
+
+    # lining up / padding
+    my $pad = Text::Padding->new;
+    $self->log_debug( "lining up categories" );
+    $spec =~ s
+        {^(Name|Version|Release|Epoch|Summary|License|Group|Url|Source\d*):\s*}
+        { $pad->left( ucfirst(lc($1)) . ":", 12 ) }mgie;
 
     $self->log_debug( "trimming empty end lines" );
     $spec =~ s/\n+\z//;
