@@ -186,6 +186,8 @@ sub fixspec {
     $spec =~
         s{^(Name|Version|Release|Epoch|Summary|License|Group|Url|Source\d*|Patch\d*|BuildArch|Requires|Obsoletes|Provides):\s*}
          { $pad->left( ucfirst(lc($1)) . ":", 12 ) }mgie;
+    $spec =~ s{^source:}{Source0:}mgi;
+    $spec =~ s{^patch:}{Patch0:}mgi;
     $spec =~ s{^buildrequires:}{BuildRequires:}mgi;
     $spec =~ s{^buildarch:}{BuildArch:}mgi;
 
