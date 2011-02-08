@@ -5,10 +5,11 @@ use warnings;
 package App::Magpie;
 # ABSTRACT: Mageia Perl Integration Easy
 
+use Parse::CPAN::Meta   1.4401; # load_file
 use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
-use Path::Class 0.22; # dir->basename
+use Path::Class         0.22;   # dir->basename
 use Text::Padding;
 
 
@@ -112,7 +113,11 @@ sub fixspec {
     $self->log_debug( "removing previous BUILD directory" );
     dir( "BUILD" )->rmtree;
     $self->_run_command( "bm -lp" );
-    my $distdir = dir( glob "BUILD/*" );
+    my $distdir  = dir( glob "BUILD/*" );
+    my $metafile = -e $distdir->file("META.json")
+        ? $distdir->file("META.json")
+        : -e $distdir->file("META.yml")
+            ? $distdir->file("META.yml") : undef;
 
     # cleaning spec file
     $self->log_debug( "removing mandriva macros" );
@@ -131,6 +136,48 @@ sub fixspec {
         $str .= $key . ": $1\n" while $value =~ m{(\S+(\s*[>=<]+\s*\S+)?)\s*}g;
         $str;
     }mgie;
+
+    # fetching buildrequires from meta file
+    if ( defined $metafile ) {
+        $self->log_debug( "using META file to get buildrequires" );
+        $spec =~ s{^buildrequires:\s*perl\(.*\).*$}{}mgi;
+        my $meta = Parse::CPAN::Meta->load_file( $metafile );
+        my %br_from_meta;
+        if ( $meta->{"meta-spec"}{version} < 2 ) {
+            %br_from_meta = (
+                %{ $meta->{configure_requires} },
+                %{ $meta->{build_requires} },
+                %{ $meta->{requires} },
+            );
+        } else {
+            my $prereqs = $meta->{prereqs};
+            %br_from_meta = (
+                %{ $prereqs->{configure}{requires} },
+                %{ $prereqs->{build}{requires} },
+                %{ $prereqs->{test}{requires} },
+                %{ $prereqs->{runtime}{requires} },
+            );
+        }
+
+        my $rpmbr;
+        foreach my $br ( sort keys %br_from_meta ) {
+            next if $br eq 'perl';
+            my $version = $br_from_meta{$br};
+            $rpmbr .= "BuildRequires: perl($br)";
+            if ( $version != 0 ) {
+                my $rpmvers = qx{ rpm -E "%perl_convert_version $version" };
+                $rpmbr .= " >= $rpmvers";
+            }
+            $rpmbr .= "\n";
+        }
+
+        if ( $spec =~ /buildrequires/i ) {
+            $spec =~ s{^(buildrequires:.*)$}{$rpmbr$1}mi;
+        } else {
+            $spec =~ s{^(buildarch.*)$}{$rpmbr$1}mi;
+        }
+    }
+
     $spec =~ s{^((?:build)?requires:.*)\n+}{$1\n}mgi;
 
     # lining up / padding
