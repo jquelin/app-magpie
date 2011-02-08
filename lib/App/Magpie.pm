@@ -82,13 +82,22 @@ sub checkout {
 
 # -- private methods
 
+#
+# $magpie->_run_command( $cmd );
+#
+# Run a command, spicing some debug comments here and there.
+# Die if the command encountered a problem.
+#
 sub _run_command {
     my ($self, $cmd) = @_;
     my $logger   = $self->logger;
+
     my $redirect = ($logger->get_debug && !$logger->get_muted) ? "&2" : "/dev/null";
     $self->log_debug( "running: $cmd" );
+
+    # run the command
     system("$cmd >$redirect") == 0
-        or $self->logger->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
+        or $logger->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
 }
 
 1;
