@@ -211,6 +211,32 @@ sub fixspec {
         $self->log_debug( "no documentation found" );
     }
 
+    # other things that might be worth checking...
+        # perl-version instead of perl(version)
+        # url before source
+        # source:  http://www.cpan.org/modules/by-module/Algorithm/
+        #  Url:        http://search.cpan.org/dist/%{upstream_name}
+        # license
+        # rpmlint ?
+        # sorting buildrequires
+        # %description\n\n
+        # $RPM_BUILD_ROOT
+        #  %{upstream_name} module for perl within summary
+        # "perl module" within summary
+        # "module for perl" within summary
+        # %{upstream_name}  within description
+        # requires with buildrequires
+        # requires perl
+        # no %check
+        # %upstream instead of %{upstream
+        # perl-devel alongside noarch
+        # within %install et %clean: [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+        # "no summary found"
+        # "no description found"
+        # make test without %check
+        # %modprefix
+
+
     # removing extra newlines
     $spec =~ s{\n{3,}}{\n\n}g;
 
