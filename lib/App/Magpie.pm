@@ -122,10 +122,10 @@ sub _run_command {
     my $logger = $self->logger;
     $logger->log_debug( "running: $cmd" );
 
-    my $redirect = ($logger->get_debug && !$logger->get_muted) ? "&2" : "/dev/null";
+    my $stderr = ($logger->get_debug && !$logger->get_muted) ? "" : "2>/dev/null";
 
     # run the command
-    system("$cmd >$redirect") == 0
+    system("$cmd $stderr >&2") == 0
         or $logger->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
 }
 
