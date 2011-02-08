@@ -124,6 +124,15 @@ sub fixspec {
     $self->log_debug( "trimming empty end lines" );
     $spec =~ s/\n+\z//;
 
+    # splitting up build-/requires
+    $self->log_debug( "splitting (build-)requires one per line" );
+    $spec =~ s{^((?:build)?requires):\s*(.*)$}{
+        my $key = $1; my $value = $2; my $str;
+        $str .= $key . ": $1\n" while $value =~ m{(\S+(\s*[>=<]+\s*\S+)?)\s*}g;
+        $str;
+    }mgie;
+    $spec =~ s{^((?:build)?requires:.*)\n+}{$1\n}mgi;
+
     # lining up / padding
     my $pad = Text::Padding->new;
     $self->log_debug( "lining up categories" );
