@@ -184,9 +184,10 @@ sub fixspec {
     my $pad = Text::Padding->new;
     $self->log_debug( "lining up categories" );
     $spec =~
-        s{^(Name|Version|Release|Epoch|Summary|License|Group|Url|Source\d*|Requires|Obsoletes|Provides):\s*}
+        s{^(Name|Version|Release|Epoch|Summary|License|Group|Url|Source\d*|Patch\d*|BuildArch|Requires|Obsoletes|Provides):\s*}
          { $pad->left( ucfirst(lc($1)) . ":", 12 ) }mgie;
-    $spec =~ s{^(buildrequires):\s*}{BuildRequires: }mgi;
+    $spec =~ s{^buildrequires:}{BuildRequires:}mgi;
+    $spec =~ s{^buildarch:}{BuildArch:}mgi;
 
     # updating %doc
     $self->log_debug( "fetching documentation files" );
