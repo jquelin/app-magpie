@@ -87,7 +87,8 @@ sub _run_command {
     my $logger   = $self->logger;
     my $redirect = ($logger->get_debug && !$logger->get_muted) ? "&2" : "/dev/null";
     $self->log_debug( "running: $cmd" );
-    system "$cmd >$redirect";
+    system("$cmd >$redirect") == 0
+        or $self->logger->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
 }
 
 1;
