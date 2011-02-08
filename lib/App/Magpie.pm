@@ -8,7 +8,7 @@ package App::Magpie;
 use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
-use Path::Class;
+use Path::Class 0.22; # dir->basename
 
 
 # -- public attributes
@@ -103,10 +103,48 @@ sub fixspec {
         or $self->log_fatal("could not find a spec file, aborting");
     scalar(@specfiles) < 2
         or $self->log_fatal("more than one spec file found, aborting");
+    my $specfile = shift @specfiles;
+    my $spec = $specfile->slurp;
+    $self->log( "fixing $specfile" );
 
-    #
-    #system "bm -lp >$redirect";
+    # extracting tarball
+    $self->log_debug( "removing previous BUILD directory" );
+    dir( "BUILD" )->rmtree;
+    $self->_run_command( "bm -lp" );
+    my $distdir = dir( glob "BUILD/*" );
 
+    # cleaning spec file
+    $self->log_debug( "removing mandriva macros" );
+    $spec =~ s/^%if %{mdkversion}.*?^%endif$//msi;
+
+    $self->log_debug( "trimming empty end lines" );
+    $spec =~ s/\n+\z//;
+
+    # updating %doc
+    $self->log_debug( "fetching documentation files" );
+    my @docfiles =
+        grep { ! /^MANIFEST/ }
+        grep { /^[A-Z]+$/ || m{^(Change(s|log)|META.(json|yml)|eg|examples)$}i }
+        map  { $_->basename }
+        $distdir->children;
+    if ( @docfiles ) {
+        $self->log_debug( "found: @docfiles" );
+        if ( $spec =~ /^%doc (.*)/m ) {
+            $self->log_debug( "updating %doc" );
+            $spec =~ s/^(%doc .*)$/%doc @docfiles/m;
+        } else {
+            $self->log_debug( "adding a %doc" );
+            $spec =~ s/^%files$/%files\n%doc @docfiles/m;
+        }
+    } else {
+        $self->log_debug( "no documentation found" );
+    }
+
+    # writing down new spec file
+    $self->log_debug( "writing updated spec file" );
+    my $fh = $specfile->openw;
+    $fh->print($spec);
+    $fh->close;
 }
 
 # -- private methods
