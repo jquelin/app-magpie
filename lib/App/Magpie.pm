@@ -380,7 +380,7 @@ EOF
     $self->log( "committing changes" );
     $self->_run_command( "mgarepo sync" );
     $self->_run_command( "svn ci SOURCES-bin -m 'update to $newvers'" );
-    $self->_run_command( "svn ci SOURCES     -m 'update to $newvers'" );
+    $self->_run_command( "svn ci             -m 'update to $newvers'" );
 
 }
 
