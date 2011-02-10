@@ -10,6 +10,7 @@ use Parse::CPAN::Meta   1.4401; # load_file
 use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
+use Parse::CPAN::Packages;
 use Path::Class         0.22;   # dir->basename
 use Text::Padding;
 
@@ -277,6 +278,13 @@ sub update {
     my $pkgname = $specfile->basename; $pkgname =~ s/\.spec$//;
     $self->log( "updating $pkgname" );
 
+    # check if package uses %upstream_{name|version}
+    my ($distname) = ( $spec =~ /^%define upstream_name\s+(.*)$/m );
+    my ($distvers) = ( $spec =~ /^%define upstream_version\s+(.*)$/m );
+    defined($distname) or $self->log_fatal( "package does not use %upstream_name" );
+    defined($distvers) or $self->log_fatal( "package does not use %upstream_version" );
+    $self->log_debug( "perl distribution to update: $distname v$distvers" );
+
     # check if we have a minicpan at hand
     my $cpanmconf = CPAN::Mini->config_file;
     defined($cpanmconf)
@@ -285,12 +293,10 @@ sub update {
     my $cpanmdir = dir( $config{local} );
     $self->log_debug( "found a minicpan installation in $cpanmdir" );
 
-    # check if package uses %upstream_{name|version}
-    my ($distname) = ( $spec =~ /^%define upstream_name\s+(.*)$/m );
-    my ($distvers) = ( $spec =~ /^%define upstream_version\s+(.*)$/m );
-    defined($distname) or $self->log_fatal( "package does not use %upstream_name" );
-    defined($distvers) or $self->log_fatal( "package does not use %upstream_version" );
-    $self->log_debug( "perl distribution to update: $distname v$distvers" );
+    #
+    $self->log_debug( "parsing 02packages.details.txt.gz" );
+    my $modgz = $cpanmdir->file("modules", "02packages.details.txt.gz");
+    my $p = Parse::CPAN::Packages->new( $modgz->stringify );
 
 }
 
