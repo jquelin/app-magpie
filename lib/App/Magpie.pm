@@ -357,6 +357,9 @@ sub update {
     $specfh->print( $spec );
     $specfh->close;
 
+    # fix spec file, update buildrequires
+    $self->fixspec;
+
     # create script
     my $script  = file( "refresh" );
     my $fh = $script->openw;
