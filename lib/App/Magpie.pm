@@ -274,9 +274,8 @@ sub update {
         or $self->log_fatal("more than one spec file found, aborting");
     my $specfile = shift @specfiles;
     my $spec = $specfile->slurp;
-
-    my ($pkgname) = ( $spec =~ /^%define upstream_name\s+(.*)$/m );
-    $self->log( "updating perl distribution $pkgname" );
+    my $pkgname = $specfile->basename; $pkgname =~ s/\.spec$//;
+    $self->log( "updating $pkgname" );
 
     # check if we have a minicpan at hand
     my $cpanmconf = CPAN::Mini->config_file;
@@ -284,8 +283,14 @@ sub update {
         or $self->log_fatal("no minicpan installation found, aborting");
     my %config   = CPAN::Mini->read_config( {quiet=>1} );
     my $cpanmdir = dir( $config{local} );
-    $self->log( "found a minicpan installation in $cpanmdir" );
+    $self->log_debug( "found a minicpan installation in $cpanmdir" );
 
+    # check if package uses %upstream_{name|version}
+    my ($distname) = ( $spec =~ /^%define upstream_name\s+(.*)$/m );
+    my ($distvers) = ( $spec =~ /^%define upstream_version\s+(.*)$/m );
+    defined($distname) or $self->log_fatal( "package does not use %upstream_name" );
+    defined($distvers) or $self->log_fatal( "package does not use %upstream_version" );
+    $self->log_debug( "perl distribution to update: $distname v$distvers" );
 
 }
 
