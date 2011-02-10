@@ -6,10 +6,11 @@ package App::Magpie;
 # ABSTRACT: Mageia Perl Integration Easy
 
 use CPAN::Mini;
-use Parse::CPAN::Meta   1.4401; # load_file
+use File::Copy;
 use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
+use Parse::CPAN::Meta   1.4401; # load_file
 use Parse::CPAN::Packages;
 use Path::Class         0.22;   # dir->basename
 use Text::Padding;
@@ -305,6 +306,36 @@ sub update {
     version->new( $newvers ) > version->new( $distvers )
         or $self->log_fatal( "no new version found" );
     $self->log_debug( "new version found: $newvers" );
+
+    # copy tarball
+    my $cpantarball = $cpanmdir->file( "authors", "id", $dist->prefix );
+    my $tarball     = $dist->filename;
+    $self->log_debug( "copying $tarball to SOURCES" );
+    copy( $cpantarball->stringify, "SOURCES" )
+        or $self->log_fatal( "could not copy $cpantarball to SOURCES: $!" );
+
+    # update spec file
+    $self->log_debug( "updating spec file $specfile" );
+    $spec =~ s/%mkrel \d+/%mkrel 1/;
+    $spec =~ s/^(%define upstream_version) .*/$1 $newvers/m;
+    my $specfh = $specfile->openw;
+    $specfh->print( $spec );
+    $specfh->close;
+
+    # create script
+    my $script  = file( "refresh" );
+    my $fh = $script->openw;
+    $fh->print(<<EOF);
+#!/bin/bash
+bm -l                                       && \\
+mgarepo sync                                && \\
+svn ci SOURCES-bin -m "update to $newvers"  && \\
+svn ci -m "update to $newvers"              && \\
+mgarepo submit                              && \\
+rm \$0
+EOF
+    $fh->close;
+    chmod 0755, $script;
 
 }
 
