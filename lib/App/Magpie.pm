@@ -13,6 +13,7 @@ use MooseX::Has::Sugar;
 use Parse::CPAN::Packages;
 use Path::Class         0.22;   # dir->basename
 use Text::Padding;
+use version;
 
 
 # -- public attributes
@@ -295,10 +296,15 @@ sub update {
     my $cpanmdir = dir( $config{local} );
     $self->log_debug( "found a minicpan installation in $cpanmdir" );
 
-    #
+    # try to find a newer version
     $self->log_debug( "parsing 02packages.details.txt.gz" );
-    my $modgz = $cpanmdir->file("modules", "02packages.details.txt.gz");
-    my $p = Parse::CPAN::Packages->new( $modgz->stringify );
+    my $modgz   = $cpanmdir->file("modules", "02packages.details.txt.gz");
+    my $p       = Parse::CPAN::Packages->new( $modgz->stringify );
+    my $dist    = $p->latest_distribution( $distname );
+    my $newvers = $dist->version;
+    version->new( $newvers ) > version->new( $distvers )
+        or $self->log_fatal( "no new version found" );
+    $self->log_debug( "new version found: $newvers" );
 
 }
 
