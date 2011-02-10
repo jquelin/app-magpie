@@ -282,8 +282,8 @@ sub update {
     $self->log( "updating $pkgname" );
 
     # check if package uses %upstream_{name|version}
-    my ($distname) = ( $spec =~ /^%define upstream_name\s+(.*)$/m );
-    my ($distvers) = ( $spec =~ /^%define upstream_version\s+(.*)$/m );
+    my ($distname) = ( $spec =~ /^%define\s+upstream_name\s+(.*)$/m );
+    my ($distvers) = ( $spec =~ /^%define\s+upstream_version\s+(.*)$/m );
     defined($distname) or $self->log_fatal( "package does not use %upstream_name" );
     defined($distvers) or $self->log_fatal( "package does not use %upstream_version" );
     $self->log_debug( "perl distribution to update: $distname v$distvers" );
