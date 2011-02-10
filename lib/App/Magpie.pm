@@ -45,9 +45,11 @@ has logger => (
             ident     => "magpie",
             to_stderr => 1,
             log_pid   => 0,
+            prefix    => '[magpie] ',
         });
     },
 );
+
 
 
 # -- public methods
