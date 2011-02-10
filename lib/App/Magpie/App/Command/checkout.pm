@@ -5,8 +5,6 @@ use warnings;
 package App::Magpie::App::Command::checkout;
 # ABSTRACT: check-out or update a given package
 
-use Path::Class;
-
 use App::Magpie::App -command;
 
 

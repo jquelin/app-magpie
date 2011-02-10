@@ -5,8 +5,6 @@ use warnings;
 package App::Magpie::App::Command::fixspec;
 # ABSTRACT: update a spec file to match some policies
 
-use Path::Class;
-
 use App::Magpie::App -command;
 
 
