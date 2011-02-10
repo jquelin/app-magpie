@@ -365,11 +365,10 @@ sub update {
     my $fh = $script->openw;
     $fh->print(<<EOF);
 #!/bin/bash
-bm -l                                       && \\
-mgarepo sync                                && \\
-svn ci SOURCES-bin -m "update to $newvers"  && \\
-svn ci -m "update to $newvers"              && \\
-mgarepo submit                              && \\
+bm -l                          && \\
+mgarepo sync -c                && \\
+svn ci -m "update to $newvers" && \\
+mgarepo submit                 && \\
 rm \$0
 EOF
     $fh->close;
@@ -381,9 +380,8 @@ EOF
 
     # push changes
     $self->log( "committing changes" );
-    $self->_run_command( "mgarepo sync" );
-    $self->_run_command( "svn ci SOURCES-bin -m 'update to $newvers'" );
-    $self->_run_command( "svn ci             -m 'update to $newvers'" );
+    $self->_run_command( "mgarepo sync -c" );
+    $self->_run_command( "svn ci -m 'update to $newvers'" );
 
     # submit
     $self->bswait;
