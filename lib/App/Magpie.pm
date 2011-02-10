@@ -5,6 +5,7 @@ use warnings;
 package App::Magpie;
 # ABSTRACT: Mageia Perl Integration Easy
 
+use CPAN::Mini;
 use Parse::CPAN::Meta   1.4401; # load_file
 use Log::Dispatchouli;
 use Moose;
@@ -246,6 +247,47 @@ sub fixspec {
     $fh->print($spec);
     $fh->close;
 }
+
+
+=method update
+
+    $magpie->update;
+
+Try to update the current checked-out package to its latest version, if
+there's one available.
+
+=cut
+
+sub update {
+    my ($self) = @_;
+
+    # check if there's a spec file to update...
+    my $specdir = dir("SPECS");
+    -e $specdir or $self->log_fatal("cannot find a SPECS directory, aborting");
+    my @specfiles =
+        grep { /\.spec$/ }
+        $specdir->children;
+    scalar(@specfiles) > 0
+        or $self->log_fatal("could not find a spec file, aborting");
+    scalar(@specfiles) < 2
+        or $self->log_fatal("more than one spec file found, aborting");
+    my $specfile = shift @specfiles;
+    my $spec = $specfile->slurp;
+
+    my ($pkgname) = ( $spec =~ /^%define upstream_name\s+(.*)$/m );
+    $self->log( "updating perl distribution $pkgname" );
+
+    # check if we have a minicpan at hand
+    my $cpanmconf = CPAN::Mini->config_file;
+    defined($cpanmconf)
+        or $self->log_fatal("no minicpan installation found, aborting");
+    my %config   = CPAN::Mini->read_config( {quiet=>1} );
+    my $cpanmdir = dir( $config{local} );
+    $self->log( "found a minicpan installation in $cpanmdir" );
+
+
+}
+
 
 # -- private methods
 
