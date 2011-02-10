@@ -305,7 +305,7 @@ sub update {
     my $newvers = $dist->version;
     version->new( $newvers ) > version->new( $distvers )
         or $self->log_fatal( "no new version found" );
-    $self->log_debug( "new version found: $newvers" );
+    $self->log( "new version found: $newvers" );
 
     # copy tarball
     my $cpantarball = $cpanmdir->file( "authors", "id", $dist->prefix );
@@ -336,6 +336,16 @@ rm \$0
 EOF
     $fh->close;
     chmod 0755, $script;
+
+    # local dry-run
+    $self->log( "trying to build package locally" );
+    $self->_run_command( "bm -l" );
+
+    # push changes
+    $self->log( "committing changes" );
+    $self->_run_command( "mgarepo sync" );
+    $self->_run_command( "svn ci SOURCES-bin -m 'update to $newvers'" );
+    $self->_run_command( "svn ci SOURCES     -m 'update to $newvers'" );
 
 }
 
