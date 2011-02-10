@@ -385,6 +385,7 @@ EOF
     # submit
     $self->bswait;
     $self->_run_command( "mgarepo submit" );
+    $script->remove;
 }
 
 
