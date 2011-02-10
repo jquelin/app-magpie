@@ -195,6 +195,7 @@ sub fixspec {
     # updating %doc
     $self->log_debug( "fetching documentation files" );
     my @docfiles =
+        sort
         grep { ! /^MANIFEST/ }
         grep { /^[A-Z]+$/ || m{^(Change(s|log)|META.(json|yml)|eg|examples)$}i }
         map  { $_->basename }

@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - fixspec now sorts doc files
 
 1.110390  2011-02-08 15:16:05 Europe/Paris
  - new command: fixspec
