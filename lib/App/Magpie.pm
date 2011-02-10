@@ -382,6 +382,9 @@ EOF
     $self->_run_command( "svn ci SOURCES-bin -m 'update to $newvers'" );
     $self->_run_command( "svn ci             -m 'update to $newvers'" );
 
+    # submit
+    $self->bswait;
+    $self->_run_command( "mgarepo submit" );
 }
 
 
