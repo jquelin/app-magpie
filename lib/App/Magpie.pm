@@ -186,17 +186,17 @@ sub fixspec {
         my %br_from_meta;
         if ( $meta->{"meta-spec"}{version} < 2 ) {
             %br_from_meta = (
-                %{ $meta->{configure_requires} },
-                %{ $meta->{build_requires} },
-                %{ $meta->{requires} },
+                %{ $meta->{configure_requires} // {} },
+                %{ $meta->{build_requires}     // {} },
+                %{ $meta->{requires}           // {} },
             );
         } else {
             my $prereqs = $meta->{prereqs};
             %br_from_meta = (
-                %{ $prereqs->{configure}{requires} },
-                %{ $prereqs->{build}{requires} },
-                %{ $prereqs->{test}{requires} },
-                %{ $prereqs->{runtime}{requires} },
+                %{ $prereqs->{configure}{requires} // {} },
+                %{ $prereqs->{build}{requires}     // {} },
+                %{ $prereqs->{test}{requires}      // {} },
+                %{ $prereqs->{runtime}{requires}   // {} },
             );
         }
 
