@@ -2,6 +2,9 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110470  2011-02-16 13:32:14 Europe/Paris
+ - fixspec: meta.yml requires can be empty
+
 1.110410  2011-02-10 14:33:08 Europe/Paris
  - new command: update (aka refresh)
  - fixspec now sorts doc files
