@@ -357,14 +357,12 @@ sub update {
     $specfh->print( $spec );
     $specfh->close;
 
-    # fix spec file, update buildrequires
-    $self->fixspec;
-
     # create script
     my $script  = file( "refresh" );
     my $fh = $script->openw;
     $fh->print(<<EOF);
 #!/bin/bash
+magpie fix -v                  && \\
 bm -l                          && \\
 mgarepo sync -c                && \\
 svn ci -m "update to $newvers" && \\
@@ -373,6 +371,9 @@ rm \$0
 EOF
     $fh->close;
     chmod 0755, $script;
+
+    # fix spec file, update buildrequires
+    $self->fixspec;
 
     # local dry-run
     $self->log( "trying to build package locally" );
