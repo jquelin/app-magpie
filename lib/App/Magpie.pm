@@ -12,7 +12,7 @@ use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
 use Parse::CPAN::Meta   1.4401; # load_file
-use Parse::CPAN::Packages;
+use Parse::CPAN::Packages::Fast;
 use Path::Class         0.22;   # dir->basename
 use Text::Padding;
 use version;
@@ -335,7 +335,7 @@ sub update {
     # try to find a newer version
     $self->log_debug( "parsing 02packages.details.txt.gz" );
     my $modgz   = $cpanmdir->file("modules", "02packages.details.txt.gz");
-    my $p       = Parse::CPAN::Packages->new( $modgz->stringify );
+    my $p       = Parse::CPAN::Packages::Fast->new( $modgz->stringify );
     my $dist    = $p->latest_distribution( $distname );
     my $newvers = $dist->version;
     version->new( $newvers ) > version->new( $distvers )
