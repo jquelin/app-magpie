@@ -188,6 +188,7 @@ sub fixspec {
             %br_from_meta = (
                 %{ $meta->{configure_requires} // {} },
                 %{ $meta->{build_requires}     // {} },
+                %{ $meta->{test_requires}      // {} },
                 %{ $meta->{requires}           // {} },
             );
         } else {
