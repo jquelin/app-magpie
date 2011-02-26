@@ -215,8 +215,10 @@ sub fixspec {
 
         if ( $spec =~ /buildrequires/i ) {
             $spec =~ s{^(buildrequires:.*)$}{$rpmbr$1}mi;
-        } else {
+        } elsif ( $spec =~ /buildarch/i ) {
             $spec =~ s{^(buildarch.*)$}{$rpmbr$1}mi;
+        } else {
+            $spec =~ s{^(source.*)$}{$1\n\n$rpmbr}mi;
         }
     }
 
