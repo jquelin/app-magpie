@@ -2,6 +2,10 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110570  2011-02-26 15:57:51 Europe/Paris
+ - fixspec: insert buildrequires even if no buildarch present
+ - fixspec: fetch test_requires from meta.yml as buildrequires
+
 1.110560  2011-02-25 15:57:31 Europe/Paris
  - update: big speedup by using parse::cpan::packages::fast
 
