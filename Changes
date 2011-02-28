@@ -2,6 +2,11 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110590  2011-02-28 15:32:09 Europe/Paris
+ - new command: config
+ - config: support for --dump
+ - config: support for default logging level
+
 1.110570  2011-02-26 15:57:51 Europe/Paris
  - fixspec: insert buildrequires even if no buildarch present
  - fixspec: fetch test_requires from meta.yml as buildrequires
