@@ -21,6 +21,7 @@ sub opt_spec {
     my $self = shift;
     return (
         [],
+        [ "log-level|l=i", "default logging level", ]
     );
 }
 
@@ -28,6 +29,9 @@ sub execute {
     my ($self, $opts, $args) = @_;
     my $config = App::Magpie::Config->instance;
 
+    if ( exists $opts->{log_level} ) {
+        $config->set( "log", "level", $opts->{log_level} );
+    }
 }
 
 1;
