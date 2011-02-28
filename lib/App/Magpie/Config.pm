@@ -24,6 +24,20 @@ sub _build__config {
 
 # -- public methods
 
+=method dump
+
+    my $str = $config->dump;
+
+Return the whole content of the configuration file.
+
+=cut
+
+sub dump {
+    my $self = shift;
+    return $config_file->slurp;
+}
+
+
 =method get
 
     my $value = $config->get( $section, $key );

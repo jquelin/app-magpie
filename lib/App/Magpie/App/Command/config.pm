@@ -21,6 +21,9 @@ sub opt_spec {
     my $self = shift;
     return (
         [],
+        [ "dump|D", "dump whole configuration" ],
+        [],
+        [ "Available configuration items" ],
         [ "log-level|l=i", "default logging level", ]
     );
 }
@@ -28,6 +31,11 @@ sub opt_spec {
 sub execute {
     my ($self, $opts, $args) = @_;
     my $config = App::Magpie::Config->instance;
+
+    if ( $opts->{dump} ) {
+        say $config->dump;
+        exit;
+    }
 
     if ( exists $opts->{log_level} ) {
         $config->set( "log", "level", $opts->{log_level} );
