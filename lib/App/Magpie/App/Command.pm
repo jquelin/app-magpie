@@ -10,7 +10,7 @@ use Moose;
 use MooseX::Has::Sugar;
 
 use App::Magpie;
-use App::Magpie::Config;
+use App::Magpie::Logger;
 
 
 # -- public attributes
@@ -42,10 +42,9 @@ value of verbose options.
 sub log_init {
     my ($self, $opts) = @_;
 
-    my $config =App::Magpie::Config->instance;
-    my $log_level = ( $config->get( "log", "level" ) // 1 ) + $opts->{verbose} - $opts->{quiet};
-    $self->magpie->logger->set_muted(1) if $log_level == 0;
-    $self->magpie->logger->set_debug(1) if $log_level == 2;
+    my $logger =App::Magpie::Logger->instance;
+    $logger->more_verbose for 0 .. $opts->{verbose};
+    $logger->less_verbose for 0 .. $opts->{quiet};
 }
 
 
@@ -59,8 +58,8 @@ method. Those options can then be used by C<log_init()>.
 =cut
 
 sub verbose_options {
-    my $config =App::Magpie::Config->instance;
-    my $log_level = ( qw{ quiet normal debug } )[ $config->get( "log", "level" ) // 1 ];
+    my $logger    = App::Magpie::Logger->instance;
+    my $log_level = ( qw{ quiet normal debug } )[ $logger->log_level ];
     return (
         [ "Logging options (default log level: $log_level)" ],
         [ 'verbose|v+' => "be more verbose (can be repeated)",  {default=>0} ],

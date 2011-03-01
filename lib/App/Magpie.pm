@@ -17,42 +17,7 @@ use Path::Class         0.22;   # dir->basename
 use Text::Padding;
 use version;
 
-
-# -- public attributes
-
-=attr logger
-
-The L<Log::Dispatchouli> object used for logging.
-
-=method log
-
-=method log_debug
-
-=method log_fatal
-
-    $magpie->log( ... );
-    $magpie->log_debug( ... );
-    $magpie->log_fatal( ... );
-
-Log stuff at various verbose levels. Uses L<Log::Dispatchouli>
-underneath - refer to this module for more information.
-
-=cut
-
-has logger => (
-    ro, lazy,
-    isa     => "Log::Dispatchouli",
-    handles => [ qw{ log log_debug log_fatal } ],
-    default => sub {
-        Log::Dispatchouli->new({
-            ident     => "magpie",
-            to_stderr => 1,
-            log_pid   => 0,
-            prefix    => '[magpie] ',
-        });
-    },
-);
-
+with 'App::Magpie::Role::Logging';
 
 
 # -- public methods
@@ -405,13 +370,13 @@ EOF
 sub _run_command {
     my ($self, $cmd) = @_;
     my $logger = $self->logger;
-    $logger->log_debug( "running: $cmd" );
+    $self->log_debug( "running: $cmd" );
 
-    my $stderr = ($logger->get_debug && !$logger->get_muted) ? "" : "2>/dev/null";
+    my $stderr = $logger->log_level >= 2 ? "" : "2>/dev/null";
 
     # run the command
     system("$cmd $stderr >&2") == 0
-        or $logger->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
+        or $self->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
 }
 
 1;
