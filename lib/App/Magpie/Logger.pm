@@ -8,6 +8,9 @@ package App::Magpie::Logger;
 use Log::Dispatchouli;
 use MooseX::Singleton;
 use MooseX::Has::Sugar;
+use MooseX::SemiAffordanceAccessor;
+
+use App::Magpie::Config;
 
 
 # -- private attributes
@@ -40,6 +43,53 @@ has _logger => (
         });
     },
 );
+
+
+# -- public attributes
+
+=attr log_level
+
+The logging level is an integer. In reality, only 3 levels are
+recognized:
+
+=over 4
+
+=item * 0 or less - Quiet: Nothing at all will be logged, except if
+magpie aborts with an error.
+
+=item * 1 - Normal: quiet level + regular information will be logged.
+
+=item * 2 or more - Debug: normal level + all debug information will be
+logged.
+
+=back
+
+=cut
+
+has log_level => (
+    ro, lazy_build,
+    isa     => "Int",
+    traits  => ['Counter'],
+    handles => {
+        more_verbose => 'inc',
+        less_verbose => 'dec',
+    },
+    trigger => \&_trigger_log_level,
+);
+
+sub _build_log_level {
+    my $config = App::Magpie::Config->instance;
+    return $config->get( "log", "level" ) // 1;
+}
+
+sub _trigger_log_level {
+    my ($self, $new, $old) = @_;
+
+    my $logger = $self->_logger;
+    $logger->set_muted( ($new <= 0) );
+    $logger->set_debug( ($new >= 2) );
+}
+
 
 1;
 __END__
