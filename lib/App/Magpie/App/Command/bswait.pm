@@ -30,7 +30,8 @@ sub opt_spec {
 sub execute {
     my ($self, $opts, $args) = @_;
     $self->log_init($opts);
-    $self->magpie->bswait($opts);
+    require App::Magpie::Action::BSWait;
+    App::Magpie::Action::BSWait->new->run($opts);
 }
 
 1;

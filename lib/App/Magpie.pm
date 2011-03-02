@@ -7,7 +7,6 @@ package App::Magpie;
 
 use CPAN::Mini;
 use File::Copy;
-use LWP::UserAgent;
 use Log::Dispatchouli;
 use Moose;
 use MooseX::Has::Sugar;
@@ -21,40 +20,6 @@ with 'App::Magpie::Role::Logging';
 
 
 # -- public methods
-
-=method bswait
-
-    my $sleep = $magpie->bswait( $opts );
-
-Check Mageia build-system and fetch the wait hint. Sleep according to
-this hint, unless $opts->{nosleep} is true.
-
-Return the number of recommended number of seconds to sleep.
-
-=cut
-
-sub bswait {
-    my ($self, $opts) = @_;
-    $self->log( "checking bs wait hint" );
-
-    my $ua = LWP::UserAgent->new;
-    $ua->timeout(10);
-    $ua->env_proxy;
-
-    my $response = $ua->head('http://pkgsubmit.mageia.org/');
-    $self->log_fatal( $response->status_line ) unless $response->is_success;
-
-    my $sleep = $response->header( "x-bs-throttle" );
-    $self->log( "bs recommends to sleep $sleep seconds" );
-
-    if ( !$opts->{nosleep} && $sleep ) {
-        $self->log_debug( "sleeping $sleep seconds" );
-        sleep($sleep);
-    }
-
-    return $sleep;
-}
-
 
 =method checkout
 
@@ -353,7 +318,8 @@ EOF
     $self->_run_command( "svn ci -m 'update to $newvers'" );
 
     # submit
-    $self->bswait;
+    require App::Magpie::Action::BSWait;
+    App::Magpie::Action::BSWait->new->run;
     $self->_run_command( "mgarepo submit" );
     $script->remove;
 }
