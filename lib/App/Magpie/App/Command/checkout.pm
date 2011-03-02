@@ -38,7 +38,8 @@ sub execute {
 
     # do the checkout
     $self->log_init($opts);
-    my $pkgdir = $self->magpie->checkout($pkg, $opts->{directory});
+    require App::Magpie::Action::Checkout;
+    my $pkgdir = App::Magpie::Action::Checkout->new->run($pkg, $opts->{directory});
 
     # display command to execute if shell mode
     say "cd $pkgdir" if $opts->{shell};

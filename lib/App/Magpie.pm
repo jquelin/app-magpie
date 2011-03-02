@@ -21,39 +21,6 @@ with 'App::Magpie::Role::Logging';
 
 # -- public methods
 
-=method checkout
-
-    my $pkgdir = $magpie->checkout( $pkg [, $directory] );
-
-Check out C<$pkg> under C<$directory> (or current directory if no
-directory specified). Refresh the checkout if it already exists.
-
-Return the directory in which the checkout is located.
-
-=cut
-
-sub checkout {
-    my ($self, $pkg, $directory) = @_;
-
-    # check out the package, or update the local checkout
-    my $dir    = defined($directory) ? dir( $directory ) : dir();
-    my $pkgdir = $dir->subdir( $pkg );
-    $dir->mkpath unless -d $dir;
-    $self->log( "checking out $pkg in $pkgdir" );
-
-    if ( -d $pkgdir ) {
-        $self->log( "package already checked out, refreshing checkout");
-        chdir $pkgdir;
-        $self->_run_command( "mgarepo up" );
-    } else {
-        chdir $dir;
-        $self->_run_command( "mgarepo co $pkg" );
-    }
-
-    return $pkgdir;
-}
-
-
 =method fixspec
 
     $magpie->fixspec;
