@@ -114,6 +114,7 @@ EOF
     # submit
     require App::Magpie::Action::BSWait;
     App::Magpie::Action::BSWait->new->run;
+    $self->log( "submitting package" );
     $self->run_command( "mgarepo submit" );
     $script->remove;
 }
