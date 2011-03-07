@@ -26,7 +26,8 @@ sub opt_spec {
 sub execute {
     my ($self, $opts, $args) = @_;
     $self->log_init($opts);
-    $self->magpie->fixspec;
+    require App::Magpie::Action::FixSpec;
+    App::Magpie::Action::FixSpec->new->run;
 }
 
 1;
