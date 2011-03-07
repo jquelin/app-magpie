@@ -30,7 +30,8 @@ sub opt_spec {
 sub execute {
     my ($self, $opts, $args) = @_;
     $self->log_init($opts);
-    $self->magpie->update;
+    require App::Magpie::Action::Update;
+    App::Magpie::Action::Update->new->run;
 }
 
 1;
