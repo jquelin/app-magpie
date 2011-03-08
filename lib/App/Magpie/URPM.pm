@@ -9,6 +9,7 @@ use MooseX::Singleton;
 use MooseX::Has::Sugar;
 use URPM;
 
+with "App::Magpie::Role::Logging";
 
 # -- private attributes
 
@@ -16,7 +17,13 @@ has _urpm => ( ro, isa=>"URPM", lazy_build );
 
 sub _build__urpm {
     my $urpm = URPM->new;
-    $urpm->parse_synthesis($_) for glob "/var/lib/urpmi/*/synthesis.hdlist.cz";
+    my @hdlists = glob "/var/lib/urpmi/*/synthesis.hdlist.cz";
+
+    foreach my $hdlist ( @hdlists ) {
+        $urpm->log_debug( "parsing $hdlist" );
+        $urpm->parse_synthesis( $hdlist );
+    }
+
     return $urpm;
 }
 
