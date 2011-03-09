@@ -1,0 +1,21 @@
+# module ; new version ; reason
+Apache::AuthCookie::Util         ; 222.00     
+Apache::SessionX::Manager        ; 2.00       
+Bio::Root::RootI                 ; 1.006001   
+Boulder::Unigene                 ; 28051999.00 ; dummy ddmmyyyy version (wtf!?)
+DBIx::Class::Schema::Loader      ; 0.07001     ; broken upstream: rt#60318
+File::MimeInfo::Rox              ; 0.20        ; upstream version mismatch
+Getopt::Lucid                    ; 0.19        ; unparsable version in current version 0.19
+HTML::Table                      ; 2.08        ; 2.08a shipped
+HTML::Tidy                       ; 1.52        ; broken upstream
+Imager::Font::Type1              ; 1.011       ; version decrease upstream, https://rt.cpan.org/Ticket/Display.html?id=66250
+Inline::Python                   ; 0.38        ; broken with latest python, https://rt.cpan.org/Ticket/Display.html?id=65017
+Lingua::Features                 ; 0.30        ; cpanplus lost with version
+Net::FTP::Common                 ; 7.00       
+Parse::RecDescent::FAQ::Original ; 6.00        ; original faq
+SVN::Core                        ; 1.60       
+Switch                           ; 2.16        ; cpanplus lost with version
+Syntax::Highlight::Perl6         ; 0.85        ; broken upstream
+Tie::Watch                       ; 1.301       ; now in its own dist, https://rt.cpan.org/Ticket/Display.html?id=66249
+WebFetch                         ; 0.13        ; broken upstream
+XML::Grove                       ; 0.46        ; already at this version

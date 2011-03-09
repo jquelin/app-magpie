@@ -30,17 +30,23 @@ sub execute {
 
     $self->log_init($opts);
     require App::Magpie::Action::Old;
-    my @old =
+    my @oldsets =
         sort { $a->name cmp $b->name }
         App::Magpie::Action::Old->new->run;
 
     my $pad = Text::Padding->new;
-    foreach my $old ( @old ) {
-        my $label = $old->name;
-        say "** $label packages: " . $old->nb_modules;
+    my @ignored;
+    foreach my $set ( @oldsets ) {
+        if ( $set->name eq "ignored" ) {
+            @ignored = $set->all_modules;
+            next;
+        }
+
+        my $label = $set->name;
+        say "** $label packages: " . $set->nb_modules;
         say '';
 
-        foreach my $module ( sort $old->all_modules ) {
+        foreach my $module ( sort $set->all_modules ) {
             my @pkgs = $module->packages;
             given ( scalar(@pkgs) ) {
                 when (0) {
@@ -76,7 +82,12 @@ sub execute {
              }
         }
         say '';
+    }
 
+    if ( @ignored ) {
+        say "** ignored modules: " . scalar(@ignored) . "\n";
+        print join ", ", map { $_->name ."(" . $_->newver . ")" } @ignored;
+        say '';
     }
 }
 

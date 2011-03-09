@@ -5,11 +5,29 @@ use warnings;
 package App::Magpie::Action::Old::Module;
 # ABSTRACT: module that has a newer version available
 
+use File::ShareDir::PathClass;
 use Moose;
 use MooseX::Has::Sugar;
 use MooseX::SemiAffordanceAccessor;
 
 use App::Magpie::URPM;
+
+
+# -- private vars
+
+my %SKIP = do {
+    my $sharedir = File::ShareDir::PathClass->dist_dir( 'App-Magpie' );
+    my $skipfile = $sharedir->file( 'modules.skip' );
+    my @skips = $skipfile->slurp;
+    my %skip;
+    foreach my $skip ( @skips ) {
+        next if $skip =~ /^#/;
+        chomp $skip;
+        my ($module, $version, $reason) = split /\s*;\s*/, $skip;
+        $skip{$module} = $version;
+    }
+    %skip;
+};
 
 
 # -- public attributes
@@ -83,6 +101,11 @@ sub category {
     my ($self) = @_;
     my @pkgs   = $self->packages;
     my $iscore = $self->is_core;
+
+    if ( exists $SKIP{ $self->name } ) {
+        return "ignored" if not defined $SKIP{ $self->name };
+        return "ignored" if $self->newver eq $SKIP{ $self->name }
+    }
 
     if ( $iscore ) {
         return "core"       if scalar(@pkgs) == 0;
