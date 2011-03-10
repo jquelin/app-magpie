@@ -2,6 +2,9 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110690  2011-03-10 14:00:51 Europe/Paris
+ - skiplist update
+
 1.110680  2011-03-09 12:16:27 Europe/Paris
  - new command: old
  - all commands are now dispatched in their own modules, to be able to
