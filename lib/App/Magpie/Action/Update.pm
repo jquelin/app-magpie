@@ -78,7 +78,7 @@ sub run {
     # update spec file
     $self->log_debug( "updating spec file $specfile" );
     $spec =~ s/%mkrel \d+/%mkrel 1/;
-    $spec =~ s/^(%define upstream_version) .*/$1 $newvers/m;
+    $spec =~ s/^(%define\s+upstream_version)\s+.*/$1 $newvers/m;
     my $specfh = $specfile->openw;
     $specfh->print( $spec );
     $specfh->close;
