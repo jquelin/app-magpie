@@ -2,6 +2,9 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.110720  2011-03-13 10:46:39 Europe/Paris
+ - update: allow tabs in %define upstream_version
+
 1.110690  2011-03-10 14:00:51 Europe/Paris
  - skiplist update
 
