@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::App::Command::config;
+BEGIN {
+  $App::Magpie::App::Command::config::VERSION = '1.110840';
+}
 # ABSTRACT: update a spec file to match some policies
 
 use App::Magpie::App -command;
@@ -43,8 +54,17 @@ sub execute {
 }
 
 1;
-__END__
 
+
+=pod
+
+=head1 NAME
+
+App::Magpie::App::Command::config - update a spec file to match some policies
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
@@ -54,10 +74,26 @@ __END__
     # to get list of available options
     $ magpie help config
 
-
 =head1 DESCRIPTION
 
 This command allows to store some general configuration items to change
 the behaviour of magpie, instead of having to repeat them over & over
 again as command-line arguments. Classical example: log level.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
+
 

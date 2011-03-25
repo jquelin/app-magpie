@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::Role::RunningCommand;
+BEGIN {
+  $App::Magpie::Role::RunningCommand::VERSION = '1.110840';
+}
 # ABSTRACT: sthg that can run an external command
 
 use Moose::Role;
@@ -13,14 +24,6 @@ with 'App::Magpie::Role::Logging';
 
 # -- public methods
 
-=method run_command
-
-    $obj->run_command( $cmd );
-
-Run a command, spicing some debug comments here and there. Die if the
-command encountered a problem.
-
-=cut
 
 sub run_command {
     my ($self, $cmd) = @_;
@@ -37,17 +40,51 @@ sub run_command {
 
  
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie::Role::RunningCommand - sthg that can run an external command
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
     with 'App::Magpie::Role::RunningCommand';
     $self->run_command( "sleep 10" );
 
-
 =head1 DESCRIPTION
 
 This role is meant to provide easy way of running a command for classes
 consuming it. Standard output & standard errors are redirected depending
 on the log level.
+
+=head1 METHODS
+
+=head2 run_command
+
+    $obj->run_command( $cmd );
+
+Run a command, spicing some debug comments here and there. Die if the
+command encountered a problem.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

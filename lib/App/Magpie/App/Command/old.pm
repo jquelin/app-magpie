@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::App::Command::old;
+BEGIN {
+  $App::Magpie::App::Command::old::VERSION = '1.110840';
+}
 # ABSTRACT: report installed perl modules with new version available 
 
 use Encode;
@@ -92,8 +103,17 @@ sub execute {
 }
 
 1;
-__END__
 
+
+=pod
+
+=head1 NAME
+
+App::Magpie::App::Command::old - report installed perl modules with new version available 
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
@@ -102,10 +122,26 @@ __END__
     # to get list of available options
     $ magpie help old
 
-
 =head1 DESCRIPTION
 
 This command will check all installed Perl modules, and report the ones
 that have a new version available on CPAN. It will also provides the
 Mageia package which said module belongs.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
+
 

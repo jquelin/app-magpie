@@ -1,7 +1,5 @@
 Changelog for App-Magpie
 
-{{$NEXT}}
-
 1.110840  2011-03-25 10:11:11 Europe/Paris
  - old: adding skip based on package name
  - old: modules.skip updated

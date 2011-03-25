@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::App::Command::bswait;
+BEGIN {
+  $App::Magpie::App::Command::bswait::VERSION = '1.110840';
+}
 # ABSTRACT: pause according to build-system recommendations
 
 use App::Magpie::App -command;
@@ -35,8 +46,17 @@ sub execute {
 }
 
 1;
-__END__
 
+
+=pod
+
+=head1 NAME
+
+App::Magpie::App::Command::bswait - pause according to build-system recommendations
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 DESCRIPTION
 
@@ -45,3 +65,21 @@ build-system. Indeed, instead of pushing all your packages to be
 rebuilt, it's better to throttle them one at a time. Build-system
 provides some recommendation on how much to pause between 2 packages -
 and this command uses this hint to pause accordingly.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
+
+

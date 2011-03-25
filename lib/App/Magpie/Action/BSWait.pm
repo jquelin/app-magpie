@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::Action::BSWait;
+BEGIN {
+  $App::Magpie::Action::BSWait::VERSION = '1.110840';
+}
 # ABSTRACT: bswait command implementation
 
 use LWP::UserAgent;
@@ -11,14 +22,6 @@ use Moose;
 with 'App::Magpie::Role::Logging';
 
 
-=method run
-
-    App::Magpie::Action::BSWait->new->run( $opts );
-
-Check Mageia build-system and fetch the wait hint. Sleep according to
-this hint, unless $opts->{nosleep} is true.
-
-=cut
 
 sub run {
     my ($self, $opts) = @_;
@@ -45,16 +48,50 @@ sub run {
 
 
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie::Action::BSWait - bswait command implementation
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
     my $bswait = App::Magpie::Action::BSWait->new;
     $bswait->run;
 
-
 =head1 DESCRIPTION
 
 This module implements the C<bswait> action. It's in a module of its own
 to be able to be C<require>-d without loading all other actions.
+
+=head1 METHODS
+
+=head2 run
+
+    App::Magpie::Action::BSWait->new->run( $opts );
+
+Check Mageia build-system and fetch the wait hint. Sleep according to
+this hint, unless $opts->{nosleep} is true.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

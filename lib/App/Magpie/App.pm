@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::App;
+BEGIN {
+  $App::Magpie::App::VERSION = '1.110840';
+}
 # ABSTRACT: magpie's App::Cmd
 
 use App::Cmd::Setup -app;
@@ -10,7 +21,17 @@ use App::Cmd::Setup -app;
 sub allow_any_unambiguous_abbrev { 1 }
 
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie::App - magpie's App::Cmd
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 DESCRIPTION
 
@@ -23,3 +44,20 @@ information, or run one of the following:
 
 Note that each subcommand can be abbreviated as long as the abbreviation
 is unambiguous.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
+

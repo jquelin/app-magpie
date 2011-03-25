@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::App::Command::checkout;
+BEGIN {
+  $App::Magpie::App::Command::checkout::VERSION = '1.110840';
+}
 # ABSTRACT: check-out or update a given package
 
 use App::Magpie::App -command;
@@ -46,8 +57,17 @@ sub execute {
 }
 
 1;
-__END__
 
+
+=pod
+
+=head1 NAME
+
+App::Magpie::App::Command::checkout - check-out or update a given package
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
@@ -71,4 +91,21 @@ check-out directory. In that case, you may want to add the following to
 your F<~/.bashrc>:
 
     function cco() { eval $(magpie co -d ~/rpm/cauldron -q -s $*); }
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
+
 

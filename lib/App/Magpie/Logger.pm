@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::Logger;
+BEGIN {
+  $App::Magpie::Logger::VERSION = '1.110840';
+}
 # ABSTRACT: magpie logging facility
 
 use Log::Dispatchouli;
@@ -15,20 +26,6 @@ use App::Magpie::Config;
 
 # -- private attributes
 
-=method log
-
-=method log_debug
-
-=method log_fatal
-
-    $magpie->log( ... );
-    $magpie->log_debug( ... );
-    $magpie->log_fatal( ... );
-
-Log stuff at various verbose levels. Uses L<Log::Dispatchouli>
-underneath - refer to this module for more information.
-
-=cut
 
 has _logger => (
     ro, lazy,
@@ -47,24 +44,6 @@ has _logger => (
 
 # -- public attributes
 
-=attr log_level
-
-The logging level is an integer. In reality, only 3 levels are
-recognized:
-
-=over 4
-
-=item * 0 or less - Quiet: Nothing at all will be logged, except if
-magpie aborts with an error.
-
-=item * 1 - Normal: quiet level + regular information will be logged.
-
-=item * 2 or more - Debug: normal level + all debug information will be
-logged.
-
-=back
-
-=cut
 
 has log_level => (
     ro, lazy_build,
@@ -92,16 +71,75 @@ sub _trigger_log_level {
 
 
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie::Logger - magpie logging facility
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
     my $log = App::Magpie::Logger->instance;
     $log->log_fatal( "die!" );
 
-
 =head1 DESCRIPTION
 
 This module holds a singleton used to log stuff throughout various
 magpie commands. Logging itself is done with L<Log::Dispatchouli>.
+
+=head1 ATTRIBUTES
+
+=head2 log_level
+
+The logging level is an integer. In reality, only 3 levels are
+recognized:
+
+=over 4
+
+=item * 0 or less - Quiet: Nothing at all will be logged, except if
+magpie aborts with an error.
+
+=item * 1 - Normal: quiet level + regular information will be logged.
+
+=item * 2 or more - Debug: normal level + all debug information will be
+logged.
+
+=back
+
+=head1 METHODS
+
+=head2 log
+
+=head2 log_debug
+
+=head2 log_fatal
+
+    $magpie->log( ... );
+    $magpie->log_debug( ... );
+    $magpie->log_fatal( ... );
+
+Log stuff at various verbose levels. Uses L<Log::Dispatchouli>
+underneath - refer to this module for more information.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

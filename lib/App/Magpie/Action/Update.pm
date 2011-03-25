@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::Action::Update;
+BEGIN {
+  $App::Magpie::Action::Update::VERSION = '1.110840';
+}
 # ABSTRACT: update command implementation
 
 use CPAN::Mini;
@@ -16,14 +27,6 @@ with 'App::Magpie::Role::Logging';
 with 'App::Magpie::Role::RunningCommand';
 
 
-=method run
-
-    $update->run;
-
-Try to update the current checked-out package to its latest version, if
-there's one available.
-
-=cut
 
 sub run {
     my ($self) = @_;
@@ -122,16 +125,50 @@ EOF
 
 
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie::Action::Update - update command implementation
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
     my $update = App::Magpie::Action::Update->new;
     $update->run;
 
-
 =head1 DESCRIPTION
 
 This module implements the C<update> action. It's in a module of its
 own to be able to be C<require>-d without loading all other actions.
+
+=head1 METHODS
+
+=head2 run
+
+    $update->run;
+
+Try to update the current checked-out package to its latest version, if
+there's one available.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

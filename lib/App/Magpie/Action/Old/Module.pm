@@ -1,8 +1,19 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie::Action::Old::Module;
+BEGIN {
+  $App::Magpie::Action::Old::Module::VERSION = '1.110840';
+}
 # ABSTRACT: module that has a newer version available
 
 use File::ShareDir::PathClass;
@@ -45,28 +56,6 @@ my %SKIPPKG = do {
 
 # -- public attributes
 
-=attr name
-
-The name of the module.
-
-=attr oldver
-
-The version of the module as currently installed.
-
-=attr newver
-
-The module version, as available on CPAN.
-
-=attr packages
-
-The Mageia packages holding the module (there can be more than one).
-Core packages (perl and perl-base) are excluded from this list.
-
-=attr is_core
-
-Whether the module is shipped in a core Perl package.
-
-=cut
 
 has name     => ( ro, isa => "Str", required );
 has oldver   => ( ro, isa => "Str" );
@@ -87,28 +76,6 @@ sub _build_packages {
 
 # -- public methods
 
-=method category
-
-    my $str = $module->category;
-
-Return the module category:
-
-=over 4
-
-=item * C<core> - one of the core packages (perl, perl-base)
-
-=item * C<dual-lifed> - core package + one other package
-
-=item * C<normal> - plain, non-core regular package
-
-=item * C<orphan> - installed package not shipped by a package
-(inherited from mandriva, or not yet submitted)
-
-=item * C<strange> - shipped by more than one non-core package
-
-=back
-
-=cut
 
 sub category {
     my ($self) = @_;
@@ -138,10 +105,82 @@ sub category {
 
 __PACKAGE__->meta->make_immutable;
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie::Action::Old::Module - module that has a newer version available
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 DESCRIPTION
 
 This class represents an installed Perl module that has a newer version
 available on CPAN.
+
+=head1 ATTRIBUTES
+
+=head2 name
+
+The name of the module.
+
+=head2 oldver
+
+The version of the module as currently installed.
+
+=head2 newver
+
+The module version, as available on CPAN.
+
+=head2 packages
+
+The Mageia packages holding the module (there can be more than one).
+Core packages (perl and perl-base) are excluded from this list.
+
+=head2 is_core
+
+Whether the module is shipped in a core Perl package.
+
+=head1 METHODS
+
+=head2 category
+
+    my $str = $module->category;
+
+Return the module category:
+
+=over 4
+
+=item * C<core> - one of the core packages (perl, perl-base)
+
+=item * C<dual-lifed> - core package + one other package
+
+=item * C<normal> - plain, non-core regular package
+
+=item * C<orphan> - installed package not shipped by a package
+(inherited from mandriva, or not yet submitted)
+
+=item * C<strange> - shipped by more than one non-core package
+
+=back
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

@@ -1,13 +1,34 @@
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use 5.012;
 use strict;
 use warnings;
 
 package App::Magpie;
+BEGIN {
+  $App::Magpie::VERSION = '1.110840';
+}
 # ABSTRACT: Mageia Perl Integration Easy
 
 
 1;
-__END__
+
+
+=pod
+
+=head1 NAME
+
+App::Magpie - Mageia Perl Integration Easy
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 DESCRIPTION
 
@@ -27,7 +48,6 @@ independently.
 Even if they are Mageia-centered, and Perl-centered, some of those tools
 can be used also by to maintain non-Perl packages, or by other Linux
 distributions than Mageia. I'd like to hear from you in this case! :-)
-
 
 =head1 SEE ALSO
 
@@ -57,4 +77,19 @@ L<http://cpanratings.perl.org/d/App-Magpie>
 
 =back
 
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

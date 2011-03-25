@@ -1,10 +1,21 @@
 #!/usr/bin/perl
+#
+# This file is part of App-Magpie
+#
+# This software is copyright (c) 2011 by Jerome Quelin.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 
 use 5.012;
 use strict;
 use warnings;
 
 package main;
+BEGIN {
+  $main::VERSION = '1.110840';
+}
 # ABSTRACT: Mageia Perl Integration Easy
 
 use FindBin               qw{ $Bin };
@@ -19,7 +30,17 @@ App::Magpie::App->run;
 
 exit;
 
-__END__
+
+
+=pod
+
+=head1 NAME
+
+main - Mageia Perl Integration Easy
+
+=head1 VERSION
+
+version 1.110840
 
 =head1 SYNOPSIS
 
@@ -31,11 +52,26 @@ __END__
     # to really do stuff
     magpie <subcommand>
 
-
 =head1 DESCRIPTION
 
 This script is the main entry point to the Perl module L<App::Magpie>.
 It is providing various subcommands - which list is available with
 C<magpie commands>. Each of the commands provides some help when running
 C<magpie help subcommand>.
+
+=head1 AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 
