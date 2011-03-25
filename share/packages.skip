@@ -1,0 +1,4 @@
+# vim: set textwidth=
+# package ; reason
+perl-Image-Magick       ; from imagemagick
+perl-qt4                ; from kdebindings

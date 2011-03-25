@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - old: adding skip based on package name
 
 1.110720  2011-03-13 10:46:39 Europe/Paris
  - update: allow tabs in %define upstream_version
