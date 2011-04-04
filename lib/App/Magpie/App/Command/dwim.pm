@@ -17,6 +17,7 @@ sub description {
 sub opt_spec {
     my $self = shift;
     return (
+        [ 'directory|d=s' => "directory where update will be done" ],
         [],
         $self->verbose_options,
     );
@@ -27,7 +28,7 @@ sub execute {
 
     $self->log_init($opts);
     require App::Magpie::Action::DWIM;
-    App::Magpie::Action::DWIM->new->run;
+    App::Magpie::Action::DWIM->new->run( $opts->{directory} );
 }
 
 1;
