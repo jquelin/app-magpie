@@ -38,7 +38,7 @@ has _logger => (
         Log::Dispatchouli->new({
             ident     => "magpie",
             to_stderr => 1,
-            log_pid   => 0,
+            log_pid   => 1,
             prefix    => '[magpie] ',
         });
     },
