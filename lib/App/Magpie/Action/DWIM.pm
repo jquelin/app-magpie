@@ -5,9 +5,14 @@ use warnings;
 package App::Magpie::Action::DWIM;
 # ABSTRACT: dwim command implementation
 
+use File::pushd;
+use List::MoreUtils qw{ each_array };
 use Moose;
+use Proc::ParallelLoop;
 
+use App::Magpie::Action::Checkout;
 use App::Magpie::Action::Old;
+use App::Magpie::Action::Update;
 
 with 'App::Magpie::Role::Logging';
 
@@ -22,18 +27,36 @@ CPAN.
 =cut
 
 sub run {
-    my ($self) = @_;
+    my ($self, $directory) = @_;
     
     my ($set) =
         grep { $_->name eq "normal" }
         App::Magpie::Action::Old->new->run;
+    my @modules = $set->all_modules;
 
-    foreach my $module ( sort $set->all_modules ) {
+    # loop around the modules
+    my @status = pareach [ @modules ], sub {
+        my $module = shift;
         my $pkg = ( $module->packages )[0];
         $self->log( "updating " . $module->name
             . " from " .  $module->oldver
             . " to "   . $module->newver
             . " in "   . $pkg->name );
+
+        # check out the package
+        my $pkgdir = App::Magpie::Action::Checkout->new->run( $pkg->name, $directory );
+        pushd( $pkgdir );
+
+        # update the package
+        eval { App::Magpie::Action::Update->new->run; };
+        exit ( $@ ? 1 : 0 );
+    }, { Max_Workers => 5 };
+
+    my $ea = each_array(@modules, @status);
+    while ( my ($m, $s) = $ea->() ) {
+        next if $s == 0;
+        my $pkg = ( $m->packages )[0];
+        $self->log( "error while updating: " . $pkg->name );
     }
 }
 
