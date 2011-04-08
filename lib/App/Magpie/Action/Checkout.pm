@@ -5,6 +5,7 @@ use warnings;
 package App::Magpie::Action::Checkout;
 # ABSTRACT: checkout command implementation
 
+use File::pushd;
 use Moose;
 use Path::Class;
 
@@ -34,10 +35,10 @@ sub run {
 
     if ( -d $pkgdir ) {
         $self->log( "package already checked out, refreshing checkout");
-        chdir $pkgdir;
+        my $old = pushd( $pkgdir );
         $self->run_command( "mgarepo up" );
     } else {
-        chdir $dir;
+        my $old = pushd( $dir );
         $self->run_command( "mgarepo co $pkg" );
     }
 
