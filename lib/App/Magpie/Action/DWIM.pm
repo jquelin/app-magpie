@@ -45,7 +45,7 @@ sub run {
 
         # check out the package
         my $pkgdir = App::Magpie::Action::Checkout->new->run( $pkg->name, $directory );
-        pushd( $pkgdir );
+        my $old = pushd( $pkgdir );
 
         # update the package
         eval { App::Magpie::Action::Update->new->run; };
