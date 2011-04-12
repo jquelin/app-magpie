@@ -2,6 +2,12 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.111020  2011-04-12 14:23:04 Europe/Paris
+ - new command: dwim
+ - checkout: using temp chdir to not remove carpet under other commands
+ - logger: prepend pid to each log message
+ - old: bigger space left for version information columns
+
 1.110840  2011-03-25 10:11:11 Europe/Paris
  - old: adding skip based on package name
  - old: modules.skip updated
