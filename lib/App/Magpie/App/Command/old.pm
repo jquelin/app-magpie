@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::old;
 BEGIN {
-  $App::Magpie::App::Command::old::VERSION = '1.110840';
+  $App::Magpie::App::Command::old::VERSION = '1.111020';
 }
 # ABSTRACT: report installed perl modules with new version available 
 
@@ -63,19 +63,19 @@ sub execute {
                 when (0) {
                     say encode( 'utf-8',
                         $pad->left ( $module->name, 40 )   .
-                        $pad->right( $module->oldver, 12 ) .
-                        $pad->right( $module->newver, 12 )
+                        $pad->right( $module->oldver, 14 ) .
+                        $pad->right( $module->newver, 14 )
                     );
                 }
                 when (1) {
                     my $pkg = shift @pkgs;
                     say encode( 'utf-8',
                         $pad->left ( $module->name, 40 )   .
-                        $pad->right( $module->oldver, 12 ) .
-                        $pad->right( $module->newver, 12 ) .
+                        $pad->right( $module->oldver, 14 ) .
+                        $pad->right( $module->newver, 14 ) .
                         " " x 5                            .
                         $pad->left ( $pkg->name, 50 )      .
-                        $pad->right( $pkg->version, 12 )
+                        $pad->right( $pkg->version, 14 )
                     );
                 }
                 default {
@@ -84,8 +84,8 @@ sub execute {
                         @pkgs;
                     say encode( 'utf-8',
                         $pad->left ( $module->name, 40 )   .
-                        $pad->right( $module->oldver, 12 ) .
-                        $pad->right( $module->newver, 12 ) .
+                        $pad->right( $module->oldver, 14 ) .
+                        $pad->right( $module->newver, 14 ) .
                         " " x 5                            .
                         join( ",", @details )
                     );
@@ -113,7 +113,7 @@ App::Magpie::App::Command::old - report installed perl modules with new version 
 
 =head1 VERSION
 
-version 1.110840
+version 1.111020
 
 =head1 SYNOPSIS
 

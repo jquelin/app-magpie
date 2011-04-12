@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Logger;
 BEGIN {
-  $App::Magpie::Logger::VERSION = '1.110840';
+  $App::Magpie::Logger::VERSION = '1.111020';
 }
 # ABSTRACT: magpie logging facility
 
@@ -35,7 +35,7 @@ has _logger => (
         Log::Dispatchouli->new({
             ident     => "magpie",
             to_stderr => 1,
-            log_pid   => 0,
+            log_pid   => 1,
             prefix    => '[magpie] ',
         });
     },
@@ -81,7 +81,7 @@ App::Magpie::Logger - magpie logging facility
 
 =head1 VERSION
 
-version 1.110840
+version 1.111020
 
 =head1 SYNOPSIS
 

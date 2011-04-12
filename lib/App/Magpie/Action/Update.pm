@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Update;
 BEGIN {
-  $App::Magpie::Action::Update::VERSION = '1.110840';
+  $App::Magpie::Action::Update::VERSION = '1.111020';
 }
 # ABSTRACT: update command implementation
 
@@ -135,7 +135,7 @@ App::Magpie::Action::Update - update command implementation
 
 =head1 VERSION
 
-version 1.110840
+version 1.111020
 
 =head1 SYNOPSIS
 

@@ -10,11 +10,11 @@ use 5.012;
 use strict;
 use warnings;
 
-package App::Magpie::App::Command::fixspec;
+package App::Magpie::App::Command::dwim;
 BEGIN {
-  $App::Magpie::App::Command::fixspec::VERSION = '1.111020';
+  $App::Magpie::App::Command::dwim::VERSION = '1.111020';
 }
-# ABSTRACT: update a spec file to match some policies
+# ABSTRACT: automagically update Mageia packages
 
 use App::Magpie::App -command;
 
@@ -22,13 +22,13 @@ use App::Magpie::App -command;
 # -- public methods
 
 sub description {
-"Update a spec file from a perl module package, and make sure it follows
-a list of various policies. Also update the list of build prereqs."
+"Automatically update Perl modules which aren't up to date in Mageia."
 }
 
 sub opt_spec {
     my $self = shift;
     return (
+        [ 'directory|d=s' => "directory where update will be done" ],
         [],
         $self->verbose_options,
     );
@@ -36,9 +36,10 @@ sub opt_spec {
 
 sub execute {
     my ($self, $opts, $args) = @_;
+
     $self->log_init($opts);
-    require App::Magpie::Action::FixSpec;
-    App::Magpie::Action::FixSpec->new->run;
+    require App::Magpie::Action::DWIM;
+    App::Magpie::Action::DWIM->new->run( $opts->{directory} );
 }
 
 1;
@@ -48,7 +49,7 @@ sub execute {
 
 =head1 NAME
 
-App::Magpie::App::Command::fixspec - update a spec file to match some policies
+App::Magpie::App::Command::dwim - automagically update Mageia packages
 
 =head1 VERSION
 
@@ -56,21 +57,15 @@ version 1.111020
 
 =head1 SYNOPSIS
 
-    $ eval $( magpie co -s perl-Foo-Bar )
-    $ magpie fixspec
+    $ magpie dwim
 
     # to get list of available options
-    $ magpie help fixspec
+    $ magpie help olddwim
 
 =head1 DESCRIPTION
 
-This command will update a spec file from a perl module package, and
-make sure it follows a list of various policies. It will also update the
-list of build prereqs, according to F<META.yml> (or F<META.json>)
-shipped with the distribution.
-
-Note that this command will abort if it finds that the spec is too much
-outdated (eg, not using C<%perl_convert_version>)
+This command will check all installed Perl modules, and update the
+Mageia packages that have a new version available on CPAN.
 
 =head1 AUTHOR
 

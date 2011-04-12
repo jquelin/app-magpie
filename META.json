@@ -4,7 +4,7 @@
       "Jerome Quelin <jquelin@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.110580",
+   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.110930",
    "license" : [
       "perl_5"
    ],
@@ -33,8 +33,10 @@
             "File::Copy" : 0,
             "File::HomeDir::PathClass" : 0,
             "File::ShareDir::PathClass" : 0,
+            "File::pushd" : 0,
             "FindBin" : 0,
             "LWP::UserAgent" : 0,
+            "List::MoreUtils" : 0,
             "Log::Dispatchouli" : 0,
             "Moose" : 0,
             "Moose::Role" : 0,
@@ -44,6 +46,7 @@
             "Parse::CPAN::Meta" : "1.4401",
             "Parse::CPAN::Packages::Fast" : 0,
             "Path::Class" : "0.22",
+            "Proc::ParallelLoop" : 0,
             "Text::Padding" : 0,
             "URPM" : 0,
             "perl" : "5.012",
@@ -61,87 +64,95 @@
    "provides" : {
       "App::Magpie" : {
          "file" : "lib/App/Magpie.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Action::BSWait" : {
          "file" : "lib/App/Magpie/Action/BSWait.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Action::Checkout" : {
          "file" : "lib/App/Magpie/Action/Checkout.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
+      },
+      "App::Magpie::Action::DWIM" : {
+         "file" : "lib/App/Magpie/Action/DWIM.pm",
+         "version" : "1.111020"
       },
       "App::Magpie::Action::FixSpec" : {
          "file" : "lib/App/Magpie/Action/FixSpec.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Action::Old" : {
          "file" : "lib/App/Magpie/Action/Old.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Action::Old::Module" : {
          "file" : "lib/App/Magpie/Action/Old/Module.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Action::Old::Set" : {
          "file" : "lib/App/Magpie/Action/Old/Set.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Action::Update" : {
          "file" : "lib/App/Magpie/Action/Update.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App" : {
          "file" : "lib/App/Magpie/App.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command" : {
          "file" : "lib/App/Magpie/App/Command.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command::bswait" : {
          "file" : "lib/App/Magpie/App/Command/bswait.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command::checkout" : {
          "file" : "lib/App/Magpie/App/Command/checkout.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command::config" : {
          "file" : "lib/App/Magpie/App/Command/config.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
+      },
+      "App::Magpie::App::Command::dwim" : {
+         "file" : "lib/App/Magpie/App/Command/dwim.pm",
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command::fixspec" : {
          "file" : "lib/App/Magpie/App/Command/fixspec.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command::old" : {
          "file" : "lib/App/Magpie/App/Command/old.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::App::Command::update" : {
          "file" : "lib/App/Magpie/App/Command/update.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Config" : {
          "file" : "lib/App/Magpie/Config.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Logger" : {
          "file" : "lib/App/Magpie/Logger.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Role::Logging" : {
          "file" : "lib/App/Magpie/Role/Logging.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::Role::RunningCommand" : {
          "file" : "lib/App/Magpie/Role/RunningCommand.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       },
       "App::Magpie::URPM" : {
          "file" : "lib/App/Magpie/URPM.pm",
-         "version" : "1.110840"
+         "version" : "1.111020"
       }
    },
    "release_status" : "stable",
@@ -157,7 +168,7 @@
          "web" : "http://github.com/jquelin/app-magpie"
       }
    },
-   "version" : "1.110840",
+   "version" : "1.111020",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
@@ -173,7 +184,7 @@
          {
             "class" : "Dist::Zilla::Plugin::CompileTests",
             "name" : "@JQUELIN/CompileTests",
-            "version" : "1.103030"
+            "version" : "1.110930"
          },
          {
             "class" : "Dist::Zilla::Plugin::HasVersionTests",
@@ -278,7 +289,7 @@
          {
             "class" : "Dist::Zilla::Plugin::MetaProvides::Package",
             "name" : "@JQUELIN/MetaProvides::Package",
-            "version" : "1.12044908"
+            "version" : "1.12060501"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",

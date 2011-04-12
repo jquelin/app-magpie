@@ -12,10 +12,11 @@ use warnings;
 
 package App::Magpie::Action::Checkout;
 BEGIN {
-  $App::Magpie::Action::Checkout::VERSION = '1.110840';
+  $App::Magpie::Action::Checkout::VERSION = '1.111020';
 }
 # ABSTRACT: checkout command implementation
 
+use File::pushd;
 use Moose;
 use Path::Class;
 
@@ -35,10 +36,10 @@ sub run {
 
     if ( -d $pkgdir ) {
         $self->log( "package already checked out, refreshing checkout");
-        chdir $pkgdir;
+        my $old = pushd( $pkgdir );
         $self->run_command( "mgarepo up" );
     } else {
-        chdir $dir;
+        my $old = pushd( $dir );
         $self->run_command( "mgarepo co $pkg" );
     }
 
@@ -58,7 +59,7 @@ App::Magpie::Action::Checkout - checkout command implementation
 
 =head1 VERSION
 
-version 1.110840
+version 1.111020
 
 =head1 SYNOPSIS
 
