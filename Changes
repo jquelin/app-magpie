@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.111030  2011-04-13 10:54:04 Europe/Paris
+ - old: update modules.skip
+
 1.111020  2011-04-12 14:23:04 Europe/Paris
  - new command: dwim
  - checkout: using temp chdir to not remove carpet under other commands

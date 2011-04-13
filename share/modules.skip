@@ -4,6 +4,7 @@ Apache::AuthCookie::Util           ; 222.00      ;
 Apache::SessionX::Manager          ; 2.00        ; cpanplus confused
 Bio::Root::RootI                   ; 1.006001    ;
 Boulder::Unigene                   ; 28051999.00 ; dummy ddmmyyyy version (wtf!?)
+Crypt::OpenSSL::X509               ; 1.70        ; cpanplus lost with version (really 1.7.1 upstream)
 DBIx::Class::Schema::Loader        ; 0.07001     ; broken upstream: rt#60318
 Dist::Zilla::PluginBundle::FAYLAND ; 0.07        ; non-existant prereq, https://rt.cpan.org/Public/Bug/Display.html?id=66171
 File::MimeInfo::Rox                ; 0.20        ; upstream version mismatch
@@ -13,6 +14,7 @@ HTML::Tidy                         ; 1.52        ; broken upstream
 Inline                             ; 0.48        ; taint test fail, https://rt.cpan.org/Ticket/Display.html?id=65703
 Lingua::Features                   ; 0.30        ; cpanplus lost with version
 Net::FTP::Common                   ; 7.00        ;
+Net::Libdnet                       ; 0.95        ; 0.95 broken upstream
 Parse::RecDescent::FAQ::Original   ; 6.00        ; original faq
 Psh                                ; 1.80        ; bad version upgrade, https://rt.cpan.org/Public/Bug/Display.html?id=53253
 SVN::Core                          ; 1.60        ;
