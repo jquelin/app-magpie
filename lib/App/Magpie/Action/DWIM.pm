@@ -34,6 +34,11 @@ sub run {
         App::Magpie::Action::Old->new->run;
     my @modules = $set->all_modules;
 
+    if ( not defined $set ) {
+        $self->log( "no package to update" );
+        return;
+    }
+
     # loop around the modules
     my @status = pareach [ @modules ], sub {
         my $module = shift;
