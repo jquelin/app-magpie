@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::DWIM;
 BEGIN {
-  $App::Magpie::Action::DWIM::VERSION = '1.111030';
+  $App::Magpie::Action::DWIM::VERSION = '1.111040';
 }
 # ABSTRACT: dwim command implementation
 
@@ -36,6 +36,11 @@ sub run {
         grep { $_->name eq "normal" }
         App::Magpie::Action::Old->new->run;
     my @modules = $set->all_modules;
+
+    if ( not defined $set ) {
+        $self->log( "no package to update" );
+        return;
+    }
 
     # loop around the modules
     my @status = pareach [ @modules ], sub {
@@ -76,7 +81,7 @@ App::Magpie::Action::DWIM - dwim command implementation
 
 =head1 VERSION
 
-version 1.111030
+version 1.111040
 
 =head1 SYNOPSIS
 

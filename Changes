@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.111040  2011-04-14 10:01:06 Europe/Paris
+ - dwim: do not fail when there is no module to update
+
 1.111030  2011-04-13 10:54:04 Europe/Paris
  - old: update modules.skip
 
