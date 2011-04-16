@@ -80,7 +80,8 @@ sub _build_packages {
     my $module = $self->name;
     my @pkgs   = $urpm->packages_providing( $module );
 
-    $self->set_is_core( scalar( grep { $_->name =~ /^perl(-base)?$/ } @pkgs ) );
+    my $iscore = scalar( grep { $_->name =~ /^perl(-base)?$/ } @pkgs );
+    $self->set_is_core( !!$iscore );
     return [ grep { $_->name !~ /^perl(-base)?$/ } @pkgs ];
 }
 
