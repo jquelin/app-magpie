@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old::Module;
 BEGIN {
-  $App::Magpie::Action::Old::Module::VERSION = '1.111040';
+  $App::Magpie::Action::Old::Module::VERSION = '1.111060';
 }
 # ABSTRACT: module that has a newer version available
 
@@ -69,7 +69,8 @@ sub _build_packages {
     my $module = $self->name;
     my @pkgs   = $urpm->packages_providing( $module );
 
-    $self->set_is_core( scalar( grep { $_->name =~ /^perl(-base)?$/ } @pkgs ) );
+    my $iscore = scalar( grep { $_->name =~ /^perl(-base)?$/ } @pkgs );
+    $self->set_is_core( !!$iscore );
     return [ grep { $_->name !~ /^perl(-base)?$/ } @pkgs ];
 }
 
@@ -115,7 +116,7 @@ App::Magpie::Action::Old::Module - module that has a newer version available
 
 =head1 VERSION
 
-version 1.111040
+version 1.111060
 
 =head1 DESCRIPTION
 
