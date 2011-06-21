@@ -29,15 +29,13 @@ CPAN.
 sub run {
     my ($self, $directory) = @_;
     
-    my ($set) =
-        grep { $_->name eq "normal" }
-        App::Magpie::Action::Old->new->run;
-    my @modules = $set->all_modules;
-
-    if ( not defined $set ) {
+    my @sets = App::Magpie::Action::Old->new->run;
+    my ($normal) = grep { $_->name eq "normal" } @sets;
+    if ( not defined $normal ) {
         $self->log( "no package to update" );
         return;
     }
+    my @modules = $normal->all_modules;
 
     # loop around the modules
     my @status = pareach [ @modules ], sub {
