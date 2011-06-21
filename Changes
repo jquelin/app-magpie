@@ -2,6 +2,12 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.111720  2011-06-21 17:17:58 Europe/Paris
+ - fixspec: removing default %clean section
+ - fixspec: removing default %defattr in %doc
+ - dwim: prevent errors when multiple virtual repos
+ - magpie: more meaningful package name in script
+
 1.111060  2011-04-16 19:17:53 Europe/Paris
 
 1.111040  2011-04-14 10:01:06 Europe/Paris
