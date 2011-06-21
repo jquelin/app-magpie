@@ -4,7 +4,7 @@ use 5.012;
 use strict;
 use warnings;
 
-package main;
+package magpie;
 # ABSTRACT: Mageia Perl Integration Easy
 
 use FindBin               qw{ $Bin };
