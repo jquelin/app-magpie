@@ -125,6 +125,10 @@ sub run {
     $spec =~ s{^buildrequires:}{BuildRequires:}mgi;
     $spec =~ s{^buildarch:}{BuildArch:}mgi;
 
+    # removing default %defattr
+    $self->log_debug( "removing default %defattr" );
+    $spec =~ s{^%defattr\(-,root,root\)\n?}{}mgi;
+
     # updating %doc
     $self->log_debug( "fetching documentation files" );
     my @docfiles =
