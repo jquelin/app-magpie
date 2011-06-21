@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::DWIM;
 BEGIN {
-  $App::Magpie::Action::DWIM::VERSION = '1.111060';
+  $App::Magpie::Action::DWIM::VERSION = '1.111720';
 }
 # ABSTRACT: dwim command implementation
 
@@ -32,15 +32,13 @@ with 'App::Magpie::Role::Logging';
 sub run {
     my ($self, $directory) = @_;
     
-    my ($set) =
-        grep { $_->name eq "normal" }
-        App::Magpie::Action::Old->new->run;
-    my @modules = $set->all_modules;
-
-    if ( not defined $set ) {
+    my @sets = App::Magpie::Action::Old->new->run;
+    my ($normal) = grep { $_->name eq "normal" } @sets;
+    if ( not defined $normal ) {
         $self->log( "no package to update" );
         return;
     }
+    my @modules = $normal->all_modules;
 
     # loop around the modules
     my @status = pareach [ @modules ], sub {
@@ -81,7 +79,7 @@ App::Magpie::Action::DWIM - dwim command implementation
 
 =head1 VERSION
 
-version 1.111060
+version 1.111720
 
 =head1 SYNOPSIS
 

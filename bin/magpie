@@ -12,9 +12,9 @@ use 5.012;
 use strict;
 use warnings;
 
-package main;
+package magpie;
 BEGIN {
-  $main::VERSION = '1.111060';
+  $magpie::VERSION = '1.111720';
 }
 # ABSTRACT: Mageia Perl Integration Easy
 
@@ -36,11 +36,11 @@ exit;
 
 =head1 NAME
 
-main - Mageia Perl Integration Easy
+magpie - Mageia Perl Integration Easy
 
 =head1 VERSION
 
-version 1.111060
+version 1.111720
 
 =head1 SYNOPSIS
 

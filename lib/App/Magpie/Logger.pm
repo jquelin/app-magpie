@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Logger;
 BEGIN {
-  $App::Magpie::Logger::VERSION = '1.111060';
+  $App::Magpie::Logger::VERSION = '1.111720';
 }
 # ABSTRACT: magpie logging facility
 
@@ -81,7 +81,7 @@ App::Magpie::Logger - magpie logging facility
 
 =head1 VERSION
 
-version 1.111060
+version 1.111720
 
 =head1 SYNOPSIS
 
