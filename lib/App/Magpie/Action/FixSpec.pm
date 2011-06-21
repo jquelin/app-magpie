@@ -129,6 +129,10 @@ sub run {
     $self->log_debug( "removing default %defattr" );
     $spec =~ s{^%defattr\(-,root,root\)\n?}{}mgi;
 
+    # removing default %clean section
+    $self->log_debug( "removing default %clean" );
+    $spec =~ s{%clean\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{}i;
+
     # updating %doc
     $self->log_debug( "fetching documentation files" );
     my @docfiles =
