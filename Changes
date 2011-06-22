@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - old: update modules.skip
 
 1.111720  2011-06-21 17:17:58 Europe/Paris
  - fixspec: removing default %clean section
