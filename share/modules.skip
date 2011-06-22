@@ -8,10 +8,12 @@ Crypt::OpenSSL::X509               ; 1.70        ; cpanplus lost with version (r
 DBIx::Class::Schema::Loader        ; 0.07001     ; broken upstream: rt#60318
 Dist::Zilla::PluginBundle::FAYLAND ; 0.07        ; non-existant prereq, https://rt.cpan.org/Public/Bug/Display.html?id=66171
 File::MimeInfo::Rox                ; 0.20        ; upstream version mismatch
+Find::Lib                          ; 1.02        ; symlink test fail, https://rt.cpan.org/Ticket/Display.html?id=69019
 Getopt::Lucid                      ; 0.19        ; unparsable version in current version 0.19
 HTML::Table                        ; 2.08        ; 2.08a shipped
 HTML::Tidy                         ; 1.52        ; broken upstream
 Inline                             ; 0.48        ; taint test fail, https://rt.cpan.org/Ticket/Display.html?id=65703
+IO::Async                          ; 0.41        ; stream-4encoding.t test fail, https://rt.cpan.org/Ticket/Display.html?id=69020
 Lingua::Features                   ; 0.30        ; cpanplus lost with version
 Net::FTP::Common                   ; 7.00        ;
 Net::Libdnet                       ; 0.95        ; 0.95 broken upstream

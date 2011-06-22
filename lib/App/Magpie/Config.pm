@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Config;
 BEGIN {
-  $App::Magpie::Config::VERSION = '1.111720';
+  $App::Magpie::Config::VERSION = '1.111730';
 }
 # ABSTRACT: magpie configuration storage & retrieval
 
@@ -69,7 +69,7 @@ App::Magpie::Config - magpie configuration storage & retrieval
 
 =head1 VERSION
 
-version 1.111720
+version 1.111730
 
 =head1 SYNOPSIS
 

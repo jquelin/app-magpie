@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::checkout;
 BEGIN {
-  $App::Magpie::App::Command::checkout::VERSION = '1.111720';
+  $App::Magpie::App::Command::checkout::VERSION = '1.111730';
 }
 # ABSTRACT: check-out or update a given package
 
@@ -67,7 +67,7 @@ App::Magpie::App::Command::checkout - check-out or update a given package
 
 =head1 VERSION
 
-version 1.111720
+version 1.111730
 
 =head1 SYNOPSIS
 

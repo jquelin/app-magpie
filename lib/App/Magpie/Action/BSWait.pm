@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::BSWait;
 BEGIN {
-  $App::Magpie::Action::BSWait::VERSION = '1.111720';
+  $App::Magpie::Action::BSWait::VERSION = '1.111730';
 }
 # ABSTRACT: bswait command implementation
 
@@ -58,7 +58,7 @@ App::Magpie::Action::BSWait - bswait command implementation
 
 =head1 VERSION
 
-version 1.111720
+version 1.111730
 
 =head1 SYNOPSIS
 
