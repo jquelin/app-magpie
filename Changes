@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - fixspec: recognizing more examples for %doc
 
 1.111730  2011-06-22 16:45:33 Europe/Paris
  - old: update modules.skip

@@ -137,8 +137,10 @@ sub run {
     $self->log_debug( "fetching documentation files" );
     my @docfiles =
         sort
-        grep { ! /^MANIFEST/ }
-        grep { /^[A-Z]+$/ || m{^(Change(s|log)|META.(json|yml)|eg|examples)$}i }
+        grep {
+            ( /^[A-Z]+$/ && ! /^MANIFEST/ ) ||
+            m{^(Change(s|log)|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
+        }
         map  { $_->basename }
         $distdir->children;
     if ( @docfiles ) {
