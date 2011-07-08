@@ -78,7 +78,10 @@ sub _build_packages {
     my ($self) = @_;
     my $urpm = App::Magpie::URPM->instance;
     my $module = $self->name;
-    my @pkgs   = $urpm->packages_providing( $module );
+    my %seen;   # to remove packages in both i586 & x86_64 medias
+    my @pkgs   =
+        grep { ! $seen{ $_->name }++ }
+        $urpm->packages_providing( $module );
 
     my $iscore = scalar( grep { $_->name =~ /^perl(-base)?$/ } @pkgs );
     $self->set_is_core( !!$iscore );
