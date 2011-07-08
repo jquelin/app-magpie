@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::FixSpec;
 BEGIN {
-  $App::Magpie::Action::FixSpec::VERSION = '1.111730';
+  $App::Magpie::Action::FixSpec::VERSION = '1.111890';
 }
 # ABSTRACT: fixspec command implementation
 
@@ -140,8 +140,10 @@ sub run {
     $self->log_debug( "fetching documentation files" );
     my @docfiles =
         sort
-        grep { ! /^MANIFEST/ }
-        grep { /^[A-Z]+$/ || m{^(Change(s|log)|META.(json|yml)|eg|examples)$}i }
+        grep {
+            ( /^[A-Z]+$/ && ! /^MANIFEST/ ) ||
+            m{^(Change(s|log)|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
+        }
         map  { $_->basename }
         $distdir->children;
     if ( @docfiles ) {
@@ -206,7 +208,7 @@ App::Magpie::Action::FixSpec - fixspec command implementation
 
 =head1 VERSION
 
-version 1.111730
+version 1.111890
 
 =head1 SYNOPSIS
 

@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old::Module;
 BEGIN {
-  $App::Magpie::Action::Old::Module::VERSION = '1.111730';
+  $App::Magpie::Action::Old::Module::VERSION = '1.111890';
 }
 # ABSTRACT: module that has a newer version available
 
@@ -67,7 +67,10 @@ sub _build_packages {
     my ($self) = @_;
     my $urpm = App::Magpie::URPM->instance;
     my $module = $self->name;
-    my @pkgs   = $urpm->packages_providing( $module );
+    my %seen;   # to remove packages in both i586 & x86_64 medias
+    my @pkgs   =
+        grep { ! $seen{ $_->name }++ }
+        $urpm->packages_providing( $module );
 
     my $iscore = scalar( grep { $_->name =~ /^perl(-base)?$/ } @pkgs );
     $self->set_is_core( !!$iscore );
@@ -116,7 +119,7 @@ App::Magpie::Action::Old::Module - module that has a newer version available
 
 =head1 VERSION
 
-version 1.111730
+version 1.111890
 
 =head1 DESCRIPTION
 
