@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - old: new category "unparsable"
 
 1.111890  2011-07-08 13:05:14 Europe/Paris
  - fixspec: recognizing more examples for %doc

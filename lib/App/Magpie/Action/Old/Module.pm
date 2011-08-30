@@ -110,6 +110,8 @@ Return the module category:
 
 =item * C<strange> - shipped by more than one non-core package
 
+=item * C<unparsable> - current version unparsable
+
 =back
 
 =cut
@@ -118,6 +120,8 @@ sub category {
     my ($self) = @_;
     my @pkgs   = $self->packages;
     my $iscore = $self->is_core;
+
+    return "unparsable" if $self->oldver eq "Unparsable";
 
     if ( exists $SKIPMOD{ $self->name } ) {
         return "ignored" if not defined $SKIPMOD{ $self->name };
