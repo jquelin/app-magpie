@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.112420  2011-08-30 16:23:42 Europe/Paris
+ - old: new category "unparsable"
+
 1.111890  2011-07-08 13:05:14 Europe/Paris
  - fixspec: recognizing more examples for %doc
  - old: classify modules in multiple packages as normal (in case of

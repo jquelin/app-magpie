@@ -11,8 +11,8 @@ use strict;
 use warnings;
 
 package App::Magpie::Action::BSWait;
-BEGIN {
-  $App::Magpie::Action::BSWait::VERSION = '1.111890';
+{
+  $App::Magpie::Action::BSWait::VERSION = '1.112420';
 }
 # ABSTRACT: bswait command implementation
 
@@ -58,7 +58,7 @@ App::Magpie::Action::BSWait - bswait command implementation
 
 =head1 VERSION
 
-version 1.111890
+version 1.112420
 
 =head1 SYNOPSIS
 

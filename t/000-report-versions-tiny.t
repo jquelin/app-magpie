@@ -75,7 +75,9 @@ eval { $v .= pmver('Proc::ParallelLoop','any version') };
 eval { $v .= pmver('Test::More','0.88') };
 eval { $v .= pmver('Text::Padding','any version') };
 eval { $v .= pmver('URPM','any version') };
+eval { $v .= pmver('strict','any version') };
 eval { $v .= pmver('version','any version') };
+eval { $v .= pmver('warnings','any version') };
 
 
 

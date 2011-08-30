@@ -11,8 +11,8 @@ use strict;
 use warnings;
 
 package App::Magpie::Action::Old::Module;
-BEGIN {
-  $App::Magpie::Action::Old::Module::VERSION = '1.111890';
+{
+  $App::Magpie::Action::Old::Module::VERSION = '1.112420';
 }
 # ABSTRACT: module that has a newer version available
 
@@ -86,6 +86,8 @@ sub category {
     my @pkgs   = $self->packages;
     my $iscore = $self->is_core;
 
+    return "unparsable" if $self->oldver eq "Unparsable";
+
     if ( exists $SKIPMOD{ $self->name } ) {
         return "ignored" if not defined $SKIPMOD{ $self->name };
         return "ignored" if $self->newver eq $SKIPMOD{ $self->name }
@@ -119,7 +121,7 @@ App::Magpie::Action::Old::Module - module that has a newer version available
 
 =head1 VERSION
 
-version 1.111890
+version 1.112420
 
 =head1 DESCRIPTION
 
@@ -169,6 +171,8 @@ Return the module category:
 (inherited from mandriva, or not yet submitted)
 
 =item * C<strange> - shipped by more than one non-core package
+
+=item * C<unparsable> - current version unparsable
 
 =back
 
