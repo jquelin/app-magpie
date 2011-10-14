@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::FixSpec;
 {
-  $App::Magpie::Action::FixSpec::VERSION = '1.112420';
+  $App::Magpie::Action::FixSpec::VERSION = '1.112870';
 }
 # ABSTRACT: fixspec command implementation
 
@@ -136,6 +136,10 @@ sub run {
     $self->log_debug( "removing default %clean" );
     $spec =~ s{%clean\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{}i;
 
+    # removing %buildroot cleaning in %install
+    $self->log_debug( "removing %buildroot cleaning in %install" );
+    $spec =~ s{%install\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{%install\n}i;
+
     # updating %doc
     $self->log_debug( "fetching documentation files" );
     my @docfiles =
@@ -208,7 +212,7 @@ App::Magpie::Action::FixSpec - fixspec command implementation
 
 =head1 VERSION
 
-version 1.112420
+version 1.112870
 
 =head1 SYNOPSIS
 

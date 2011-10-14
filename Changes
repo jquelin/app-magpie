@@ -1,5 +1,9 @@
 Changelog for App-Magpie
 
+1.112870  2011-10-14 10:17:42 Europe/Paris
+ - fixspec: removing %buildroot cleaning in %install
+ - old: update modules.skip
+
 1.112420  2011-08-30 16:23:42 Europe/Paris
  - old: new category "unparsable"
 
