@@ -125,7 +125,7 @@ sub category {
 
     if ( exists $SKIPMOD{ $self->name } ) {
         return "ignored" if not defined $SKIPMOD{ $self->name };
-        return "ignored" if $self->newver eq $SKIPMOD{ $self->name }
+        return "ignored" if $self->newver eq $SKIPMOD{ $self->name };
     }
 
     if ( $iscore ) {
