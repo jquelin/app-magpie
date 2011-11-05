@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old::Module;
 {
-  $App::Magpie::Action::Old::Module::VERSION = '1.112870';
+  $App::Magpie::Action::Old::Module::VERSION = '1.113090';
 }
 # ABSTRACT: module that has a newer version available
 
@@ -90,7 +90,7 @@ sub category {
 
     if ( exists $SKIPMOD{ $self->name } ) {
         return "ignored" if not defined $SKIPMOD{ $self->name };
-        return "ignored" if $self->newver eq $SKIPMOD{ $self->name }
+        return "ignored" if $self->newver eq $SKIPMOD{ $self->name };
     }
 
     if ( $iscore ) {
@@ -121,7 +121,7 @@ App::Magpie::Action::Old::Module - module that has a newer version available
 
 =head1 VERSION
 
-version 1.112870
+version 1.113090
 
 =head1 DESCRIPTION
 

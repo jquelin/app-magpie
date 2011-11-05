@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.113090  2011-11-05 11:01:50 Europe/Paris
+ - old: update modules.skip
+
 1.112870  2011-10-14 10:17:42 Europe/Paris
  - fixspec: removing %buildroot cleaning in %install
  - old: update modules.skip
