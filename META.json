@@ -66,95 +66,95 @@
    "provides" : {
       "App::Magpie" : {
          "file" : "lib/App/Magpie.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::BSWait" : {
          "file" : "lib/App/Magpie/Action/BSWait.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::Checkout" : {
          "file" : "lib/App/Magpie/Action/Checkout.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::DWIM" : {
          "file" : "lib/App/Magpie/Action/DWIM.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::FixSpec" : {
          "file" : "lib/App/Magpie/Action/FixSpec.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::Old" : {
          "file" : "lib/App/Magpie/Action/Old.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::Old::Module" : {
          "file" : "lib/App/Magpie/Action/Old/Module.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::Old::Set" : {
          "file" : "lib/App/Magpie/Action/Old/Set.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Action::Update" : {
          "file" : "lib/App/Magpie/Action/Update.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App" : {
          "file" : "lib/App/Magpie/App.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command" : {
          "file" : "lib/App/Magpie/App/Command.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::bswait" : {
          "file" : "lib/App/Magpie/App/Command/bswait.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::checkout" : {
          "file" : "lib/App/Magpie/App/Command/checkout.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::config" : {
          "file" : "lib/App/Magpie/App/Command/config.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::dwim" : {
          "file" : "lib/App/Magpie/App/Command/dwim.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::fixspec" : {
          "file" : "lib/App/Magpie/App/Command/fixspec.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::old" : {
          "file" : "lib/App/Magpie/App/Command/old.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::App::Command::update" : {
          "file" : "lib/App/Magpie/App/Command/update.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Config" : {
          "file" : "lib/App/Magpie/Config.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Logger" : {
          "file" : "lib/App/Magpie/Logger.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Role::Logging" : {
          "file" : "lib/App/Magpie/Role/Logging.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::Role::RunningCommand" : {
          "file" : "lib/App/Magpie/Role/RunningCommand.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       },
       "App::Magpie::URPM" : {
          "file" : "lib/App/Magpie/URPM.pm",
-         "version" : "1.113121"
+         "version" : "1.113122"
       }
    },
    "release_status" : "stable",
@@ -170,7 +170,7 @@
          "web" : "http://github.com/jquelin/app-magpie"
       }
    },
-   "version" : "1.113121",
+   "version" : "1.113122",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

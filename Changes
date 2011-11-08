@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.113122  2011-11-08 14:50:40 Europe/Paris
+ - fixspec: fix 1.113121 which was not doing the right job
+
 1.113121  2011-11-08 14:39:05 Europe/Paris
  - fixspec: don't bundle MYMETA.json in %doc JSON is not always generated
 
