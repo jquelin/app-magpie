@@ -45,10 +45,12 @@ sub run {
     dir( "BUILD" )->rmtree;
     $self->run_command( "bm -lp" );
     my $distdir  = dir( glob "BUILD/*" );
-    my $metafile = -e $distdir->file("META.json")
-        ? $distdir->file("META.json")
-        : -e $distdir->file("META.yml")
-            ? $distdir->file("META.yml") : undef;
+    my $metafile;
+    foreach my $meta ( "MYMETA.json", "MYMETA.yml", "META.json", "META.yml" ) {
+        next unless -e $distdir->file( $meta );
+        $metafile = $distdir->file( $meta );
+        last;
+    }
 
     # cleaning spec file
     $self->log_debug( "removing mandriva macros" );
