@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::FixSpec;
 {
-  $App::Magpie::Action::FixSpec::VERSION = '1.113120';
+  $App::Magpie::Action::FixSpec::VERSION = '1.113121';
 }
 # ABSTRACT: fixspec command implementation
 
@@ -49,7 +49,7 @@ sub run {
     $self->run_command( "bm -lc" ); # run -c to make sure MYMETA is generated
     my $distdir  = dir( glob "BUILD/*" );
     my $metafile;
-    foreach my $meta ( "MYMETA.json", "MYMETA.yml", "META.json", "META.yml" ) {
+    foreach my $meta ( "MYMETA.yml", "META.json", "META.yml" ) {
         next unless -e $distdir->file( $meta );
         $metafile = $distdir->file( $meta );
         last;
@@ -214,7 +214,7 @@ App::Magpie::Action::FixSpec - fixspec command implementation
 
 =head1 VERSION
 
-version 1.113120
+version 1.113121
 
 =head1 SYNOPSIS
 

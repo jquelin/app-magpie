@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie;
 {
-  $App::Magpie::VERSION = '1.113120';
+  $App::Magpie::VERSION = '1.113121';
 }
 # ABSTRACT: Mageia Perl Integration Easy
 
@@ -28,7 +28,7 @@ App::Magpie - Mageia Perl Integration Easy
 
 =head1 VERSION
 
-version 1.113120
+version 1.113121
 
 =head1 DESCRIPTION
 
