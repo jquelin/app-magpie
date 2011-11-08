@@ -46,7 +46,7 @@ sub run {
     $self->run_command( "bm -lc" ); # run -c to make sure MYMETA is generated
     my $distdir  = dir( glob "BUILD/*" );
     my $metafile;
-    foreach my $meta ( "MYMETA.yml", "META.json", "META.yml" ) {
+    foreach my $meta ( "MYMETA.json", "MYMETA.yml", "META.json", "META.yml" ) {
         next unless -e $distdir->file( $meta );
         $metafile = $distdir->file( $meta );
         last;
