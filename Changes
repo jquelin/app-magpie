@@ -1,6 +1,8 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+1.113120  2011-11-08 14:23:58 Europe/Paris
  - fixspec: adding MYMETA to %doc
  - fixspec: using MYMETA if possible to extract buildrequires
  - fixspec: run "bm -lc" to generate MYMETA before fixing spec file
