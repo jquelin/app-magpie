@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - fixspec: stop shipping MYMETA at all in %doc (it's removed by rpmbuild)
 
 1.113122  2011-11-08 14:50:40 Europe/Paris
  - fixspec: fix 1.113121 which was not doing the right job
