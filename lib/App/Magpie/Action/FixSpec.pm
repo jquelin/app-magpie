@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::FixSpec;
 {
-  $App::Magpie::Action::FixSpec::VERSION = '1.113090';
+  $App::Magpie::Action::FixSpec::VERSION = '1.113120';
 }
 # ABSTRACT: fixspec command implementation
 
@@ -46,12 +46,14 @@ sub run {
     # extracting tarball
     $self->log_debug( "removing previous BUILD directory" );
     dir( "BUILD" )->rmtree;
-    $self->run_command( "bm -lp" );
+    $self->run_command( "bm -lc" ); # run -c to make sure MYMETA is generated
     my $distdir  = dir( glob "BUILD/*" );
-    my $metafile = -e $distdir->file("META.json")
-        ? $distdir->file("META.json")
-        : -e $distdir->file("META.yml")
-            ? $distdir->file("META.yml") : undef;
+    my $metafile;
+    foreach my $meta ( "MYMETA.json", "MYMETA.yml", "META.json", "META.yml" ) {
+        next unless -e $distdir->file( $meta );
+        $metafile = $distdir->file( $meta );
+        last;
+    }
 
     # cleaning spec file
     $self->log_debug( "removing mandriva macros" );
@@ -134,11 +136,11 @@ sub run {
 
     # removing default %clean section
     $self->log_debug( "removing default %clean" );
-    $spec =~ s{%clean\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{}i;
+    $spec =~ s{%clean\s*\n(.* && )?(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{}i;
 
     # removing %buildroot cleaning in %install
     $self->log_debug( "removing %buildroot cleaning in %install" );
-    $spec =~ s{%install\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{%install\n}i;
+    $spec =~ s{%install\s*\n(.* && )?(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{%install\n}i;
 
     # updating %doc
     $self->log_debug( "fetching documentation files" );
@@ -146,7 +148,7 @@ sub run {
         sort
         grep {
             ( /^[A-Z]+$/ && ! /^MANIFEST/ ) ||
-            m{^(Change(s|log)|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
+            m{^(Change(s|log)|(MY)?META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
         }
         map  { $_->basename }
         $distdir->children;
@@ -212,7 +214,7 @@ App::Magpie::Action::FixSpec - fixspec command implementation
 
 =head1 VERSION
 
-version 1.113090
+version 1.113120
 
 =head1 SYNOPSIS
 
