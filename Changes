@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - fixspec: adding MYMETA to %doc
 
 1.113090  2011-11-05 11:01:50 Europe/Paris
  - old: update modules.skip
