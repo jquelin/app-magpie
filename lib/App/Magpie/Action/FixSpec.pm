@@ -133,11 +133,11 @@ sub run {
 
     # removing default %clean section
     $self->log_debug( "removing default %clean" );
-    $spec =~ s{%clean\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{}i;
+    $spec =~ s{%clean\s*\n(.* && )?(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{}i;
 
     # removing %buildroot cleaning in %install
     $self->log_debug( "removing %buildroot cleaning in %install" );
-    $spec =~ s{%install\s*\n(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{%install\n}i;
+    $spec =~ s{%install\s*\n(.* && )?(rm|%\{?_?_?rm\}?)\s+-rf\s+(%\{?buildroot\}?|\$buildroot)\s*\n?}{%install\n}i;
 
     # updating %doc
     $self->log_debug( "fetching documentation files" );
