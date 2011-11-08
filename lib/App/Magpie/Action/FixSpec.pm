@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::FixSpec;
 {
-  $App::Magpie::Action::FixSpec::VERSION = '1.113122';
+  $App::Magpie::Action::FixSpec::VERSION = '1.113123';
 }
 # ABSTRACT: fixspec command implementation
 
@@ -148,7 +148,7 @@ sub run {
         sort
         grep {
             ( /^[A-Z]+$/ && ! /^MANIFEST/ ) ||
-            m{^(Change(s|log)|MYMETA.yml|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
+            m{^(Change(s|log)|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
         }
         map  { $_->basename }
         $distdir->children;
@@ -214,7 +214,7 @@ App::Magpie::Action::FixSpec - fixspec command implementation
 
 =head1 VERSION
 
-version 1.113122
+version 1.113123
 
 =head1 SYNOPSIS
 

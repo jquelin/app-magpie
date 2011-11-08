@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::old;
 {
-  $App::Magpie::App::Command::old::VERSION = '1.113122';
+  $App::Magpie::App::Command::old::VERSION = '1.113123';
 }
 # ABSTRACT: report installed perl modules with new version available 
 
@@ -113,7 +113,7 @@ App::Magpie::App::Command::old - report installed perl modules with new version 
 
 =head1 VERSION
 
-version 1.113122
+version 1.113123
 
 =head1 SYNOPSIS
 

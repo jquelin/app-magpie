@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App;
 {
-  $App::Magpie::App::VERSION = '1.113122';
+  $App::Magpie::App::VERSION = '1.113123';
 }
 # ABSTRACT: magpie's App::Cmd
 
@@ -31,7 +31,7 @@ App::Magpie::App - magpie's App::Cmd
 
 =head1 VERSION
 
-version 1.113122
+version 1.113123
 
 =head1 DESCRIPTION
 
