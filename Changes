@@ -3,6 +3,7 @@ Changelog for App-Magpie
 {{$NEXT}}
  - fixspec: adding MYMETA to %doc
  - fixspec: using MYMETA if possible to extract buildrequires
+ - fixspec: run "bm -lc" to generate MYMETA before fixing spec file
 
 1.113090  2011-11-05 11:01:50 Europe/Paris
  - old: update modules.skip

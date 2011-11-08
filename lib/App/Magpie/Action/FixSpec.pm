@@ -43,7 +43,7 @@ sub run {
     # extracting tarball
     $self->log_debug( "removing previous BUILD directory" );
     dir( "BUILD" )->rmtree;
-    $self->run_command( "bm -lp" );
+    $self->run_command( "bm -lc" ); # run -c to make sure MYMETA is generated
     my $distdir  = dir( glob "BUILD/*" );
     my $metafile;
     foreach my $meta ( "MYMETA.json", "MYMETA.yml", "META.json", "META.yml" ) {
