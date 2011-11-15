@@ -145,7 +145,7 @@ sub run {
         sort
         grep {
             ( /^[A-Z]+$/ && ! /^MANIFEST/ ) ||
-            m{^(Change(s|log)|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
+            m{^(Change(s|log)|MYMETA.yml|META.(json|yml)|e[gx]|(ex|s)amples?|demos?)$}i
         }
         map  { $_->basename }
         $distdir->children;
