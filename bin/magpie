@@ -14,15 +14,11 @@ use warnings;
 
 package magpie;
 {
-  $magpie::VERSION = '1.113123';
+  $magpie::VERSION = '1.113320';
 }
 # ABSTRACT: Mageia Perl Integration Easy
 
-use FindBin               qw{ $Bin };
-use Path::Class;
-
-use lib dir($Bin)->parent->subdir('lib')->stringify; # for dev purposes
-
+use Find::Lib '../lib';
 use App::Magpie::App;
 
 $|++; # disabling buffered output
@@ -40,7 +36,7 @@ magpie - Mageia Perl Integration Easy
 
 =head1 VERSION
 
-version 1.113123
+version 1.113320
 
 =head1 SYNOPSIS
 
