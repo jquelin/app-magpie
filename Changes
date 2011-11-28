@@ -2,6 +2,10 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.113320  2011-11-28 13:19:16 Europe/Paris
+ - fixspec: shipping MYMETA back in %doc (rpm-build now provides modules
+   to create the file)
+
 1.113123  2011-11-08 14:58:58 Europe/Paris
  - fixspec: stop shipping MYMETA at all in %doc (it's removed by rpmbuild)
 
