@@ -7,11 +7,7 @@ use warnings;
 package magpie;
 # ABSTRACT: Mageia Perl Integration Easy
 
-use FindBin               qw{ $Bin };
-use Path::Class;
-
-use lib dir($Bin)->parent->subdir('lib')->stringify; # for dev purposes
-
+use Find::Lib '../lib';
 use App::Magpie::App;
 
 $|++; # disabling buffered output
