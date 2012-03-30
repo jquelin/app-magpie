@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - webstatic: fix webpage title
 
 1.120900  2012-03-30 16:50:20 Europe/Paris
  - new command: webstatic
