@@ -10,11 +10,11 @@ use 5.012;
 use strict;
 use warnings;
 
-package App::Magpie::App::Command::bswait;
+package App::Magpie::App::Command::webstatic;
 {
-  $App::Magpie::App::Command::bswait::VERSION = '1.120900';
+  $App::Magpie::App::Command::webstatic::VERSION = '1.120900';
 }
-# ABSTRACT: pause according to build-system recommendations
+# ABSTRACT: create a static web site
 
 use App::Magpie::App -command;
 
@@ -22,17 +22,16 @@ use App::Magpie::App -command;
 # -- public methods
 
 sub description {
-"Pauses according to the recommendation of Mageia build-system.
-Build-system provides some recommendation on how much time to pause
-between 2 packages submission to not overload it - this is known as
-throttling."
+"This command generates a static web site with some statistics &
+information on Perl modules available in Mageia Linux."
 }
 
 sub opt_spec {
     my $self = shift;
     return (
         [],
-        [ 'nosleep|n!'  => "don't sleep" ],
+        [ 'directory|d=s' => "directory where website will be created"
+=>{required=>1} ],
         [],
         $self->verbose_options,
     );
@@ -41,8 +40,8 @@ sub opt_spec {
 sub execute {
     my ($self, $opts, $args) = @_;
     $self->log_init($opts);
-    require App::Magpie::Action::BSWait;
-    App::Magpie::Action::BSWait->new->run($opts);
+    require App::Magpie::Action::WebStatic;
+    App::Magpie::Action::WebStatic->new->run($opts);
 }
 
 1;
@@ -52,7 +51,7 @@ sub execute {
 
 =head1 NAME
 
-App::Magpie::App::Command::bswait - pause according to build-system recommendations
+App::Magpie::App::Command::webstatic - create a static web site
 
 =head1 VERSION
 
@@ -60,11 +59,8 @@ version 1.120900
 
 =head1 DESCRIPTION
 
-This command pauses according to the recommendation of Mageia
-build-system. Indeed, instead of pushing all your packages to be
-rebuilt, it's better to throttle them one at a time. Build-system
-provides some recommendation on how much to pause between 2 packages -
-and this command uses this hint to pause accordingly.
+This command generates a static web site with some statistics &
+information on Perl modules available in Mageia Linux.
 
 =head1 AUTHOR
 

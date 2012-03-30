@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.120900  2012-03-30 16:50:20 Europe/Paris
+ - new command: webstatic
+
 1.113320  2011-11-28 13:19:16 Europe/Paris
  - fixspec: shipping MYMETA back in %doc (rpm-build now provides modules
    to create the file)

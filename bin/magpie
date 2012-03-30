@@ -14,7 +14,7 @@ use warnings;
 
 package magpie;
 {
-  $magpie::VERSION = '1.113320';
+  $magpie::VERSION = '1.120900';
 }
 # ABSTRACT: Mageia Perl Integration Easy
 
@@ -36,7 +36,7 @@ magpie - Mageia Perl Integration Easy
 
 =head1 VERSION
 
-version 1.113320
+version 1.120900
 
 =head1 SYNOPSIS
 
@@ -51,8 +51,8 @@ version 1.113320
 =head1 DESCRIPTION
 
 This script is the main entry point to the Perl module L<App::Magpie>.
-It is providing various subcommands - which list is available with
-C<magpie commands>. Each of the commands provides some help when running
+It provides various subcommands whose list is available with
+C<magpie commands>. You can get help for each command by running
 C<magpie help subcommand>.
 
 =head1 AUTHOR

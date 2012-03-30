@@ -6,19 +6,26 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
-use 5.012;
+use 5.010;
 use strict;
 use warnings;
 
-package App::Magpie::App;
+package App::Magpie::Constants;
 {
-  $App::Magpie::App::VERSION = '1.120900';
+  $App::Magpie::Constants::VERSION = '1.120900';
 }
-# ABSTRACT: magpie's App::Cmd
+# ABSTRACT: Various constants
 
-use App::Cmd::Setup -app;
+use Exporter::Lite;
+use File::ShareDir::PathClass;
+use Path::Class;
+ 
+our @EXPORT_OK = qw{ $SHAREDIR };
 
-sub allow_any_unambiguous_abbrev { 1 }
+our $SHAREDIR = -e file("dist.ini")
+    ? dir ("share")
+    : File::ShareDir::PathClass->dist_dir("App-Magpie");
+
 
 1;
 
@@ -27,7 +34,7 @@ sub allow_any_unambiguous_abbrev { 1 }
 
 =head1 NAME
 
-App::Magpie::App - magpie's App::Cmd
+App::Magpie::Constants - Various constants
 
 =head1 VERSION
 
@@ -35,15 +42,14 @@ version 1.120900
 
 =head1 DESCRIPTION
 
-This is the main application, based on the excellent L<App::Cmd>.
-Nothing much to see here, see the various subcommands available for more
-information, or run one of the following:
+This module provides some helper variables, to be used on various
+occasions throughout the code. Available constants:
 
-    magpie commands
-    magpie help
+=over 4
 
-Note that each subcommand can be abbreviated as long as the abbreviation
-is unambiguous.
+=item * C<$SHAREDIR>
+
+=back
 
 =head1 AUTHOR
 
@@ -60,4 +66,5 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+
 
