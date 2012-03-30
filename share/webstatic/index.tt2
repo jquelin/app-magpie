@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Index of /</title>
+</head>
+
+<body>
+
+<h2><a href="http://mageia.org">Mageia Linux</a> ships with [%nbmodules%] Perl modules!</h2>
+
+<img
+    src="images/nbmodules.png"
+    alt="evolution of perl modules within Mageia Linux">
+
+<p> <i>Page generated on [%date%].</i> </p>
+
+</body>
+</html>
