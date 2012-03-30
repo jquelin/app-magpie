@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::webstatic;
 {
-  $App::Magpie::App::Command::webstatic::VERSION = '1.120901';
+  $App::Magpie::App::Command::webstatic::VERSION = '1.120902';
 }
 # ABSTRACT: create a static web site
 
@@ -55,7 +55,7 @@ App::Magpie::App::Command::webstatic - create a static web site
 
 =head1 VERSION
 
-version 1.120901
+version 1.120902
 
 =head1 DESCRIPTION
 

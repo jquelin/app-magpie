@@ -12,12 +12,12 @@ use warnings;
 
 package App::Magpie::Action::WebStatic;
 {
-  $App::Magpie::Action::WebStatic::VERSION = '1.120901';
+  $App::Magpie::Action::WebStatic::VERSION = '1.120902';
 }
 # ABSTRACT: webstatic command implementation
 
 use DateTime;
-use File::Copy                  qw{ move };
+use File::Copy;
 use File::HomeDir::PathClass    qw{ my_dist_data };
 use Moose;
 use ORDB::CPAN::Mageia;
@@ -82,6 +82,7 @@ sub run {
     };
     $tt->process('index.tt2', $vars, $dir->file("index.html")->stringify)
         or die $tt->error(), "\n";
+    copy( $rrdfile->stringify, $dir->stringify );
 
 
     # update website in one pass: remove previous version, replace it by new one
@@ -102,7 +103,7 @@ App::Magpie::Action::WebStatic - webstatic command implementation
 
 =head1 VERSION
 
-version 1.120901
+version 1.120902
 
 =head1 SYNOPSIS
 

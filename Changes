@@ -1,5 +1,8 @@
 Changelog for App-Magpie
 
+1.120902  2012-03-30 18:17:38 Europe/Paris
+ - webstatic: provide rrd in the website
+
 1.120901  2012-03-30 18:00:13 Europe/Paris
  - webstatic: fix webpage title
 

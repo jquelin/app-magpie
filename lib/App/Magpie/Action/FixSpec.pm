@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::FixSpec;
 {
-  $App::Magpie::Action::FixSpec::VERSION = '1.120901';
+  $App::Magpie::Action::FixSpec::VERSION = '1.120902';
 }
 # ABSTRACT: fixspec command implementation
 
@@ -214,7 +214,7 @@ App::Magpie::Action::FixSpec - fixspec command implementation
 
 =head1 VERSION
 
-version 1.120901
+version 1.120902
 
 =head1 SYNOPSIS
 
