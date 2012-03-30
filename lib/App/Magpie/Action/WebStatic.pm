@@ -6,7 +6,7 @@ package App::Magpie::Action::WebStatic;
 # ABSTRACT: webstatic command implementation
 
 use DateTime;
-use File::Copy                  qw{ move };
+use File::Copy;
 use File::HomeDir::PathClass    qw{ my_dist_data };
 use Moose;
 use ORDB::CPAN::Mageia;
@@ -79,6 +79,7 @@ sub run {
     };
     $tt->process('index.tt2', $vars, $dir->file("index.html")->stringify)
         or die $tt->error(), "\n";
+    copy( $rrdfile->stringify, $dir->stringify );
 
 
     # update website in one pass: remove previous version, replace it by new one
