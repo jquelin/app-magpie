@@ -8,8 +8,10 @@ package App::Magpie::Action::WebStatic;
 use DateTime;
 use File::Copy;
 use File::HomeDir::PathClass    qw{ my_dist_data };
+use LWP::Simple;
 use Moose;
 use ORDB::CPAN::Mageia;
+use Parse::CPAN::Packages::Fast;
 use Path::Class;
 use RRDTool::OO;
 use Readonly;
@@ -60,6 +62,18 @@ sub run {
     my $nbmgadists = scalar @$mgadists;
     $rrd{mga_dists}->update( $nbmgadists );
     $self->log_debug( "mageia dists: $nbmgadists" );
+
+    my $modpkg = $datadir->file( "02packages.details.txt.gz" );
+    my $src    = "http://cpan.cpantesters.org/modules/02packages.details.txt.gz";
+    mirror( $src, $modpkg->stringify );
+    my $p = Parse::CPAN::Packages::Fast->new($modpkg->stringify);
+    my $cpanmods  = $p->package_count;
+    my $cpandists = $p->distribution_count;
+    $rrd{cpan_mods}->update( $cpanmods );
+    $self->log_debug( "cpan modules: $cpanmods" );
+    $rrd{cpan_dists}->update( $cpandists );
+    $self->log_debug( "cpan dists: $cpandists" );
+
 
     # -- create the web site
     $self->log( "** creating web site" );
