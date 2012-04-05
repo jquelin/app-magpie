@@ -19,8 +19,11 @@ sub opt_spec {
     my $self = shift;
     return (
         [],
-        [ 'directory|d=s' => "directory where website will be created"
-=>{required=>1} ],
+        [
+            'directory|d=s'
+                => "directory where website will be created"
+                => { required => 1 }
+        ],
         [],
         $self->verbose_options,
     );
