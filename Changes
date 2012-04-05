@@ -2,6 +2,11 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.120960  2012-04-05 19:52:31 Europe/Paris
+ - webstatic: fix distro name
+ - webstatic: show nb of perl packages shipped
+ - webstatic: store nb of mods/dists on cpan (not yet displayed)
+
 1.120902  2012-03-30 18:17:38 Europe/Paris
  - webstatic: provide rrd in the website
 
