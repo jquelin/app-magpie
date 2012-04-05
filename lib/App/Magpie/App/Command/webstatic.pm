@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::webstatic;
 {
-  $App::Magpie::App::Command::webstatic::VERSION = '1.120902';
+  $App::Magpie::App::Command::webstatic::VERSION = '1.120960';
 }
 # ABSTRACT: create a static web site
 
@@ -30,8 +30,11 @@ sub opt_spec {
     my $self = shift;
     return (
         [],
-        [ 'directory|d=s' => "directory where website will be created"
-=>{required=>1} ],
+        [
+            'directory|d=s'
+                => "directory where website will be created"
+                => { required => 1 }
+        ],
         [],
         $self->verbose_options,
     );
@@ -55,7 +58,7 @@ App::Magpie::App::Command::webstatic - create a static web site
 
 =head1 VERSION
 
-version 1.120902
+version 1.120960
 
 =head1 DESCRIPTION
 

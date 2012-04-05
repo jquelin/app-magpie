@@ -12,15 +12,17 @@ use warnings;
 
 package App::Magpie::Action::WebStatic;
 {
-  $App::Magpie::Action::WebStatic::VERSION = '1.120902';
+  $App::Magpie::Action::WebStatic::VERSION = '1.120960';
 }
 # ABSTRACT: webstatic command implementation
 
 use DateTime;
 use File::Copy;
 use File::HomeDir::PathClass    qw{ my_dist_data };
+use LWP::Simple;
 use Moose;
 use ORDB::CPAN::Mageia;
+use Parse::CPAN::Packages::Fast;
 use Path::Class;
 use RRDTool::OO;
 use Readonly;
@@ -31,37 +33,64 @@ use App::Magpie::Constants qw{ $SHAREDIR };
 
 with 'App::Magpie::Role::Logging';
 
+my $datadir = my_dist_data( "App-Magpie", { create=>1 } );
+my $rrdsdir = $datadir->subdir( "rrds" );
+
+my $rrdvers = $rrdsdir->file( "version" );
+my %rrdfile = (
+    mga_mods   => $rrdsdir->file( "mageia-modules.rrd" ),
+    mga_dists  => $rrdsdir->file( "mageia-dists.rrd" ),
+    cpan_mods  => $rrdsdir->file( "cpan-modules.rrd" ),
+    cpan_dists => $rrdsdir->file( "cpan-dists.rrd" ),
+);
+my %rrd;
+
+
 
 
 sub run {
     my ($self, $opts) = @_;
+    $self->_migrate_and_create_rrds_if_needed;
 
-    # first, update the rrd file with the number of available modules
-    my $datadir = my_dist_data( "App-Magpie", { create=>1 } );
-    my $rrdfile = $datadir->file( "modules.rrd" );
+    # -- first, update the rrd files
+    $self->log( "** updating rrd files" );
 
-    my $rrd = RRDTool::OO->new( file=>$rrdfile );
-    if ( ! -f $rrdfile ) {
-        $rrd->create(
-            step        => 60*60*24,            # 1 measure per day
-            data_source => {
-                name => "nbmodules",
-                type => "GAUGE",
-            },
-            archive => { rows => 365 * 100 },   # data kept for 100 years
-        );
-    }
+    my $mgamods = ORDB::CPAN::Mageia::Module->count;
+    $rrd{mga_mods}->update( $mgamods );
+    $self->log_debug( "mageia modules: $mgamods" );
 
-    my $nbmodules = ORDB::CPAN::Mageia::Module->count;
-    $rrd->update( $nbmodules );
+    my $mgadists = ORDB::CPAN::Mageia->selectcol_arrayref(
+        'SELECT DISTINCT dist FROM module ORDER BY dist'
+    );
+    my $nbmgadists = scalar @$mgadists;
+    $rrd{mga_dists}->update( $nbmgadists );
+    $self->log_debug( "mageia dists: $nbmgadists" );
 
-    # create the web site
+    my $modpkg = $datadir->file( "02packages.details.txt.gz" );
+    my $src    = "http://cpan.cpantesters.org/modules/02packages.details.txt.gz";
+    mirror( $src, $modpkg->stringify );
+    my $p = Parse::CPAN::Packages::Fast->new($modpkg->stringify);
+    my $cpanmods  = $p->package_count;
+    my $cpandists = $p->distribution_count;
+    $rrd{cpan_mods}->update( $cpanmods );
+    $self->log_debug( "cpan modules: $cpanmods" );
+    $rrd{cpan_dists}->update( $cpandists );
+    $self->log_debug( "cpan dists: $cpandists" );
+
+
+    # -- create the web site
+    $self->log( "** creating web site" );
+    $opts->{directory} =~ s!/$!!;
     my $dir = dir( $opts->{directory} . ".new" );
     $dir->rmtree; $dir->mkpath;
+
+    # images
+    $self->log_debug( "images:" );
     my $imgdir = $dir->subdir( "images" );
     $imgdir->mkpath;
-    $rrd->graph(
-        image => $imgdir->file("nbmodules.png"),
+    $self->log_debug( " - mageia modules" );
+    $rrd{mga_mods}->graph(
+        image => $imgdir->file("mgamods.png"),
         width => 800,
         title => 'Number of available Perl modules in Mageia Linux',
         start => DateTime->new(year=>2012)->epoch,
@@ -69,28 +98,76 @@ sub run {
             thickness => 2,
             color     => '0000FF',
         },
+        units_exponent => 0,
     );
 
+    # template toolkit
+    $self->log_debug( "template toolkit processing" );
     my $tt = Template->new({
         INCLUDE_PATH => $SHAREDIR->subdir("webstatic"),
         INTERPOLATE  => 1,
     }) or die "$Template::ERROR\n";
 
     my $vars = {
-        nbmodules => $nbmodules,
-        date      => scalar localtime,
+        mgamods  => $mgamods,
+        mgadists => $nbmgadists,
+        date     => scalar localtime,
     };
     $tt->process('index.tt2', $vars, $dir->file("index.html")->stringify)
         or die $tt->error(), "\n";
-    copy( $rrdfile->stringify, $dir->stringify );
 
+    # rrd files
+    $self->log_debug( "copying rrd files" );
+    my $rrdsubdir = $dir->subdir( "rrds" );
+    $rrdsubdir->mkpath;
+    foreach my $f ( keys %rrdfile ) {
+        copy( $rrdfile{$f}->stringify, $rrdsubdir->stringify );
+    }
 
     # update website in one pass: remove previous version, replace it by new one
+    $self->log( "** updating web site" );
     my $olddir = dir( $opts->{directory} );
     $olddir->rmtree;
     move( $dir->stringify, $olddir->stringify );
 }
 
+
+# -- private methods
+
+sub _migrate_and_create_rrds_if_needed {
+    my $self = shift;
+    $rrdsdir->mkpath;
+
+    # v0 - too bad, drop existing files
+    my $rrdfile = $datadir->file( "modules.rrd" );
+    if ( -e $rrdfile ) {
+        $self->log( "converting from v0" );
+        $self->log_debug( "removing $rrdfile" );
+        $rrdfile->remove
+    }
+
+    # create rrds
+    $self->log("creating rrd files");
+    foreach my $f ( keys %rrdfile ) {
+        $rrd{$f} = RRDTool::OO->new( file=>$rrdfile{$f} );
+        next if -f $rrdfile{$f};
+        $self->log_debug( "creating $rrdfile{$f}" );
+        $rrd{$f}->create(
+            step        => 60*60*24,            # 1 measure per day
+            data_source => {
+                name => "nb",
+                type => "GAUGE",
+            },
+            archive => { rows => 365 * 100 },   # data kept for 100 years (!)
+        );
+    }
+
+    # saving rrd schema version
+    $self->log_debug( "saving schema version" );
+    my $fh = $rrdvers->openw;
+    $fh->print( "1" );
+    $fh->close;
+}
 
 1;
 
@@ -103,7 +180,7 @@ App::Magpie::Action::WebStatic - webstatic command implementation
 
 =head1 VERSION
 
-version 1.120902
+version 1.120960
 
 =head1 SYNOPSIS
 

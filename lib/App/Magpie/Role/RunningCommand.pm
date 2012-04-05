@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Role::RunningCommand;
 {
-  $App::Magpie::Role::RunningCommand::VERSION = '1.120902';
+  $App::Magpie::Role::RunningCommand::VERSION = '1.120960';
 }
 # ABSTRACT: sthg that can run an external command
 
@@ -50,7 +50,7 @@ App::Magpie::Role::RunningCommand - sthg that can run an external command
 
 =head1 VERSION
 
-version 1.120902
+version 1.120960
 
 =head1 SYNOPSIS
 

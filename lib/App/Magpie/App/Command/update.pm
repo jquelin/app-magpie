@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::update;
 {
-  $App::Magpie::App::Command::update::VERSION = '1.120902';
+  $App::Magpie::App::Command::update::VERSION = '1.120960';
 }
 # ABSTRACT: update a perl module to its latest version
 
@@ -56,7 +56,7 @@ App::Magpie::App::Command::update - update a perl module to its latest version
 
 =head1 VERSION
 
-version 1.120902
+version 1.120960
 
 =head1 SYNOPSIS
 

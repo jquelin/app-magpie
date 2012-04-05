@@ -61,6 +61,7 @@ eval { $v .= pmver('File::ShareDir::PathClass','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('File::pushd','any version') };
 eval { $v .= pmver('Find::Lib','any version') };
+eval { $v .= pmver('LWP::Simple','any version') };
 eval { $v .= pmver('LWP::UserAgent','any version') };
 eval { $v .= pmver('List::MoreUtils','any version') };
 eval { $v .= pmver('Log::Dispatchouli','any version') };

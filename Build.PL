@@ -20,7 +20,7 @@ my %module_build_args = (
     "Jerome Quelin <jquelin\@gmail.com>"
   ],
   "dist_name" => "App-Magpie",
-  "dist_version" => "1.120902",
+  "dist_version" => "1.120960",
   "license" => "perl",
   "module_name" => "App::Magpie",
   "recommends" => {},
@@ -37,6 +37,7 @@ my %module_build_args = (
     "File::ShareDir::PathClass" => 0,
     "File::pushd" => 0,
     "Find::Lib" => 0,
+    "LWP::Simple" => 0,
     "LWP::UserAgent" => 0,
     "List::MoreUtils" => 0,
     "Log::Dispatchouli" => 0,
