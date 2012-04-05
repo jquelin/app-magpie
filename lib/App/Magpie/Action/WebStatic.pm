@@ -67,6 +67,7 @@ sub run {
             thickness => 2,
             color     => '0000FF',
         },
+        units_exponent => 0,
     );
 
     my $tt = Template->new({
