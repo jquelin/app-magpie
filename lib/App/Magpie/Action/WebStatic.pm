@@ -53,6 +53,7 @@ sub run {
     $rrd->update( $nbmodules );
 
     # create the web site
+    $opts->{directory} =~ s!/$!!;
     my $dir = dir( $opts->{directory} . ".new" );
     $dir->rmtree; $dir->mkpath;
     my $imgdir = $dir->subdir( "images" );
