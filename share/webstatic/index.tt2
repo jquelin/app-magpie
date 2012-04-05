@@ -5,10 +5,12 @@
 
 <body>
 
-<h2><a href="http://mageia.org">Mageia</a> ships with [%nbmodules%] Perl modules!</h2>
+<h2><a href="http://mageia.org">Mageia</a> ships with [%mgadists%] Perl
+packages!</h2>
+<p> This represents [%mgamods%] Perl modules.</p>
 
 <img
-    src="images/nbmodules.png"
+    src="images/mgamods.png"
     alt="evolution of perl modules within Mageia Linux">
 
 <p> <i>Page generated on [%date%].</i> </p>
