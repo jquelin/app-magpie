@@ -90,7 +90,7 @@ sub run {
 #!/bin/bash
 magpie fix -v                  && \\
 bm -l                          && \\
-mgarepo sync -c                && \\
+mgarepo sync                   && \\
 svn ci -m "update to $newvers" && \\
 mgarepo submit                 && \\
 rm \$0
@@ -108,7 +108,7 @@ EOF
 
     # push changes
     $self->log( "committing changes" );
-    $self->run_command( "mgarepo sync -c" );
+    $self->run_command( "mgarepo sync" );
     $self->run_command( "svn ci -m 'update to $newvers'" );
 
     # submit
