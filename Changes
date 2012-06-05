@@ -2,6 +2,10 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+1.121570  2012-06-05 10:12:33 Europe/Paris
+ - new command: missing
+ - update: no need to commit when using mgarepo sync (kharec)
+
 1.120960  2012-04-05 19:52:31 Europe/Paris
  - webstatic: fix distro name
  - webstatic: show nb of perl packages shipped
