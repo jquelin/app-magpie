@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Checkout;
 {
-  $App::Magpie::Action::Checkout::VERSION = '1.120960';
+  $App::Magpie::Action::Checkout::VERSION = '1.121570';
 }
 # ABSTRACT: checkout command implementation
 
@@ -59,7 +59,7 @@ App::Magpie::Action::Checkout - checkout command implementation
 
 =head1 VERSION
 
-version 1.120960
+version 1.121570
 
 =head1 SYNOPSIS
 

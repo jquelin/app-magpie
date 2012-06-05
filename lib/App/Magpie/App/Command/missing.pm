@@ -10,11 +10,11 @@ use 5.012;
 use strict;
 use warnings;
 
-package App::Magpie::App::Command::dwim;
+package App::Magpie::App::Command::missing;
 {
-  $App::Magpie::App::Command::dwim::VERSION = '1.121570';
+  $App::Magpie::App::Command::missing::VERSION = '1.121570';
 }
-# ABSTRACT: automagically update Mageia packages
+# ABSTRACT: List modules shipped by Mageia not present locally
 
 use App::Magpie::App -command;
 
@@ -22,13 +22,14 @@ use App::Magpie::App -command;
 # -- public methods
 
 sub description {
-"Automatically update Perl modules which aren't up to date in Mageia."
+'This command lists Perl modules shipped by Mageia but not present on
+the local system. This is especially useful if one wants to run "magpie
+old" afterwards.'
 }
 
 sub opt_spec {
     my $self = shift;
     return (
-        [ 'directory|d=s' => "directory where update will be done" ],
         [],
         $self->verbose_options,
     );
@@ -36,10 +37,9 @@ sub opt_spec {
 
 sub execute {
     my ($self, $opts, $args) = @_;
-
     $self->log_init($opts);
-    require App::Magpie::Action::DWIM;
-    App::Magpie::Action::DWIM->new->run( $opts->{directory} );
+    require App::Magpie::Action::Missing;
+    App::Magpie::Action::Missing->new->run($opts);
 }
 
 1;
@@ -49,23 +49,17 @@ sub execute {
 
 =head1 NAME
 
-App::Magpie::App::Command::dwim - automagically update Mageia packages
+App::Magpie::App::Command::missing - List modules shipped by Mageia not present locally
 
 =head1 VERSION
 
 version 1.121570
 
-=head1 SYNOPSIS
-
-    $ magpie dwim
-
-    # to get list of available options
-    $ magpie help olddwim
-
 =head1 DESCRIPTION
 
-This command will check all installed Perl modules, and update the
-Mageia packages that have a new version available on CPAN.
+This command lists Perl modules shipped by Mageia but not present on the
+local system. This is especially useful if one wants to run "magpie old"
+afterwards.
 
 =head1 AUTHOR
 

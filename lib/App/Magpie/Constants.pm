@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Constants;
 {
-  $App::Magpie::Constants::VERSION = '1.120960';
+  $App::Magpie::Constants::VERSION = '1.121570';
 }
 # ABSTRACT: Various constants
 
@@ -38,7 +38,7 @@ App::Magpie::Constants - Various constants
 
 =head1 VERSION
 
-version 1.120960
+version 1.121570
 
 =head1 DESCRIPTION
 

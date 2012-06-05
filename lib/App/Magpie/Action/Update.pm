@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Update;
 {
-  $App::Magpie::Action::Update::VERSION = '1.120960';
+  $App::Magpie::Action::Update::VERSION = '1.121570';
 }
 # ABSTRACT: update command implementation
 
@@ -93,7 +93,7 @@ sub run {
 #!/bin/bash
 magpie fix -v                  && \\
 bm -l                          && \\
-mgarepo sync -c                && \\
+mgarepo sync                   && \\
 svn ci -m "update to $newvers" && \\
 mgarepo submit                 && \\
 rm \$0
@@ -111,7 +111,7 @@ EOF
 
     # push changes
     $self->log( "committing changes" );
-    $self->run_command( "mgarepo sync -c" );
+    $self->run_command( "mgarepo sync" );
     $self->run_command( "svn ci -m 'update to $newvers'" );
 
     # submit
@@ -135,7 +135,7 @@ App::Magpie::Action::Update - update command implementation
 
 =head1 VERSION
 
-version 1.120960
+version 1.121570
 
 =head1 SYNOPSIS
 

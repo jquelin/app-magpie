@@ -4,7 +4,7 @@
       "Jerome Quelin <jquelin@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -73,107 +73,115 @@
    "provides" : {
       "App::Magpie" : {
          "file" : "lib/App/Magpie.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::BSWait" : {
          "file" : "lib/App/Magpie/Action/BSWait.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::Checkout" : {
          "file" : "lib/App/Magpie/Action/Checkout.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::DWIM" : {
          "file" : "lib/App/Magpie/Action/DWIM.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::FixSpec" : {
          "file" : "lib/App/Magpie/Action/FixSpec.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
+      },
+      "App::Magpie::Action::Missing" : {
+         "file" : "lib/App/Magpie/Action/Missing.pm",
+         "version" : "1.121570"
       },
       "App::Magpie::Action::Old" : {
          "file" : "lib/App/Magpie/Action/Old.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::Old::Module" : {
          "file" : "lib/App/Magpie/Action/Old/Module.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::Old::Set" : {
          "file" : "lib/App/Magpie/Action/Old/Set.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::Update" : {
          "file" : "lib/App/Magpie/Action/Update.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Action::WebStatic" : {
          "file" : "lib/App/Magpie/Action/WebStatic.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App" : {
          "file" : "lib/App/Magpie/App.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command" : {
          "file" : "lib/App/Magpie/App/Command.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::bswait" : {
          "file" : "lib/App/Magpie/App/Command/bswait.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::checkout" : {
          "file" : "lib/App/Magpie/App/Command/checkout.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::config" : {
          "file" : "lib/App/Magpie/App/Command/config.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::dwim" : {
          "file" : "lib/App/Magpie/App/Command/dwim.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::fixspec" : {
          "file" : "lib/App/Magpie/App/Command/fixspec.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
+      },
+      "App::Magpie::App::Command::missing" : {
+         "file" : "lib/App/Magpie/App/Command/missing.pm",
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::old" : {
          "file" : "lib/App/Magpie/App/Command/old.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::update" : {
          "file" : "lib/App/Magpie/App/Command/update.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::App::Command::webstatic" : {
          "file" : "lib/App/Magpie/App/Command/webstatic.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Config" : {
          "file" : "lib/App/Magpie/Config.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Constants" : {
          "file" : "lib/App/Magpie/Constants.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Logger" : {
          "file" : "lib/App/Magpie/Logger.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Role::Logging" : {
          "file" : "lib/App/Magpie/Role/Logging.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::Role::RunningCommand" : {
          "file" : "lib/App/Magpie/Role/RunningCommand.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       },
       "App::Magpie::URPM" : {
          "file" : "lib/App/Magpie/URPM.pm",
-         "version" : "1.120960"
+         "version" : "1.121570"
       }
    },
    "release_status" : "stable",
@@ -189,202 +197,202 @@
          "web" : "http://github.com/jquelin/app-magpie"
       }
    },
-   "version" : "1.120960",
+   "version" : "1.121570",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
             "class" : "Dist::Zilla::Plugin::AutoVersion",
-            "name" : "@JQUELIN/AutoVersion",
+            "name" : "@Author::JQUELIN/AutoVersion",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::GatherDir",
-            "name" : "@JQUELIN/GatherDir",
+            "name" : "@Author::JQUELIN/GatherDir",
             "version" : "4.300009"
          },
          {
-            "class" : "Dist::Zilla::Plugin::CompileTests",
-            "name" : "@JQUELIN/CompileTests",
+            "class" : "Dist::Zilla::Plugin::Test::Compile",
+            "name" : "@Author::JQUELIN/Test::Compile",
             "version" : "1.112820"
          },
          {
             "class" : "Dist::Zilla::Plugin::HasVersionTests",
-            "name" : "@JQUELIN/HasVersionTests",
+            "name" : "@Author::JQUELIN/HasVersionTests",
             "version" : "1.101420"
          },
          {
-            "class" : "Dist::Zilla::Plugin::KwaliteeTests",
-            "name" : "@JQUELIN/KwaliteeTests",
+            "class" : "Dist::Zilla::Plugin::Test::Kwalitee",
+            "name" : "@Author::JQUELIN/Test::Kwalitee",
             "version" : "2.03"
          },
          {
-            "class" : "Dist::Zilla::Plugin::MinimumVersionTests",
-            "name" : "@JQUELIN/MinimumVersionTests",
+            "class" : "Dist::Zilla::Plugin::Test::MinimumVersion",
+            "name" : "@Author::JQUELIN/Test::MinimumVersion",
             "version" : "2.0.1"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodCoverageTests",
-            "name" : "@JQUELIN/PodCoverageTests",
+            "name" : "@Author::JQUELIN/PodCoverageTests",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodSyntaxTests",
-            "name" : "@JQUELIN/PodSyntaxTests",
+            "name" : "@Author::JQUELIN/PodSyntaxTests",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ReportVersions::Tiny",
-            "name" : "@JQUELIN/ReportVersions::Tiny",
+            "name" : "@Author::JQUELIN/ReportVersions::Tiny",
             "version" : "1.03"
          },
          {
             "class" : "Dist::Zilla::Plugin::PruneCruft",
-            "name" : "@JQUELIN/PruneCruft",
+            "name" : "@Author::JQUELIN/PruneCruft",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PruneFiles",
-            "name" : "@JQUELIN/PruneFiles",
+            "name" : "@Author::JQUELIN/PruneFiles",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ManifestSkip",
-            "name" : "@JQUELIN/ManifestSkip",
+            "name" : "@Author::JQUELIN/ManifestSkip",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::AutoPrereqs",
-            "name" : "@JQUELIN/AutoPrereqs",
+            "name" : "@Author::JQUELIN/AutoPrereqs",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ExtraTests",
-            "name" : "@JQUELIN/ExtraTests",
+            "name" : "@Author::JQUELIN/ExtraTests",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::NextRelease",
-            "name" : "@JQUELIN/NextRelease",
+            "name" : "@Author::JQUELIN/NextRelease",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PkgVersion",
-            "name" : "@JQUELIN/PkgVersion",
+            "name" : "@Author::JQUELIN/PkgVersion",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodWeaver",
-            "name" : "@JQUELIN/PodWeaver",
+            "name" : "@Author::JQUELIN/PodWeaver",
             "version" : "3.101641"
          },
          {
             "class" : "Dist::Zilla::Plugin::Prepender",
-            "name" : "@JQUELIN/Prepender",
+            "name" : "@Author::JQUELIN/Prepender",
             "version" : "1.112280"
          },
          {
             "class" : "Dist::Zilla::Plugin::ExecDir",
-            "name" : "@JQUELIN/ExecDir",
+            "name" : "@Author::JQUELIN/ExecDir",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ShareDir",
-            "name" : "@JQUELIN/ShareDir",
+            "name" : "@Author::JQUELIN/ShareDir",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Bugtracker",
-            "name" : "@JQUELIN/Bugtracker",
+            "name" : "@Author::JQUELIN/Bugtracker",
             "version" : "1.111080"
          },
          {
             "class" : "Dist::Zilla::Plugin::Homepage",
-            "name" : "@JQUELIN/Homepage",
+            "name" : "@Author::JQUELIN/Homepage",
             "version" : "1.101420"
          },
          {
             "class" : "Dist::Zilla::Plugin::Repository",
-            "name" : "@JQUELIN/Repository",
+            "name" : "@Author::JQUELIN/Repository",
             "version" : "0.18"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaProvides::Package",
-            "name" : "@JQUELIN/MetaProvides::Package",
+            "name" : "@Author::JQUELIN/MetaProvides::Package",
             "version" : "1.14000001"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",
-            "name" : "@JQUELIN/MetaConfig",
+            "name" : "@Author::JQUELIN/MetaConfig",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::License",
-            "name" : "@JQUELIN/License",
+            "name" : "@Author::JQUELIN/License",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaYAML",
-            "name" : "@JQUELIN/MetaYAML",
+            "name" : "@Author::JQUELIN/MetaYAML",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaJSON",
-            "name" : "@JQUELIN/MetaJSON",
+            "name" : "@Author::JQUELIN/MetaJSON",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::ModuleBuild",
-            "name" : "@JQUELIN/ModuleBuild",
+            "name" : "@Author::JQUELIN/ModuleBuild",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Readme",
-            "name" : "@JQUELIN/Readme",
+            "name" : "@Author::JQUELIN/Readme",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::Manifest",
-            "name" : "@JQUELIN/Manifest",
+            "name" : "@Author::JQUELIN/Manifest",
             "version" : "4.300009"
          },
          {
             "class" : "Dist::Zilla::Plugin::CheckChangeLog",
-            "name" : "@JQUELIN/CheckChangeLog",
+            "name" : "@Author::JQUELIN/CheckChangeLog",
             "version" : "0.01"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Check",
-            "name" : "@JQUELIN/Git::Check",
+            "name" : "@Author::JQUELIN/Git::Check",
             "version" : "1.120370"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Commit",
-            "name" : "@JQUELIN/Git::Commit",
+            "name" : "@Author::JQUELIN/Git::Commit",
             "version" : "1.120370"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::CommitBuild",
-            "name" : "@JQUELIN/Git::CommitBuild",
+            "name" : "@Author::JQUELIN/Git::CommitBuild",
             "version" : "1.120370"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
-            "name" : "@JQUELIN/TagMaster",
+            "name" : "@Author::JQUELIN/TagMaster",
             "version" : "1.120370"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
-            "name" : "@JQUELIN/TagRelease",
+            "name" : "@Author::JQUELIN/TagRelease",
             "version" : "1.120370"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Push",
-            "name" : "@JQUELIN/Git::Push",
+            "name" : "@Author::JQUELIN/Git::Push",
             "version" : "1.120370"
          },
          {
             "class" : "Dist::Zilla::Plugin::UploadToCPAN",
-            "name" : "@JQUELIN/UploadToCPAN",
+            "name" : "@Author::JQUELIN/UploadToCPAN",
             "version" : "4.300009"
          },
          {
