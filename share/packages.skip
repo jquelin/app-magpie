@@ -4,3 +4,4 @@ mdv-distrib-tools       ; not owner
 perl-Image-Magick       ; from imagemagick
 perl-SVN                ; from subversion
 perl-qt4                ; from kdebindings
+perl-kolab              ; not updated since 2004
