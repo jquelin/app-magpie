@@ -74,11 +74,14 @@ sub run {
     $self->log_debug( "copying $tarball to SOURCES" );
     copy( $cpantarball->stringify, "SOURCES" )
         or $self->log_fatal( "could not copy $cpantarball to SOURCES: $!" );
+    my $suffix = $tarball; $suffix =~ s/.*$newvers\.//g;
+    $self->log( "new suffix: $suffix" );
 
     # update spec file
     $self->log_debug( "updating spec file $specfile" );
     $spec =~ s/%mkrel \d+/%mkrel 1/;
     $spec =~ s/^(%define\s+upstream_version)\s+.*/$1 $newvers/m;
+    $spec =~ s/^(source.*upstream_version[^.]*)\..*/$1.$suffix/mi;
     my $specfh = $specfile->openw;
     $specfh->print( $spec );
     $specfh->close;

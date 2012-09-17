@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - update: change tarball suffix if needed
 
 1.121570  2012-06-05 10:12:33 Europe/Paris
  - new command: missing
