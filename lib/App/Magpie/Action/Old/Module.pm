@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old::Module;
 {
-  $App::Magpie::Action::Old::Module::VERSION = '1.121570';
+  $App::Magpie::Action::Old::Module::VERSION = '1.122610';
 }
 # ABSTRACT: module that has a newer version available
 
@@ -112,6 +112,7 @@ sub category {
 __PACKAGE__->meta->make_immutable;
 1;
 
+__END__
 
 =pod
 
@@ -121,7 +122,7 @@ App::Magpie::Action::Old::Module - module that has a newer version available
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 DESCRIPTION
 
@@ -188,7 +189,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

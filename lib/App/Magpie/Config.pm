@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Config;
 {
-  $App::Magpie::Config::VERSION = '1.121570';
+  $App::Magpie::Config::VERSION = '1.122610';
 }
 # ABSTRACT: magpie configuration storage & retrieval
 
@@ -60,6 +60,7 @@ sub set {
 
 1;
 
+__END__
 
 =pod
 
@@ -69,7 +70,7 @@ App::Magpie::Config - magpie configuration storage & retrieval
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 SYNOPSIS
 
@@ -117,7 +118,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

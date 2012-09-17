@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::URPM;
 {
-  $App::Magpie::URPM::VERSION = '1.121570';
+  $App::Magpie::URPM::VERSION = '1.122610';
 }
 # ABSTRACT: magpie interface to urpm
 
@@ -51,6 +51,7 @@ sub packages_providing {
 
 1;
 
+__END__
 
 =pod
 
@@ -60,7 +61,7 @@ App::Magpie::URPM - magpie interface to urpm
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 SYNOPSIS
 
@@ -91,7 +92,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

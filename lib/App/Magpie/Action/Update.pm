@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Update;
 {
-  $App::Magpie::Action::Update::VERSION = '1.121570';
+  $App::Magpie::Action::Update::VERSION = '1.122610';
 }
 # ABSTRACT: update command implementation
 
@@ -77,11 +77,14 @@ sub run {
     $self->log_debug( "copying $tarball to SOURCES" );
     copy( $cpantarball->stringify, "SOURCES" )
         or $self->log_fatal( "could not copy $cpantarball to SOURCES: $!" );
+    my $suffix = $tarball; $suffix =~ s/.*$newvers\.//g;
+    $self->log( "new suffix: $suffix" );
 
     # update spec file
     $self->log_debug( "updating spec file $specfile" );
     $spec =~ s/%mkrel \d+/%mkrel 1/;
     $spec =~ s/^(%define\s+upstream_version)\s+.*/$1 $newvers/m;
+    $spec =~ s/^(source.*upstream_version[^.]*)\..*/$1.$suffix/mi;
     my $specfh = $specfile->openw;
     $specfh->print( $spec );
     $specfh->close;
@@ -126,6 +129,7 @@ EOF
 
 1;
 
+__END__
 
 =pod
 
@@ -135,7 +139,7 @@ App::Magpie::Action::Update - update command implementation
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 SYNOPSIS
 
@@ -168,7 +172,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

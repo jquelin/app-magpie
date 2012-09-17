@@ -1,5 +1,9 @@
 Changelog for App-Magpie
 
+1.122610  2012-09-17 15:54:41 Europe/Paris
+ - update: change tarball suffix if needed
+ - old: update packages.skip
+
 1.121570  2012-06-05 10:12:33 Europe/Paris
  - new command: missing
  - update: no need to commit when using mgarepo sync (kharec)

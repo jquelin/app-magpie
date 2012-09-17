@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old::Set;
 {
-  $App::Magpie::Action::Old::Set::VERSION = '1.121570';
+  $App::Magpie::Action::Old::Set::VERSION = '1.122610';
 }
 # ABSTRACT: a set of AM::Old::Modules objects
 
@@ -41,6 +41,7 @@ has _modules => (
 
 1;
 
+__END__
 
 =pod
 
@@ -50,7 +51,7 @@ App::Magpie::Action::Old::Set - a set of AM::Old::Modules objects
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 SYNOPSIS
 
@@ -95,7 +96,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

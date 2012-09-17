@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App;
 {
-  $App::Magpie::App::VERSION = '1.121570';
+  $App::Magpie::App::VERSION = '1.122610';
 }
 # ABSTRACT: magpie's App::Cmd
 
@@ -22,6 +22,7 @@ sub allow_any_unambiguous_abbrev { 1 }
 
 1;
 
+__END__
 
 =pod
 
@@ -31,7 +32,7 @@ App::Magpie::App - magpie's App::Cmd
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 DESCRIPTION
 
@@ -57,7 +58,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

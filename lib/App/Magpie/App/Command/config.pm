@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command::config;
 {
-  $App::Magpie::App::Command::config::VERSION = '1.121570';
+  $App::Magpie::App::Command::config::VERSION = '1.122610';
 }
 # ABSTRACT: update a spec file to match some policies
 
@@ -55,6 +55,7 @@ sub execute {
 
 1;
 
+__END__
 
 =pod
 
@@ -64,7 +65,7 @@ App::Magpie::App::Command::config - update a spec file to match some policies
 
 =head1 VERSION
 
-version 1.121570
+version 1.122610
 
 =head1 SYNOPSIS
 
@@ -92,8 +93,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
-
