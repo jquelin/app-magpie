@@ -1,5 +1,9 @@
 Changelog for App-Magpie
 
+1.122700  2012-09-26 14:08:10 Europe/Paris
+ - checkout: possibility to pass in a module name instead of pkg name
+ - old: update packages.skip
+
 1.122610  2012-09-17 15:54:41 Europe/Paris
  - update: change tarball suffix if needed
  - old: update packages.skip
