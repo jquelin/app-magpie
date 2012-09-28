@@ -36,6 +36,7 @@ sub run {
     foreach my $line ( @lines ) {
         next unless $line =~ s/^\s+\d+\s+//; # re
         chomp $line;
+        $line =~ s/Unparsable\s+([A-Za-z])/Unparsable ? $1/; # force word separation
 
         my ($oldver, $newver, $modname) = split /\s+/, $line;
         my $module = App::Magpie::Action::Old::Module->new(
