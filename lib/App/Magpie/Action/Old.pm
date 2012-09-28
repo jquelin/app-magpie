@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old;
 {
-  $App::Magpie::Action::Old::VERSION = '1.122720';
+  $App::Magpie::Action::Old::VERSION = '1.122721';
 }
 # ABSTRACT: old command implementation
 
@@ -40,6 +40,7 @@ sub run {
     foreach my $line ( @lines ) {
         next unless $line =~ s/^\s+\d+\s+//; # re
         chomp $line;
+        $line =~ s/Unparsable\s+([A-Za-z])/Unparsable ? $1/; # force word separation
 
         my ($oldver, $newver, $modname) = split /\s+/, $line;
         my $module = App::Magpie::Action::Old::Module->new(
@@ -67,7 +68,7 @@ App::Magpie::Action::Old - old command implementation
 
 =head1 VERSION
 
-version 1.122720
+version 1.122721
 
 =head1 SYNOPSIS
 

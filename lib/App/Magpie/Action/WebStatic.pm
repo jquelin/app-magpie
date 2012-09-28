@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::WebStatic;
 {
-  $App::Magpie::Action::WebStatic::VERSION = '1.122720';
+  $App::Magpie::Action::WebStatic::VERSION = '1.122721';
 }
 # ABSTRACT: webstatic command implementation
 
@@ -181,7 +181,7 @@ App::Magpie::Action::WebStatic - webstatic command implementation
 
 =head1 VERSION
 
-version 1.122720
+version 1.122721
 
 =head1 SYNOPSIS
 

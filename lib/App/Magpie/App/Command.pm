@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::App::Command;
 {
-  $App::Magpie::App::Command::VERSION = '1.122720';
+  $App::Magpie::App::Command::VERSION = '1.122721';
 }
 # ABSTRACT: base class for sub-commands
 
@@ -69,7 +69,7 @@ App::Magpie::App::Command - base class for sub-commands
 
 =head1 VERSION
 
-version 1.122720
+version 1.122721
 
 =head1 DESCRIPTION
 

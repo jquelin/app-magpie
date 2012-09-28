@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Missing;
 {
-  $App::Magpie::Action::Missing::VERSION = '1.122720';
+  $App::Magpie::Action::Missing::VERSION = '1.122721';
 }
 # ABSTRACT: Missing command implementation
 
@@ -56,7 +56,7 @@ App::Magpie::Action::Missing - Missing command implementation
 
 =head1 VERSION
 
-version 1.122720
+version 1.122721
 
 =head1 DESCRIPTION
 

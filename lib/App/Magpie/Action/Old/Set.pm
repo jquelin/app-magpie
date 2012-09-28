@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Old::Set;
 {
-  $App::Magpie::Action::Old::Set::VERSION = '1.122720';
+  $App::Magpie::Action::Old::Set::VERSION = '1.122721';
 }
 # ABSTRACT: a set of AM::Old::Modules objects
 
@@ -51,7 +51,7 @@ App::Magpie::Action::Old::Set - a set of AM::Old::Modules objects
 
 =head1 VERSION
 
-version 1.122720
+version 1.122721
 
 =head1 SYNOPSIS
 

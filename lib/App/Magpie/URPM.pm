@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::URPM;
 {
-  $App::Magpie::URPM::VERSION = '1.122720';
+  $App::Magpie::URPM::VERSION = '1.122721';
 }
 # ABSTRACT: magpie interface to urpm
 
@@ -61,7 +61,7 @@ App::Magpie::URPM - magpie interface to urpm
 
 =head1 VERSION
 
-version 1.122720
+version 1.122721
 
 =head1 SYNOPSIS
 
