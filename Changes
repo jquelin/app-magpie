@@ -1,8 +1,10 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - old: update modules.skip & packages.skip
 
 1.122720  2012-09-28 14:14:19 Europe/Paris
+ - old: update modules.skip & packages.skip
 
 1.122700  2012-09-26 14:08:10 Europe/Paris
  - checkout: possibility to pass in a module name instead of pkg name
