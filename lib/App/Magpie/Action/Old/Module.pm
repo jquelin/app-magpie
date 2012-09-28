@@ -121,10 +121,8 @@ sub category {
     my @pkgs   = $self->packages;
     my $iscore = $self->is_core;
 
-    return "unparsable" if $self->oldver eq "Unparsable";
-
     if ( exists $SKIPMOD{ $self->name } ) {
-        return "ignored" if not defined $SKIPMOD{ $self->name };
+        return "ignored" if $SKIPMOD{ $self->name } eq "";
         return "ignored" if $self->newver eq $SKIPMOD{ $self->name };
     }
 
@@ -139,7 +137,8 @@ sub category {
     return "orphan"  if scalar(@pkgs) == 0;
     return "strange" if scalar(@pkgs) >= 2;
     # scalar(@pkgs) == 1;
-    return "ignored" if exists $SKIPPKG{ $pkgs[0]->name };
+    return "ignored"    if exists $SKIPPKG{ $pkgs[0]->name };
+    return "unparsable" if $self->oldver eq "Unparsable";
     return "normal";
 }
 

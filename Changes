@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - old: ignore package before reporting them elsewhere
  - old: update modules.skip & packages.skip
 
 1.122720  2012-09-28 14:14:19 Europe/Paris
