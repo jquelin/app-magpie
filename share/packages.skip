@@ -2,6 +2,7 @@
 # package ; reason
 mdv-distrib-tools       ; not owner
 perl-Image-Magick       ; from imagemagick
-perl-SVN                ; from subversion
-perl-qt4                ; from kdebindings
 perl-kolab              ; not updated since 2004
+perl-qt4                ; from kdebindings
+perl-SVN                ; from subversion
+perl-URPM               ; urpm stuff

@@ -19,7 +19,9 @@ HTML::Tidy                            ; 1.52        ; broken upstream
 Inline                                ; 0.48        ; taint test fail, https://rt.cpan.org/Ticket/Display.html?id=65703
 IO::Async                             ; 0.41        ; stream-4encoding.t test fail, https://rt.cpan.org/Ticket/Display.html?id=69020
 Lingua::Features                      ; 0.30        ; cpanplus lost with version
+Makefile::Parser                      ; 0.215       ; https://rt.cpan.org/Ticket/Display.html?id=77738 / https://rt.cpan.org/Ticket/Display.html?id=77737
 Module::Depends                       ; 0.16        ; https://rt.cpan.org/Public/Bug/Display.html?id=37051
+MojoMojo                              ; 1.06        ; rt#79879, rt#79880
 Net::FTP::Common                      ; 7.00        ;
 Net::Libdnet                          ; 0.95        ; 0.95 broken upstream
 Parse::RecDescent::FAQ::Original      ; 6.00        ; original faq
@@ -29,6 +31,7 @@ SVN::Core                             ; 1.60        ;
 Switch                                ; 2.16        ; cpanplus lost with version
 Syntax::Highlight::Perl6              ; 0.85        ; broken upstream
 Tie::Watch                            ; 1.301       ; now in its own dist, https://rt.cpan.org/Ticket/Display.html?id=66249
+Tk::ColorEditor                       ; 4.012       ; cpanplus lost with version (not a new tk version)
 WebFetch                              ; 0.13        ; broken upstream
 XML::Grove                            ; 0.46        ; already at this version
 XML::TreeBuilder                      ; 3.09        ; we're shipping 4.0.0
