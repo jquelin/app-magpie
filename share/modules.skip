@@ -37,6 +37,5 @@ Tie::Watch                            ; 1.301       ; now in its own dist, https
 Tk::ColorEditor                       ; 4.012       ; cpanplus lost with version (not a new tk version)
 urpm                                  ;             ; rpm toolchain
 WebFetch                              ; 0.13        ; broken upstream
-Wx                                    ; 0.9912      ; rt#79907
 XML::Grove                            ; 0.46        ; already at this version
 XML::TreeBuilder                      ; 3.09        ; we're shipping 4.0.0
