@@ -28,6 +28,7 @@
          "requires" : {
             "App::Cmd::Setup" : "0",
             "CPAN::Mini" : "0",
+            "CPAN::Recent::Uploads" : "0",
             "Config::Tiny" : "0",
             "DateTime" : "0",
             "Encode" : "0",
@@ -39,8 +40,10 @@
             "Find::Lib" : "0",
             "LWP::Simple" : "0",
             "LWP::UserAgent" : "0",
+            "List::AllUtils" : "0",
             "List::MoreUtils" : "0",
             "Log::Dispatchouli" : "0",
+            "MetaCPAN::API" : "0",
             "Moose" : "0",
             "Moose::Role" : "0",
             "MooseX::Has::Sugar" : "0",
@@ -56,7 +59,7 @@
             "Template" : "0",
             "Text::Padding" : "0",
             "URPM" : "0",
-            "perl" : "5.012",
+            "perl" : "5.016",
             "strict" : "0",
             "version" : "0",
             "warnings" : "0"
@@ -73,115 +76,123 @@
    "provides" : {
       "App::Magpie" : {
          "file" : "lib/App/Magpie.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::BSWait" : {
          "file" : "lib/App/Magpie/Action/BSWait.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::Checkout" : {
          "file" : "lib/App/Magpie/Action/Checkout.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::DWIM" : {
          "file" : "lib/App/Magpie/Action/DWIM.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::FixSpec" : {
          "file" : "lib/App/Magpie/Action/FixSpec.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::Missing" : {
          "file" : "lib/App/Magpie/Action/Missing.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::Old" : {
          "file" : "lib/App/Magpie/Action/Old.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::Old::Module" : {
          "file" : "lib/App/Magpie/Action/Old/Module.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::Old::Set" : {
          "file" : "lib/App/Magpie/Action/Old/Set.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
+      },
+      "App::Magpie::Action::Recent" : {
+         "file" : "lib/App/Magpie/Action/Recent.pm",
+         "version" : "1.122770"
       },
       "App::Magpie::Action::Update" : {
          "file" : "lib/App/Magpie/Action/Update.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Action::WebStatic" : {
          "file" : "lib/App/Magpie/Action/WebStatic.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App" : {
          "file" : "lib/App/Magpie/App.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command" : {
          "file" : "lib/App/Magpie/App/Command.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::bswait" : {
          "file" : "lib/App/Magpie/App/Command/bswait.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::checkout" : {
          "file" : "lib/App/Magpie/App/Command/checkout.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::config" : {
          "file" : "lib/App/Magpie/App/Command/config.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::dwim" : {
          "file" : "lib/App/Magpie/App/Command/dwim.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::fixspec" : {
          "file" : "lib/App/Magpie/App/Command/fixspec.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::missing" : {
          "file" : "lib/App/Magpie/App/Command/missing.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::old" : {
          "file" : "lib/App/Magpie/App/Command/old.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
+      },
+      "App::Magpie::App::Command::recent" : {
+         "file" : "lib/App/Magpie/App/Command/recent.pm",
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::update" : {
          "file" : "lib/App/Magpie/App/Command/update.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::App::Command::webstatic" : {
          "file" : "lib/App/Magpie/App/Command/webstatic.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Config" : {
          "file" : "lib/App/Magpie/Config.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Constants" : {
          "file" : "lib/App/Magpie/Constants.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Logger" : {
          "file" : "lib/App/Magpie/Logger.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Role::Logging" : {
          "file" : "lib/App/Magpie/Role/Logging.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::Role::RunningCommand" : {
          "file" : "lib/App/Magpie/Role/RunningCommand.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       },
       "App::Magpie::URPM" : {
          "file" : "lib/App/Magpie/URPM.pm",
-         "version" : "1.122721"
+         "version" : "1.122770"
       }
    },
    "release_status" : "stable",
@@ -197,7 +208,7 @@
          "web" : "http://github.com/jquelin/app-magpie"
       }
    },
-   "version" : "1.122721",
+   "version" : "1.122770",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016001"

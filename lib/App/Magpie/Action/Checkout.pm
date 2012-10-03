@@ -12,7 +12,7 @@ use warnings;
 
 package App::Magpie::Action::Checkout;
 {
-  $App::Magpie::Action::Checkout::VERSION = '1.122721';
+  $App::Magpie::Action::Checkout::VERSION = '1.122770';
 }
 # ABSTRACT: checkout command implementation
 
@@ -36,7 +36,7 @@ sub run {
         my $urpm = App::Magpie::URPM->instance;
         my ($realpkg) = map { $_->name } $urpm->packages_providing( $pkg );
         $self->log_fatal( "$pkg doesn't exist and isn't a perl module, aborting" )
-            unless _pkg_exist_in_svn( $realpkg );
+            unless $realpkg && _pkg_exist_in_svn( $realpkg );
         $self->log( "$pkg is a module provided by $realpkg" );
         $pkg = $realpkg;
     }
@@ -86,7 +86,7 @@ App::Magpie::Action::Checkout - checkout command implementation
 
 =head1 VERSION
 
-version 1.122721
+version 1.122770
 
 =head1 SYNOPSIS
 

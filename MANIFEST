@@ -16,6 +16,7 @@ lib/App/Magpie/Action/Missing.pm
 lib/App/Magpie/Action/Old.pm
 lib/App/Magpie/Action/Old/Module.pm
 lib/App/Magpie/Action/Old/Set.pm
+lib/App/Magpie/Action/Recent.pm
 lib/App/Magpie/Action/Update.pm
 lib/App/Magpie/Action/WebStatic.pm
 lib/App/Magpie/App.pm
@@ -27,6 +28,7 @@ lib/App/Magpie/App/Command/dwim.pm
 lib/App/Magpie/App/Command/fixspec.pm
 lib/App/Magpie/App/Command/missing.pm
 lib/App/Magpie/App/Command/old.pm
+lib/App/Magpie/App/Command/recent.pm
 lib/App/Magpie/App/Command/update.pm
 lib/App/Magpie/App/Command/webstatic.pm
 lib/App/Magpie/Config.pm

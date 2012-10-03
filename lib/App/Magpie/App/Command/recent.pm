@@ -6,15 +6,15 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
-use 5.012;
+use 5.016;
 use strict;
 use warnings;
 
-package App::Magpie::App::Command::missing;
+package App::Magpie::App::Command::recent;
 {
-  $App::Magpie::App::Command::missing::VERSION = '1.122770';
+  $App::Magpie::App::Command::recent::VERSION = '1.122770';
 }
-# ABSTRACT: List modules shipped by Mageia not present locally
+# ABSTRACT: Recent uploads on PAUSE not available in Mageia
 
 use App::Magpie::App -command;
 
@@ -22,9 +22,8 @@ use App::Magpie::App -command;
 # -- public methods
 
 sub description {
-'This command lists Perl modules shipped by Mageia but not present on
-the local system. This is especially useful if one wants to run "magpie
-old" afterwards.'
+"This command checks what has been recently (1 day) uploaded on PAUSE
+which is not available in Mageia."
 }
 
 sub opt_spec {
@@ -38,8 +37,8 @@ sub opt_spec {
 sub execute {
     my ($self, $opts, $args) = @_;
     $self->log_init($opts);
-    require App::Magpie::Action::Missing;
-    App::Magpie::Action::Missing->new->run($opts);
+    require App::Magpie::Action::Recent;
+    App::Magpie::Action::Recent->new->run($opts);
 }
 
 1;
@@ -50,7 +49,7 @@ __END__
 
 =head1 NAME
 
-App::Magpie::App::Command::missing - List modules shipped by Mageia not present locally
+App::Magpie::App::Command::recent - Recent uploads on PAUSE not available in Mageia
 
 =head1 VERSION
 
@@ -58,9 +57,9 @@ version 1.122770
 
 =head1 DESCRIPTION
 
-This command lists Perl modules shipped by Mageia but not present on the
-local system. This is especially useful if one wants to run "magpie old"
-afterwards.
+This command checks what has been recently (1 day) uploaded on PAUSE
+which is not available in Mageia. Interesting to see what could be done
+to extend Perl support in Mageia.
 
 =head1 AUTHOR
 
