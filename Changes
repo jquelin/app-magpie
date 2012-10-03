@@ -2,6 +2,7 @@ Changelog for App-Magpie
 
 {{$NEXT}}
  - new command: recent
+ - checkout: abort if neither a module name nor a pkg name
  - old: update modules.skip
 
 1.122721  2012-09-28 15:31:22 Europe/Paris

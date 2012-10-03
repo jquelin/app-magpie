@@ -35,7 +35,7 @@ sub run {
         my $urpm = App::Magpie::URPM->instance;
         my ($realpkg) = map { $_->name } $urpm->packages_providing( $pkg );
         $self->log_fatal( "$pkg doesn't exist and isn't a perl module, aborting" )
-            unless _pkg_exist_in_svn( $realpkg );
+            unless $realpkg && _pkg_exist_in_svn( $realpkg );
         $self->log( "$pkg is a module provided by $realpkg" );
         $pkg = $realpkg;
     }
