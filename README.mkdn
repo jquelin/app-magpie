@@ -1,0 +1,61 @@
+# NAME
+
+App::Magpie - Mageia Perl Integration Easy
+
+# VERSION
+
+version 1.122771
+
+# DESCRIPTION
+
+CPAN holds a lot of great modules - but it can be difficult for the user
+to install if she's not familiar with the process. Therefore, Linux
+distribution usually package quite a lot of them, for them to be easily
+installable.
+
+Mageia Linux is no exception, and ships more than 2500 packages holding
+Perl distributions (at the time of writing). Maintaining those packages
+is a daunting task - and cannot be done only by hand.
+
+This distribution is therefore a set of scripts helping maintaining Perl
+packages within Mageia. They can be somehow coupled or used
+independently.
+
+Even if they are Mageia-centered, and Perl-centered, some of those tools
+can be used also by to maintain non-Perl packages, or by other Linux
+distributions than Mageia. I'd like to hear from you in this case! :-)
+
+# SEE ALSO
+
+You can find more information on this module at:
+
+- Search CPAN
+
+[http://search.cpan.org/dist/App-Magpie](http://search.cpan.org/dist/App-Magpie)
+
+- See open / report bugs
+
+[http://rt.cpan.org/NoAuth/Bugs.html?Dist=App-Magpie](http://rt.cpan.org/NoAuth/Bugs.html?Dist=App-Magpie)
+
+- Git repository
+
+[http://github.com/jquelin/app-magpie](http://github.com/jquelin/app-magpie)
+
+- AnnoCPAN: Annotated CPAN documentation
+
+[http://annocpan.org/dist/App-Magpie](http://annocpan.org/dist/App-Magpie)
+
+- CPAN Ratings
+
+[http://cpanratings.perl.org/d/App-Magpie](http://cpanratings.perl.org/d/App-Magpie)
+
+# AUTHOR
+
+Jerome Quelin <jquelin@gmail.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Jerome Quelin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
