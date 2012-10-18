@@ -6,7 +6,6 @@ package App::Magpie::Action::DWIM;
 # ABSTRACT: dwim command implementation
 
 use File::pushd;
-use List::MoreUtils qw{ each_array };
 use Moose;
 use Parallel::ForkManager;
 
@@ -81,12 +80,12 @@ __END__
 
 =head1 SYNOPSIS
 
-    my $old = App::Magpie::Action::Old->new;
-    my @old = $old->run;
+    my $dwim = App::Magpie::Action::DWIM->new;
+    $dwim->run;
 
 
 =head1 DESCRIPTION
 
-This module implements the C<old> action. It's in a module of its own
+This module implements the C<dwim> action. It's in a module of its own
 to be able to be C<require>-d without loading all other actions.
 
