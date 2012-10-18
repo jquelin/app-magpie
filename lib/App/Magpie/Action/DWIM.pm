@@ -8,7 +8,7 @@ package App::Magpie::Action::DWIM;
 use File::pushd;
 use List::MoreUtils qw{ each_array };
 use Moose;
-use Proc::ParallelLoop;
+use Parallel::ForkManager;
 
 use App::Magpie::Action::Checkout;
 use App::Magpie::Action::Old;
@@ -37,14 +37,27 @@ sub run {
     }
     my @modules = $normal->all_modules;
 
+    my $pm = Parallel::ForkManager->new(5);
+    my @failed;
+    $pm->run_on_finish( sub {
+            my ($pid, $rv, $id, $signal, $core, $data) = @_;
+            push @failed, $id if $rv;
+            print $data;
+        } );
+
     # loop around the modules
-    my @status = pareach [ @modules ], sub {
-        my $module = shift;
+    foreach my $module (@modules) {
         my $pkg = ( $module->packages )[0];
-        $self->log( "updating " . $module->name
+        my $modname = $module->name;
+        my $pkgname = $pkg->name;
+
+        # forks and returns the pid for the child:
+        my $pid = $pm->start($pkgname) and next;
+
+        $self->log( "updating " . $modname
             . " from " .  $module->oldver
             . " to "   . $module->newver
-            . " in "   . $pkg->name );
+            . " in "   . $pkgname );
 
         # check out the package
         my $pkgdir = App::Magpie::Action::Checkout->new->run( $pkg->name, $directory );
@@ -52,15 +65,11 @@ sub run {
 
         # update the package
         eval { App::Magpie::Action::Update->new->run; };
-        exit ( $@ ? 1 : 0 );
-    }, { Max_Workers => 5 };
-
-    my $ea = each_array(@modules, @status);
-    while ( my ($m, $s) = $ea->() ) {
-        next if $s == 0;
-        my $pkg = ( $m->packages )[0];
-        $self->log( "error while updating: " . $pkg->name );
+        my $rv = $@ ? 1 : 0;
+        $pm->finish( $rv ); # Terminates the child process
     }
+    $pm->wait_all_children;
+    $self->log( "error while updating: $_" ) for sort @failed;
 }
 
 

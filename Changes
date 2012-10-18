@@ -1,6 +1,9 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - dwim: migrating to parallel::forkmanager for more flexibility
+
+**
 
 1.122770  2012-10-03 14:49:29 Europe/Paris
  - new command: recent
