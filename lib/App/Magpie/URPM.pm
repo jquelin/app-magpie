@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 package App::Magpie::URPM;
-# ABSTRACT: magpie interface to urpm
+# ABSTRACT: magpie interface to L<URPM>
 
 use MooseX::Singleton;
 use MooseX::Has::Sugar;
