@@ -14,7 +14,25 @@ with "App::Magpie::Role::Logging";
 
 # -- private attributes
 
-has _urpm => ( ro, isa=>"URPM", lazy_build );
+=method packages
+
+    my @pkgs = $urpm->packages( $name );
+
+Return Mageia packages (plural because of multiple archs) which name is
+C<$name>.
+
+=cut
+
+has _urpm => (
+    ro, lazy_build,
+    isa     => "URPM",
+    handles => {
+        packages => "packages_by_name",
+    },
+);
+
+
+# -- initialization
 
 sub _build__urpm {
     my ($self) = @_;

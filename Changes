@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - new command: sort
  - dwim: migrating to parallel::forkmanager for more flexibility
  - dwim: do not try to update a package more than once
 
