@@ -1,6 +1,9 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+2.000     2012-10-19 15:53:22 Europe/Paris
+ - migrated to @dzpa:jquelin
  - new command: sort
  - dwim: migrating to parallel::forkmanager for more flexibility
  - dwim: do not try to update a package more than once
