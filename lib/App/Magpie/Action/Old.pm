@@ -25,20 +25,16 @@ sub run {
     my ($self) = @_;
     my %category;
 
-    $self->log( "running cpanplus" );
-    my @lines = qx{ cpanp o };
+    my $cmd = "cpan -O 2>/tmp/cpan-o.stderr";
+    $self->log( "running: $cmd" );
+    my @lines = qx{ $cmd };
 
-    # analyze "cpanp o" output - meaningful lines are of the form:
-    #  row  newver        oldver      module name        author
-    #   60   Unparsable      1.60     SVN::Core          MSCHWERN
-    #   68   2011.00      2011.03     Unicode::GCString  NEZUMI
+    # analyze "cpan -O" output - meaningful lines are of the form:
+    # DBIx::Class::Helper::ResultSet::Shortcut::Columns  2.0160  2.0170
     LINE:
     foreach my $line ( @lines ) {
-        next unless $line =~ s/^\s+\d+\s+//; # re
-        chomp $line;
-        $line =~ s/Unparsable\s+([A-Za-z])/Unparsable ? $1/; # force word separation
-
-        my ($oldver, $newver, $modname) = split /\s+/, $line;
+        next unless $line =~ /^(\S+)\s+(\d\S+)\s+(\d\S+)$/; # re
+        my ($modname, $oldver, $newver) = ($1,$2,$3);
         my $module = App::Magpie::Action::Old::Module->new(
             name => $modname, oldver => $oldver, newver => $newver );
 
