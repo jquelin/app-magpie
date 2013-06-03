@@ -2,6 +2,7 @@ Changelog for App-Magpie
 
 {{$NEXT}}
  - old: using cpan instead of cpanp
+ - old: only list a pkgs once, even if multiple modules are old
 
 2.000     2012-10-19 15:53:22 Europe/Paris
  - migrated to @dzpa:jquelin

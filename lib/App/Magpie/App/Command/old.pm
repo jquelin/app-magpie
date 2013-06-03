@@ -43,9 +43,11 @@ sub execute {
         }
 
         my $label = $set->name;
-        say "** $label packages: " . $set->nb_modules;
+        say "** $label packages: " . $set->nb_modules . " modules";
         say '';
 
+        my %seen;
+        MODULE:
         foreach my $module ( sort $set->all_modules ) {
             my @pkgs = $module->packages;
             given ( scalar(@pkgs) ) {
@@ -58,6 +60,7 @@ sub execute {
                 }
                 when (1) {
                     my $pkg = shift @pkgs;
+                    next MODULE if $seen{ $pkg->name }++;
                     say encode( 'utf-8',
                         $pad->left ( $module->name, 40 )   .
                         $pad->right( $module->oldver, 14 ) .
