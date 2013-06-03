@@ -1,6 +1,8 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+2.001     2013-06-03 13:55:57 Europe/Paris
  - old: using cpan instead of cpanp
  - old: only list a pkgs once, even if multiple modules are old
 
