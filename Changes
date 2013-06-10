@@ -1,6 +1,8 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+2.002     2013-06-10 13:47:21 Europe/Paris
  - dwim: allow dwimery to continue when package should be updated again
 
 2.001     2013-06-03 13:55:57 Europe/Paris

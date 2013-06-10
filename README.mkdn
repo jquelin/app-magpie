@@ -4,7 +4,7 @@ App::Magpie - Mageia Perl Integration Easy
 
 # VERSION
 
-version 2.001
+version 2.002
 
 # DESCRIPTION
 
