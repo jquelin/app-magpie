@@ -50,7 +50,7 @@ sub run {
         my $pkg = ( $module->packages )[0];
         my $modname = $module->name;
         my $pkgname = $pkg->name;
-        return if $seen{$pkgname}++; # do not try to update a pkg more than once
+        next if $seen{$pkgname}++; # do not try to update a pkg more than once
 
         # forks and returns the pid for the child:
         my $pid = $pm->start($pkgname) and next;
