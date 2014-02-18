@@ -110,6 +110,8 @@ Return the module category:
 
 =item * C<strange> - shipped by more than one non-core package
 
+=item * C<null> - when old or new versions are 0.0000
+
 =item * C<unparsable> - current version unparsable
 
 =back
@@ -138,6 +140,7 @@ sub category {
     return "strange" if scalar(@pkgs) >= 2;
     # scalar(@pkgs) == 1;
     return "ignored"    if exists $SKIPPKG{ $pkgs[0]->name };
+    return "null"       if $self->oldver == 0 || $self->newver == 0;
     return "unparsable" if $self->oldver eq "Unparsable";
     return "normal";
 }
