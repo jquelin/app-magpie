@@ -110,6 +110,8 @@ Return the module category:
 
 =item * C<strange> - shipped by more than one non-core package
 
+=item * C<confused> - when cpan reports a difference although there isn't
+
 =item * C<null> - when old or new versions are 0.0000
 
 =item * C<unparsable> - current version unparsable
@@ -140,6 +142,7 @@ sub category {
     return "strange" if scalar(@pkgs) >= 2;
     # scalar(@pkgs) == 1;
     return "ignored"    if exists $SKIPPKG{ $pkgs[0]->name };
+    return "confused"   if $self->oldver == $self->newver; # cpan can be confused
     return "null"       if $self->oldver == 0 || $self->newver == 0;
     return "unparsable" if $self->oldver eq "Unparsable";
     return "normal";
