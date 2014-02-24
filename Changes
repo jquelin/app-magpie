@@ -3,6 +3,7 @@ Changelog for App-Magpie
 {{$NEXT}}
  - old: new set "null" if one of the old/new version is 0
  - old: new set "confused" when cpan reports a difference although there isn't
+ - old: update modules.skip
  - fix: auto-converting SPEC to use Makefile.PL or Build.PL if needed
  - fix: adding Module::Build::Tiny compatibility
  - migrated from Path::Class to Path::Tiny
