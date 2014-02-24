@@ -7,7 +7,7 @@ package App::Magpie::Action::FixSpec;
 
 use Moose;
 use Parse::CPAN::Meta   1.4401; # load_file
-use Path::Class         0.22;   # dir->basename
+use Path::Tiny;
 use Text::Padding;
 
 with 'App::Magpie::Role::Logging';
@@ -27,7 +27,7 @@ sub run {
     my ($self) = @_;
 
     # check if there's a spec file to update...
-    my $specdir = dir("SPECS");
+    my $specdir = path("SPECS");
     -e $specdir or $self->log_fatal("cannot find a SPECS directory, aborting");
     my @specfiles =
         grep { /\.spec$/ }
@@ -42,13 +42,45 @@ sub run {
 
     # extracting tarball
     $self->log_debug( "removing previous BUILD directory" );
-    dir( "BUILD" )->rmtree;
+    path( "BUILD" )->remove_tree;
+    $self->log_debug( "extracting tarball" );
+    $self->run_command( "bm -lp" ); # first just extract tarball
+    my $distdir = path( glob "BUILD/*" );
+    my $has_makefile_pl = $distdir->child("Makefile.PL")->exists;
+    my $has_build_pl    = $distdir->child("Build.PL")->exists;
+    if ( $spec =~ /Makefile.PL/ && !$has_makefile_pl ) {
+        $self->log( "module converted to use Build.PL only" );
+        $spec =~ s{%{?__perl}? Makefile.PL INSTALLDIRS=vendor}{%__perl Build.PL --installdirs=vendor};
+        $spec =~ s{^%?make$}{./Build CFLAGS="%{optflags}"}m;
+        $spec =~ s{%?make test}{./Build test};
+        $spec =~ s{%makeinstall_std}{./Build install --destdir=%{buildroot}};
+        # writing down new spec file
+        $self->log_debug( "writing updated spec file" );
+        my $fh = $specfile->openw;
+        $fh->print($spec);
+        $fh->close;
+    }
+    if ( $spec =~ /Build.PL/ && !$has_build_pl ) {
+        $self->log( "module converted to use Makefile.PL only" );
+        $spec =~ s{%{?__perl}? Build.PL (--)?installdirs=vendor}{%__perl Makefile.PL INSTALLDIRS=vendor};
+        $spec =~ s{./Build( CFLAGS="%{optflags}")?$}{%make}m;
+        $spec =~ s{./Build test}{%make test};
+        $spec =~ s{./Build install.*}{%makeinstall_std};
+        # writing down new spec file
+        $self->log_debug( "writing updated spec file" );
+        my $fh = $specfile->openw;
+        $fh->print($spec);
+        $fh->close;
+    }
+
+    $self->log_debug( "generating MYMETA" );
+    path( "BUILD" )->remove_tree;
     $self->run_command( "bm -lc" ); # run -c to make sure MYMETA is generated
-    my $distdir  = dir( glob "BUILD/*" );
+    $distdir = path( glob "BUILD/*" );
     my $metafile;
     foreach my $meta ( "MYMETA.json", "MYMETA.yml", "META.json", "META.yml" ) {
-        next unless -e $distdir->file( $meta );
-        $metafile = $distdir->file( $meta );
+        next unless -e $distdir->child( $meta );
+        $metafile = $distdir->child( $meta );
         last;
     }
 
