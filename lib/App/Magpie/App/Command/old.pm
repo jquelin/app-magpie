@@ -50,38 +50,34 @@ sub execute {
         MODULE:
         foreach my $module ( sort $set->all_modules ) {
             my @pkgs = $module->packages;
-            given ( scalar(@pkgs) ) {
-                when (0) {
-                    say encode( 'utf-8',
-                        $pad->left ( $module->name, 40 )   .
-                        $pad->right( $module->oldver, 14 ) .
-                        $pad->right( $module->newver, 14 )
-                    );
-                }
-                when (1) {
-                    my $pkg = shift @pkgs;
-                    next MODULE if $seen{ $pkg->name }++;
-                    say encode( 'utf-8',
-                        $pad->left ( $module->name, 40 )   .
-                        $pad->right( $module->oldver, 14 ) .
-                        $pad->right( $module->newver, 14 ) .
-                        " " x 5                            .
-                        $pad->left ( $pkg->name, 50 )      .
-                        $pad->right( $pkg->version, 14 )
-                    );
-                }
-                default {
-                    my @details =
-                        map { $_->name . "(" . $_->version . ")" }
-                        @pkgs;
-                    say encode( 'utf-8',
-                        $pad->left ( $module->name, 40 )   .
-                        $pad->right( $module->oldver, 14 ) .
-                        $pad->right( $module->newver, 14 ) .
-                        " " x 5                            .
-                        join( ",", @details )
-                    );
-                 }
+            if ( scalar(@pkgs) == 0 ) {
+                say encode( 'utf-8',
+                    $pad->left ( $module->name, 40 )   .
+                    $pad->right( $module->oldver, 14 ) .
+                    $pad->right( $module->newver, 14 )
+                );
+            } elsif ( scalar(@pkgs) == 1 ) {
+                my $pkg = shift @pkgs;
+                next MODULE if $seen{ $pkg->name }++;
+                say encode( 'utf-8',
+                    $pad->left ( $module->name, 40 )   .
+                    $pad->right( $module->oldver, 14 ) .
+                    $pad->right( $module->newver, 14 ) .
+                    " " x 5                            .
+                    $pad->left ( $pkg->name, 50 )      .
+                    $pad->right( $pkg->version, 14 )
+                );
+            } else {
+                my @details =
+                    map { $_->name . "(" . $_->version . ")" }
+                    @pkgs;
+                say encode( 'utf-8',
+                    $pad->left ( $module->name, 40 )   .
+                    $pad->right( $module->oldver, 14 ) .
+                    $pad->right( $module->newver, 14 ) .
+                    " " x 5                            .
+                    join( ",", @details )
+                );
              }
         }
         say '';
