@@ -1,6 +1,8 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+2.003     2014-02-24 15:53:07+01:00 Europe/Paris
  - old: new set "null" if one of the old/new version is 0
  - old: new set "confused" when cpan reports a difference although there isn't
  - old: update modules.skip
