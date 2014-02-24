@@ -6,14 +6,14 @@ package App::Magpie::Constants;
 # ABSTRACT: Various constants
 
 use Exporter::Lite;
-use File::ShareDir::PathClass;
-use Path::Class;
+use File::ShareDir;
+use Path::Tiny;
  
 our @EXPORT_OK = qw{ $SHAREDIR };
 
-our $SHAREDIR = -e file("dist.ini")
-    ? dir ("share")
-    : File::ShareDir::PathClass->dist_dir("App-Magpie");
+our $SHAREDIR = -e path("dist.ini")
+    ? path("share")
+    : path( File::ShareDir->dist_dir("App-Magpie") );
 
 
 1;

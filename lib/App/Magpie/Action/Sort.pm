@@ -7,7 +7,7 @@ package App::Magpie::Action::Sort;
 
 use List::AllUtils qw{ part uniq };
 use Moose;
-use Path::Class    qw{ file };
+use Path::Tiny;
 
 use App::Magpie::Action::Sort::Package;
 use App::Magpie::URPM;
@@ -29,8 +29,8 @@ sub run {
     my ($self, $opts) = @_;
 
     # default input/output files
-    my $in  = $opts->{input} eq "-"  ? *STDIN  : file($opts->{input})->openr;
-    my $out = $opts->{output} eq "-" ? *STDOUT : file($opts->{output})->openw;
+    my $in  = $opts->{input} eq "-"  ? *STDIN  : path($opts->{input})->openr;
+    my $out = $opts->{output} eq "-" ? *STDOUT : path($opts->{output})->openw;
 
     # get list of packages to sort
     my @unsorted = $in->getlines;

@@ -7,7 +7,7 @@ package App::Magpie::Action::Checkout;
 
 use File::pushd;
 use Moose;
-use Path::Class;
+use Path::Tiny;
 
 use App::Magpie::URPM;
 
@@ -41,8 +41,8 @@ sub run {
     }
 
     # check out the package, or update the local checkout
-    my $dir    = defined($directory) ? dir( $directory ) : dir();
-    my $pkgdir = $dir->subdir( $pkg );
+    my $dir    = defined($directory) ? path( $directory ) : path(".");
+    my $pkgdir = $dir->child( $pkg );
     $dir->mkpath unless -d $dir;
     $self->log( "checking out $pkg in $pkgdir" );
 

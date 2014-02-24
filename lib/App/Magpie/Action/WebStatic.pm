@@ -7,12 +7,11 @@ package App::Magpie::Action::WebStatic;
 
 use DateTime;
 use File::Copy;
-use File::HomeDir::PathClass    qw{ my_dist_data };
 use LWP::Simple;
 use Moose;
 use ORDB::CPAN::Mageia;
 use Parse::CPAN::Packages::Fast;
-use Path::Class;
+use Path::Tiny;
 use RRDTool::OO;
 use Readonly;
 use Template;
@@ -22,15 +21,15 @@ use App::Magpie::Constants qw{ $SHAREDIR };
 
 with 'App::Magpie::Role::Logging';
 
-my $datadir = my_dist_data( "App-Magpie", { create=>1 } );
-my $rrdsdir = $datadir->subdir( "rrds" );
+my $datadir = path( File::HomeDir->my_dist_data( "App-Magpie", { create=>1 } ) );
+my $rrdsdir = $datadir->child( "rrds" );
 
-my $rrdvers = $rrdsdir->file( "version" );
+my $rrdvers = $rrdsdir->child( "version" );
 my %rrdfile = (
-    mga_mods   => $rrdsdir->file( "mageia-modules.rrd" ),
-    mga_dists  => $rrdsdir->file( "mageia-dists.rrd" ),
-    cpan_mods  => $rrdsdir->file( "cpan-modules.rrd" ),
-    cpan_dists => $rrdsdir->file( "cpan-dists.rrd" ),
+    mga_mods   => $rrdsdir->child( "mageia-modules.rrd" ),
+    mga_dists  => $rrdsdir->child( "mageia-dists.rrd" ),
+    cpan_mods  => $rrdsdir->child( "cpan-modules.rrd" ),
+    cpan_dists => $rrdsdir->child( "cpan-dists.rrd" ),
 );
 my %rrd;
 
@@ -63,7 +62,7 @@ sub run {
     $rrd{mga_dists}->update( $nbmgadists );
     $self->log_debug( "mageia dists: $nbmgadists" );
 
-    my $modpkg = $datadir->file( "02packages.details.txt.gz" );
+    my $modpkg = $datadir->child( "02packages.details.txt.gz" );
     my $src    = "http://cpan.cpantesters.org/modules/02packages.details.txt.gz";
     mirror( $src, $modpkg->stringify );
     my $p = Parse::CPAN::Packages::Fast->new($modpkg->stringify);
@@ -78,16 +77,16 @@ sub run {
     # -- create the web site
     $self->log( "** creating web site" );
     $opts->{directory} =~ s!/$!!;
-    my $dir = dir( $opts->{directory} . ".new" );
-    $dir->rmtree; $dir->mkpath;
+    my $dir = path( $opts->{directory} . ".new" );
+    $dir->remove_tree; $dir->mkpath;
 
     # images
     $self->log_debug( "images:" );
-    my $imgdir = $dir->subdir( "images" );
+    my $imgdir = $dir->child( "images" );
     $imgdir->mkpath;
     $self->log_debug( " - mageia modules" );
     $rrd{mga_mods}->graph(
-        image => $imgdir->file("mgamods.png"),
+        image => $imgdir->child("mgamods.png"),
         width => 800,
         title => 'Number of available Perl modules in Mageia Linux',
         start => DateTime->new(year=>2012)->epoch,
@@ -101,7 +100,7 @@ sub run {
     # template toolkit
     $self->log_debug( "template toolkit processing" );
     my $tt = Template->new({
-        INCLUDE_PATH => $SHAREDIR->subdir("webstatic"),
+        INCLUDE_PATH => $SHAREDIR->child("webstatic"),
         INTERPOLATE  => 1,
     }) or die "$Template::ERROR\n";
 
@@ -110,12 +109,12 @@ sub run {
         mgadists => $nbmgadists,
         date     => scalar localtime,
     };
-    $tt->process('index.tt2', $vars, $dir->file("index.html")->stringify)
+    $tt->process('index.tt2', $vars, $dir->child("index.html")->stringify)
         or die $tt->error(), "\n";
 
     # rrd files
     $self->log_debug( "copying rrd files" );
-    my $rrdsubdir = $dir->subdir( "rrds" );
+    my $rrdsubdir = $dir->child( "rrds" );
     $rrdsubdir->mkpath;
     foreach my $f ( keys %rrdfile ) {
         copy( $rrdfile{$f}->stringify, $rrdsubdir->stringify );
@@ -123,8 +122,8 @@ sub run {
 
     # update website in one pass: remove previous version, replace it by new one
     $self->log( "** updating web site" );
-    my $olddir = dir( $opts->{directory} );
-    $olddir->rmtree;
+    my $olddir = path( $opts->{directory} );
+    $olddir->remove_tree;
     move( $dir->stringify, $olddir->stringify );
 }
 
@@ -136,7 +135,7 @@ sub _migrate_and_create_rrds_if_needed {
     $rrdsdir->mkpath;
 
     # v0 - too bad, drop existing files
-    my $rrdfile = $datadir->file( "modules.rrd" );
+    my $rrdfile = $datadir->child( "modules.rrd" );
     if ( -e $rrdfile ) {
         $self->log( "converting from v0" );
         $self->log_debug( "removing $rrdfile" );
