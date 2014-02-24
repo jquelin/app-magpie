@@ -159,6 +159,11 @@ sub run {
     $spec =~ s{^buildrequires:}{BuildRequires:}mgi;
     $spec =~ s{^buildarch:}{BuildArch:}mgi;
 
+    # Module::Build::Tiny compatibility
+    $self->log_debug( "adding Module::Build::Tiny compatibility" );
+    $spec =~ s{Build.PL installdirs=vendor}{Build.PL --installdirs=vendor};
+    $spec =~ s{Build install destdir=%{buildroot}}{Build install --destdir=%{buildroot}};
+
     # removing default %defattr
     $self->log_debug( "removing default %defattr" );
     $spec =~ s{^%defattr\(-,root,root\)\n?}{}mgi;
