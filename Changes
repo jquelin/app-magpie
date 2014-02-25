@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - forcing directory removal with Path::Tiny
 
 2.004     2014-02-25 13:43:37+01:00 Europe/Paris
  - old: set "confused" renamed to "nodiff"

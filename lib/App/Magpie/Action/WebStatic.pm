@@ -78,7 +78,7 @@ sub run {
     $self->log( "** creating web site" );
     $opts->{directory} =~ s!/$!!;
     my $dir = path( $opts->{directory} . ".new" );
-    $dir->remove_tree; $dir->mkpath;
+    $dir->remove_tree( { safe => 0 } ); $dir->mkpath;
 
     # images
     $self->log_debug( "images:" );
@@ -123,7 +123,7 @@ sub run {
     # update website in one pass: remove previous version, replace it by new one
     $self->log( "** updating web site" );
     my $olddir = path( $opts->{directory} );
-    $olddir->remove_tree;
+    $olddir->remove_tree( { safe => 0 } );
     move( $dir->stringify, $olddir->stringify );
 }
 
