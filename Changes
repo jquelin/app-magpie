@@ -1,6 +1,8 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+2.005     2014-02-25 13:58:34+01:00 Europe/Paris
  - forcing directory removal with Path::Tiny
 
 2.004     2014-02-25 13:43:37+01:00 Europe/Paris
