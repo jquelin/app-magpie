@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - old: set "confused" renamed to "nodiff"
  - logger: get rid of Log::Dispatchouli, using colors
 
 2.003     2014-02-24 15:53:07+01:00 Europe/Paris
