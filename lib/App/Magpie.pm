@@ -35,9 +35,9 @@ You can find more information on this module at:
 
 =over 4
 
-=item * Search CPAN
+=item * CPAN
 
-L<http://search.cpan.org/dist/App-Magpie>
+L<http://metacpan.org/release/App-Magpie>
 
 =item * See open / report bugs
 

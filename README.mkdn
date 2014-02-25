@@ -4,7 +4,7 @@ App::Magpie - Mageia Perl Integration Easy
 
 # VERSION
 
-version 2.003
+version 2.004
 
 # DESCRIPTION
 
@@ -29,9 +29,9 @@ distributions than Mageia. I'd like to hear from you in this case! :-)
 
 You can find more information on this module at:
 
-- Search CPAN
+- CPAN
 
-    [http://search.cpan.org/dist/App-Magpie](http://search.cpan.org/dist/App-Magpie)
+    [http://metacpan.org/release/App-Magpie](http://metacpan.org/release/App-Magpie)
 
 - See open / report bugs
 
