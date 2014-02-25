@@ -5,44 +5,13 @@ use warnings;
 package App::Magpie::Logger;
 # ABSTRACT: magpie logging facility
 
-use Log::Dispatchouli;
+use DateTime;
 use MooseX::Singleton;
 use MooseX::Has::Sugar;
 use MooseX::SemiAffordanceAccessor;
+use Term::ANSIColor qw{ :constants };
 
 use App::Magpie::Config;
-
-
-# -- private attributes
-
-=method log
-
-=method log_debug
-
-=method log_fatal
-
-    $magpie->log( ... );
-    $magpie->log_debug( ... );
-    $magpie->log_fatal( ... );
-
-Log stuff at various verbose levels. Uses L<Log::Dispatchouli>
-underneath - refer to this module for more information.
-
-=cut
-
-has _logger => (
-    ro, lazy,
-    isa     => "Log::Dispatchouli",
-    handles => [ qw{ log log_debug log_fatal } ],
-    default => sub {
-        Log::Dispatchouli->new({
-            ident     => "magpie",
-            to_stderr => 1,
-            log_pid   => 1,
-            prefix    => '[magpie] ',
-        });
-    },
-);
 
 
 # -- public attributes
@@ -64,6 +33,16 @@ logged.
 
 =back
 
+
+=method more_verbose
+
+=method less_verbose
+
+    $logger->more_verbose;
+    $logger->less_verbose;
+
+Change the logger verbosity level (check log_level above).
+
 =cut
 
 has log_level => (
@@ -74,7 +53,6 @@ has log_level => (
         more_verbose => 'inc',
         less_verbose => 'dec',
     },
-    trigger => \&_trigger_log_level,
 );
 
 sub _build_log_level {
@@ -82,12 +60,53 @@ sub _build_log_level {
     return $config->get( "log", "level" ) // 1;
 }
 
-sub _trigger_log_level {
-    my ($self, $new, $old) = @_;
 
-    my $logger = $self->_logger;
-    $logger->set_muted( ($new <= 0) );
-    $logger->set_debug( ($new >= 2) );
+# -- public methods
+
+=method log
+
+=method log_debug
+
+=method log_fatal
+
+    $logger->log( ... );
+    $logger->log_debug( ... );
+    $logger->log_fatal( ... );
+
+Log stuff at various verbose levels.
+
+=cut
+
+sub log {
+    my $self = shift;
+    return if $self->log_level < 1;
+    print STDERR BLUE;
+    $self->_log(@_);
+    print STDERR RESET;
+}
+
+sub log_debug {
+    my $self = shift;
+    return if $self->log_level < 2;
+    $self->_log(@_);
+}
+
+sub log_fatal {
+    my $self = shift;
+    local $Term::ANSIColor::AUTORESET = 1;
+    print STDERR BOLD RED;
+    $self->_log(@_);
+    print STDERR RESET;
+    die @_;
+}
+
+
+# -- private methods
+
+sub _log {
+    my $self = shift;
+    my $timestamp = DateTime->now(time_zone=>"local")->hms;
+    print STDERR "$timestamp [$$] [magpie] @_\n";
 }
 
 
