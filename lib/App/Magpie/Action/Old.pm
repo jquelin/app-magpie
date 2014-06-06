@@ -42,7 +42,25 @@ sub run {
     # DBIx::Class::Helper::ResultSet::Shortcut::Columns  2.0160  2.0170
     LINE:
     foreach my $line ( @lines ) {
-        next unless $line =~ /^(\S+)\s+(\d\S+)\s+(\d\S+)$/; # re
+        if ( $line !~ /
+            ^       # begins with
+            (\S+)   # anything non-whitespace (module name)
+            \s+     # followed by some spaces
+            (       # followed by an alternative
+                v?(?:\d\S+)   # either sthg beginning with a digit (prefixed with optional v)
+                |
+                undef         # or litteral undef
+            )
+            \s+     # followed by some spaces
+            (       # followed by an alternative
+                v?(?:\d\S+)   # either sthg beginning with a digit (prefixed with optional v)
+                |
+                undef         # or litteral undef
+            )
+            $       # and an end of line
+            /x ) {
+            next;
+        }
         my ($modname, $oldver, $newver) = ($1,$2,$3);
         my $module = App::Magpie::Action::Old::Module->new(
             name => $modname, oldver => $oldver, newver => $newver );
