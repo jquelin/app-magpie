@@ -38,10 +38,16 @@ sub run {
     }
     my @lines = $outfile->lines;
 
+    # A file where will we store ignored / rejected lines from cpan -O
+    # output
+    my $rejfh  = path( "/tmp/cpan-o.rej" )->openw;
+    my $noline = 0;
+
     # analyze "cpan -O" output - meaningful lines are of the form:
     # DBIx::Class::Helper::ResultSet::Shortcut::Columns  2.0160  2.0170
     LINE:
     foreach my $line ( @lines ) {
+        $noline++;
         if ( $line !~ /
             ^       # begins with
             (\S+)   # anything non-whitespace (module name)
@@ -59,6 +65,7 @@ sub run {
             )
             $       # and an end of line
             /x ) {
+            $rejfh->print( "$noline:$line" );
             next;
         }
         my ($modname, $oldver, $newver) = ($1,$2,$3);
