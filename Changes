@@ -3,6 +3,7 @@ Changelog for App-Magpie
 {{$NEXT}}
  - logger: log correctly when error in external command 
  - old: storing "cpan -O" output
+ - old: possibility to reuse previous "cpan -O" output
  - recent: using MetaCPAN::Client (::API is deprecated, gh#2)
  - update: trying to run './refresh' if existing & no new version
  - update: trying to install buildrequires (unless MAGPIE_NO_URPMI_BUILDREQUIRES)

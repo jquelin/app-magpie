@@ -28,9 +28,15 @@ sub run {
     my %category;
 
     my $outfile = path( "/tmp/cpan-o.stdout" );
-    my $cmd = "cpan -O >$outfile 2>/tmp/cpan-o.stderr";
-    $self->run_command( $cmd );
-    my @lines = $outfile->slurp;
+    if ( $ENV{MAGPIE_REUSE_CPAN_O_OUTPUT} ) {
+        $self->log( "re-using cpan -O output from $outfile" );
+    } else {
+        my $cmd = "cpan -O >$outfile 2>/tmp/cpan-o.stderr";
+        $self->log( "running: $cmd" );
+        system("$cmd") == 0
+            or $self->log_fatal( "command [$cmd] exited with value " . ($?>>8) );
+    }
+    my @lines = $outfile->lines;
 
     # analyze "cpan -O" output - meaningful lines are of the form:
     # DBIx::Class::Helper::ResultSet::Shortcut::Columns  2.0160  2.0170
