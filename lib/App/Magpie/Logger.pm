@@ -80,7 +80,7 @@ Log stuff at various verbose levels.
 sub log {
     my $self = shift;
     return if $self->log_level < 1;
-    print STDERR BLUE;
+    print STDERR YELLOW;
     $self->_log(@_);
     print STDERR RESET;
 }
@@ -88,7 +88,9 @@ sub log {
 sub log_debug {
     my $self = shift;
     return if $self->log_level < 2;
+    print STDERR BLUE;
     $self->_log(@_);
+    print STDERR RESET;
 }
 
 sub log_fatal {

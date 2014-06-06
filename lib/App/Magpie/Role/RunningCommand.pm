@@ -31,7 +31,7 @@ sub run_command {
 
     # run the command
     system("$cmd $stderr >&2") == 0
-        or $self->log_fatal( [ "command [$cmd] exited with value %d", $?>>8] );
+        or $self->log_fatal( "command [$cmd] exited with value " . ($?>>8) );
 }
 
 
