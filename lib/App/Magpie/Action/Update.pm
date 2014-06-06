@@ -108,6 +108,12 @@ EOF
     $fh->close;
     chmod 0755, $script;
 
+    # try to install buildrequires
+    if ( ! $ENV{MAGPIE_NO_URPMI_BUILDREQUIRES} ) {
+        $self->log( "installing buildrequires" );
+        $self->run_command( "LC_ALL=C sudo urpmi --wait-lock --buildrequires $specfile" );
+    }
+
     # fix spec file, update buildrequires
     require App::Magpie::Action::FixSpec;
     App::Magpie::Action::FixSpec->new->run;
@@ -145,3 +151,7 @@ __END__
 This module implements the C<update> action. It's in a module of its
 own to be able to be C<require>-d without loading all other actions.
 
+=head1 ENVIRONMENT VARS
+
+F<MAGPIE_NO_URPMI_BUILDREQUIRES> prevents update to try installation of
+the buildrequires.

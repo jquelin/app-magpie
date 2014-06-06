@@ -2,8 +2,9 @@ Changelog for App-Magpie
 
 {{$NEXT}}
  - logger: log correctly when error in external command 
- - update: trying to run './refresh' if existing & no new version
  - recent: using MetaCPAN::Client (::API is deprecated, gh#2)
+ - update: trying to run './refresh' if existing & no new version
+ - update: trying to install buildrequires (unless MAGPIE_NO_URPMI_BUILDREQUIRES)
 
 2.005     2014-02-25 13:58:34+01:00 Europe/Paris
  - forcing directory removal with Path::Tiny
