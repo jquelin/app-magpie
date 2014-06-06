@@ -7,7 +7,7 @@ package App::Magpie::Action::Recent;
 
 use CPAN::Recent::Uploads;
 use List::AllUtils qw{ apply uniq };
-use MetaCPAN::API;
+use MetaCPAN::Client;
 use Moose;
 
 use App::Magpie::URPM;
@@ -50,7 +50,7 @@ sub run {
     # we need to check whether our wild transformation really points to
     # an existing perl module on cpan.
     $self->log( "validating modules" );
-    my $mcpan = MetaCPAN::API->new;
+    my $mcpan = MetaCPAN::Client->new;
     my $nbvalid;
     foreach my $module ( sort @nomageia ) {
         my $result;
