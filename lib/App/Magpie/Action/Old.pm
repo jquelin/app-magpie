@@ -6,11 +6,13 @@ package App::Magpie::Action::Old;
 # ABSTRACT: old command implementation
 
 use Moose;
+use Path::Tiny;
 
 use App::Magpie::Action::Old::Module;
 use App::Magpie::Action::Old::Set;
 
 with 'App::Magpie::Role::Logging';
+with 'App::Magpie::Role::RunningCommand';
 
 
 =method run
@@ -25,9 +27,10 @@ sub run {
     my ($self) = @_;
     my %category;
 
-    my $cmd = "cpan -O 2>/tmp/cpan-o.stderr";
-    $self->log( "running: $cmd" );
-    my @lines = qx{ $cmd };
+    my $outfile = path( "/tmp/cpan-o.stdout" );
+    my $cmd = "cpan -O >$outfile 2>/tmp/cpan-o.stderr";
+    $self->run_command( $cmd );
+    my @lines = $outfile->slurp;
 
     # analyze "cpan -O" output - meaningful lines are of the form:
     # DBIx::Class::Helper::ResultSet::Shortcut::Columns  2.0160  2.0170
