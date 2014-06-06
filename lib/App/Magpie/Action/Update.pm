@@ -64,8 +64,15 @@ sub run {
     my $p       = Parse::CPAN::Packages::Fast->new( $modgz->stringify );
     my $dist    = $p->latest_distribution( $distname );
     my $newvers = $dist->version;
-    version->new( $newvers ) > version->new( $distvers )
-        or $self->log_fatal( "no new version found" );
+    if ( version->new( $newvers ) <= version->new( $distvers ) ) {
+        $self->log( "no new version found" );
+        if ( path("refresh")->exists ) {
+            $self->log( "... but a previous 'refresh' script was found, trying to run it" );
+            $self->run_command( "./refresh" );
+            return;
+        }
+        $self->log_fatal( "... and no previous 'refresh' script found, aborting" );
+    }
     $self->log( "new version found: $newvers" );
 
     # copy tarball
