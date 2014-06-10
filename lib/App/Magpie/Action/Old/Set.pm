@@ -51,6 +51,26 @@ has _modules => (
     },
 );
 
+#--
+
+=method nb_packages
+
+    my $nb = $set->nb_packages;
+
+Return the nimber of Mageia packages the set is holding.
+
+=cut
+
+sub nb_packages {
+    my $self = shift;
+    my %seen;
+    @seen{
+        map { $_->packages->[0] }
+        $self->all_modules
+    }++;
+    return scalar keys %seen;
+}
+
 
 1;
 __END__

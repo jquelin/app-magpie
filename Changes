@@ -7,6 +7,7 @@ Changelog for App-Magpie
  - old: restoring parsing capabilities with new cpan precision output
  - old: storing rejected lines from "cpan -O" output
  - old: quieting warnings
+ - old: displaying number of packages (instead of modules) per category
  - recent: using MetaCPAN::Client (::API is deprecated, gh#2)
  - update: trying to run './refresh' if existing & no new version
  - update: trying to install buildrequires (unless MAGPIE_NO_URPMI_BUILDREQUIRES)

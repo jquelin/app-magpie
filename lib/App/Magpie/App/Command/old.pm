@@ -43,7 +43,13 @@ sub execute {
         }
 
         my $label = $set->name;
-        say "** $label packages: " . $set->nb_modules . " modules";
+        my $details;
+        if ( $label eq "core" || $label eq "orphan" || $label eq "strange" ) {
+            $details = $set->nb_modules . " modules";
+        } else {
+            $details = $set->nb_packages . " packages (" . $set->nb_modules . " modules)";
+        }
+        say "** $label packages: $details";
         say '';
 
         my %seen;
