@@ -5,20 +5,19 @@ use warnings;
 package App::Magpie::Action::Old::Module;
 # ABSTRACT: module that has a newer version available
 
-use File::ShareDir::PathClass;
 use Moose;
 use MooseX::Has::Sugar;
 use MooseX::SemiAffordanceAccessor;
 
+use App::Magpie::Constants qw{ $SHAREDIR };
 use App::Magpie::URPM;
 
 
 # -- private vars
 
-my $sharedir = File::ShareDir::PathClass->dist_dir( 'App-Magpie' );
 my %SKIPMOD = do {
-    my $skipfile = $sharedir->file( 'modules.skip' );
-    my @skips = $skipfile->slurp;
+    my $skipfile = $SHAREDIR->child( 'modules.skip' );
+    my @skips = $skipfile->lines;
     my %skip;
     foreach my $skip ( @skips ) {
         next if $skip =~ /^#/;
@@ -30,8 +29,8 @@ my %SKIPMOD = do {
 };
 
 my %SKIPPKG = do {
-    my $skipfile = $sharedir->file( 'packages.skip' );
-    my @skips = $skipfile->slurp;
+    my $skipfile = $SHAREDIR->child( 'packages.skip' );
+    my @skips = $skipfile->lines;
     my %skip;
     foreach my $skip ( @skips ) {
         next if $skip =~ /^#/;
