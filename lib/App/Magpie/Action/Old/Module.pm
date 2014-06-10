@@ -1,4 +1,4 @@
-use 5.012;
+use 5.020;
 use strict;
 use warnings;
 
@@ -142,8 +142,9 @@ sub category {
     return "strange" if scalar(@pkgs) >= 2;
     # scalar(@pkgs) == 1;
     return "ignored"    if exists $SKIPPKG{ $pkgs[0]->name };
-    return "null"       if $self->oldver == 0 || $self->newver == 0;
-    return "nodiff"     if $self->oldver == $self->newver; # cpan can be confused
+    return "null_old"   if $self->oldver eq "0" || $self->oldver eq "undef";
+    return "null_new"   if $self->newver eq "0" || $self->newver eq "undef";
+    return "nodiff"     if $self->oldver eq $self->newver; # cpan can be confused
     return "unparsable" if $self->oldver eq "Unparsable";
     return "normal";
 }
