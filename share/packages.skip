@@ -1,5 +1,10 @@
 # vim: set textwidth=
-# package ; reason
+# one line per pattern, following the scheme:
+#
+#       package ; reason
+#
+# string comparison with package field.
+#
 mdv-distrib-tools       ; mageia/rpm toolchain
 perl-Image-Magick       ; from imagemagick
 perl-kolab              ; not updated since 2004

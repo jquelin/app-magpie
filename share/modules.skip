@@ -1,9 +1,13 @@
 # vim: set textwidth=
-# module ; new version ; reason
-Apache::AuthCookie::Util              ; 222.00      ;
-Apache::SessionX::Manager             ; 2.00        ; cpanplus confused
+# One line per pattern, following the scheme:
+#
+#       module ; new version ; reason
+#
+# Regex comparison with module field, then regex comparison with version
+# field. Note that regex is anchored autoamtically with ^ and $. Empty
+# version always match (eg, equivalent to .*).
+#
 Bio::Root::RootI                      ; 1.006001    ;
-Boulder::Unigene                      ; 28051999.00 ; dummy ddmmyyyy version (wtf!?)
 Config::Augeas                        ; 0.903       ; need a recent libaugeas
 Crypt::OpenSSL::X509                  ; 1.70        ; cpanplus lost with version (really 1.7.1 upstream)
 DBIx::Class::Schema::Loader           ; 0.07033     ; broken upstream: rt#77628
@@ -19,7 +23,7 @@ HTML::Table                           ; 2.08        ; 2.08a shipped
 HTML::Tidy                            ; 1.52        ; broken upstream
 Inline                                ; 0.48        ; taint test fail, https://rt.cpan.org/Ticket/Display.html?id=65703
 IO::Async                             ; 0.41        ; stream-4encoding.t test fail, https://rt.cpan.org/Ticket/Display.html?id=69020
-Lingua::Features                      ; 0.3000      ; cpanplus lost with version
+Lingua::Features                      ; 0.3         ; cpanplus lost with version
 Linux::Prctl                          ; 1.005       ; rt#79909
 Makefile::AST                         ; 0.215       ; https://rt.cpan.org/Ticket/Display.html?id=77738 / https://rt.cpan.org/Ticket/Display.html?id=77737
 Module::Depends                       ; 0.16        ; https://rt.cpan.org/Public/Bug/Display.html?id=37051
@@ -30,13 +34,12 @@ Net::Libdnet                          ; 0.95        ; 0.95 broken upstream
 Number::Phone::StubCountry::UY        ; 1.201201    ; cpanplus confused
 Parse::RecDescent::FAQ::Original      ; 6.00        ; original faq
 PDL::IO::NDF                          ; 1.04        ; bad version upgrade
-Psh                                   ; 1.80        ; bad version upgrade, https://rt.cpan.org/Public/Bug/Display.html?id=53253
-SVN::Core                             ; 1.60        ;
+Psh                                   ; 1.8         ; bad version upgrade, https://rt.cpan.org/Public/Bug/Display.html?id=53253
 Switch                                ; 2.16        ; cpanplus lost with version
 Syntax::Highlight::Perl6              ; 0.85        ; broken upstream
 Tie::Watch                            ; 1.301       ; now in its own dist, https://rt.cpan.org/Ticket/Display.html?id=66249
 Tk::ColorEditor                       ; 4.012       ; cpanplus lost with version (not a new tk version)
-urpm                                  ;             ; rpm toolchain
+urpm::.*                              ;             ; rpm toolchain
 WebFetch                              ; 0.13        ; broken upstream
 XML::Grove                            ; 0.46        ; already at this version
 XML::TreeBuilder                      ; 3.09        ; we're shipping 4.0.0

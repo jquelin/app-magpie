@@ -5,6 +5,7 @@ use warnings;
 package App::Magpie::Action::Old::Module;
 # ABSTRACT: module that has a newer version available
 
+use List::AllUtils qw{ each_array };
 use Moose;
 use MooseX::Has::Sugar;
 use MooseX::SemiAffordanceAccessor;
@@ -15,18 +16,19 @@ use App::Magpie::URPM;
 
 # -- private vars
 
-my %SKIPMOD = do {
+my (@SKIP_MOD_NAME, @SKIP_MOD_VERSION);
+{
     my $skipfile = $SHAREDIR->child( 'modules.skip' );
     my @skips = $skipfile->lines;
-    my %skip;
     foreach my $skip ( @skips ) {
         next if $skip =~ /^#/;
         chomp $skip;
         my ($module, $version, $reason) = split /\s*;\s*/, $skip;
-        $skip{$module} = $version;
+        $version ||= ".*"; # no version: all versions are skipped
+        push @SKIP_MOD_NAME,    qr/^$module$/;
+        push @SKIP_MOD_VERSION, qr/^$version$/;
     }
-    %skip;
-};
+}
 
 my %SKIPPKG = do {
     my $skipfile = $SHAREDIR->child( 'packages.skip' );
@@ -124,10 +126,7 @@ sub category {
     my @pkgs   = $self->packages;
     my $iscore = $self->is_core;
 
-    if ( exists $SKIPMOD{ $self->name } ) {
-        return "ignored" if $SKIPMOD{ $self->name } eq "";
-        return "ignored" if $self->newver eq $SKIPMOD{ $self->name };
-    }
+    return "ignored" if $self->is_ignored;
 
     if ( $iscore ) {
         return "core"       if scalar(@pkgs) == 0;
@@ -146,6 +145,29 @@ sub category {
     return "nodiff"     if $self->oldver eq $self->newver; # cpan can be confused
     return "unparsable" if $self->oldver eq "Unparsable";
     return "normal";
+}
+
+
+=method is_ignored
+
+    my $bool = $module->is_ignored;
+
+Return true if C<$module> is ignored due to its presence in
+F<SHAREDIR/modules.skip>. Note that it will not match against
+F<SHAREDIR/packages.skip>.
+
+=cut
+
+sub is_ignored {
+    my $self = shift;
+
+    # check if module is ignored, regex comparison
+    my $it =  each_array @SKIP_MOD_NAME, @SKIP_MOD_VERSION;
+    while ( my ($mod, $ver) = $it->() ) {
+        return 1 if $self->name =~ $mod && $self->newver =~ $ver;
+    }
+
+    return 0;
 }
 
 
