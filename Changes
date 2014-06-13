@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - fix File::ShareDir usage
 
 2.006     2014-06-11 13:22:41+02:00 Europe/Paris
  - logger: log correctly when error in external command 
