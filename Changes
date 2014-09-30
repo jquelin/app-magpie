@@ -2,6 +2,9 @@ Changelog for App-Magpie
 
 {{$NEXT}}
 
+2.008     2014-09-30 14:46:20+02:00 Europe/Paris
+ - fix: adding %{?perl_default_filter} (rpm 4.12)
+
 2.007     2014-06-13 09:08:33+02:00 Europe/Paris
  - fix File::ShareDir usage
 
