@@ -85,6 +85,9 @@ sub run {
     }
 
     # cleaning spec file
+    $self->log_debug( "adding %{?perl_default_filter}" );
+    $spec =~ s/^Name:/%{?perl_default_filter}\n\nName:/msi;
+
     $self->log_debug( "removing mandriva macros" );
     $spec =~ s/^%if %{mdkversion}.*?^%endif$//msi;
 
