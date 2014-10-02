@@ -1,6 +1,7 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+ - fix: don't add %{?perl_default_filter} if already present
 
 2.008     2014-09-30 14:46:20+02:00 Europe/Paris
  - fix: adding %{?perl_default_filter} (rpm 4.12)
