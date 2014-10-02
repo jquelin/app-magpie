@@ -1,6 +1,8 @@
 Changelog for App-Magpie
 
 {{$NEXT}}
+
+2.009     2014-10-02 10:03:42+02:00 Europe/Paris
  - fix: don't add %{?perl_default_filter} if already present
 
 2.008     2014-09-30 14:46:20+02:00 Europe/Paris
