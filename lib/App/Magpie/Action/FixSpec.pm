@@ -50,7 +50,7 @@ sub run {
     my $has_build_pl    = $distdir->child("Build.PL")->exists;
     if ( $spec =~ /Makefile.PL/ && !$has_makefile_pl ) {
         $self->log( "module converted to use Build.PL only" );
-        $spec =~ s{%{?__perl}? Makefile.PL INSTALLDIRS=vendor}{%__perl Build.PL --installdirs=vendor};
+        $spec =~ s{%\{?__perl\}? Makefile.PL INSTALLDIRS=vendor}{%__perl Build.PL --installdirs=vendor};
         $spec =~ s{^%?make$}{./Build CFLAGS="%{optflags}"}m;
         $spec =~ s{%?make test}{./Build test};
         $spec =~ s{%makeinstall_std}{./Build install --destdir=%{buildroot}};
@@ -62,8 +62,8 @@ sub run {
     }
     if ( $spec =~ /Build.PL/ && !$has_build_pl ) {
         $self->log( "module converted to use Makefile.PL only" );
-        $spec =~ s{%{?__perl}? Build.PL (--)?installdirs=vendor}{%__perl Makefile.PL INSTALLDIRS=vendor};
-        $spec =~ s{./Build( CFLAGS="%{optflags}")?$}{%make}m;
+        $spec =~ s{%\{?__perl\}? Build.PL (--)?installdirs=vendor}{%__perl Makefile.PL INSTALLDIRS=vendor};
+        $spec =~ s{./Build( CFLAGS="%\{optflags\}")?$}{%make}m;
         $spec =~ s{./Build test}{%make test};
         $spec =~ s{./Build install.*}{%makeinstall_std};
         # writing down new spec file
@@ -89,7 +89,7 @@ sub run {
     $spec =~ s/^Name:/%{?perl_default_filter}\n\nName:/msi if $spec !~ /perl_default_filter/;
 
     $self->log_debug( "removing mandriva macros" );
-    $spec =~ s/^%if %{mdkversion}.*?^%endif$//msi;
+    $spec =~ s/^%if %\{mdkversion\}.*?^%endif$//msi;
 
     $self->log_debug( "removing buildroot, not needed anymore" );
     $spec =~ s/^buildroot:.*\n//mi;
@@ -165,7 +165,7 @@ sub run {
     # Module::Build::Tiny compatibility
     $self->log_debug( "adding Module::Build::Tiny compatibility" );
     $spec =~ s{Build.PL installdirs=vendor}{Build.PL --installdirs=vendor};
-    $spec =~ s{Build install destdir=%{buildroot}}{Build install --destdir=%{buildroot}};
+    $spec =~ s{Build install destdir=%\{buildroot\}}{Build install --destdir=%{buildroot}};
 
     # removing default %defattr
     $self->log_debug( "removing default %defattr" );
