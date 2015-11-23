@@ -4,7 +4,7 @@ App::Magpie - Mageia Perl Integration Easy
 
 # VERSION
 
-version 2.009
+version 2.010
 
 # DESCRIPTION
 
@@ -51,7 +51,7 @@ You can find more information on this module at:
 
 # AUTHOR
 
-Jerome Quelin <jquelin@gmail.com>
+Jerome Quelin &lt;jquelin@gmail.com>
 
 # COPYRIGHT AND LICENSE
 
